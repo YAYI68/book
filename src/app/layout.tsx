@@ -2,6 +2,7 @@ import Header from '@/components/header/Header'
 import './globals.css'
 import { Roboto } from 'next/font/google'
 import Footer from '@/components/footer/Footer'
+import AppProvider from '@/context/AppProvider'
 
 const inter = Roboto({ 
   subsets: ['latin'],
@@ -19,11 +20,13 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className="">
       <body className={inter.className}>
-        <Header />
-        {children}
-        <Footer />
+        <AppProvider >
+          <Header />
+          {children}
+          <Footer />
+        </AppProvider> 
       </body>
     </html>
   )
