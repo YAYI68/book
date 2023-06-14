@@ -5,6 +5,7 @@ import React, { useState } from 'react'
 import { DarkIcon, LightIcon, SearchIcon, SystemIcon } from '../ui/svg'
 import { Theme } from '../ui'
 import { useAppContext } from '@/context/AppProvider'
+import SearchInput from '../ui/SearchInput'
 
 type Props = {}
 
@@ -18,10 +19,14 @@ const MainNavbar = (props: Props) => {
        <Link href="/" className={`${pacifico.className} block text-[2rem]`}>Studee</Link>
        <div className='flex relative items-center justify-between w-[40%]'>
          <ul className='flex items-center gap-4'>
-          <li className='p-2 cursor-pointer font-medium text-gray-500 dark:text-gray-400 hover:text-black  rounded hover:dark:text-white'><Link href={''} className='w-full'>Books</Link></li>
+          <li className='p-2 cursor-pointer font-medium text-gray-500 dark:text-gray-400 hover:text-black  rounded hover:dark:text-white'><Link href={'/books'} className='w-full'>Books</Link></li>
           <li className='p-2 cursor-pointer font-medium text-gray-500 dark:text-gray-400 hover:text-black rounded hover:dark:text-white'><Link href={''} className='w-full'>Genres</Link></li>
-          <li  className='w-full p-2 cursor-pointer font-medium text-gray-500  hover:text-black dark:text-gray-400 rounded hover:dark:text-white'><p className='flex items-center gap-2 '><span>Search</span><span><SearchIcon classname='h-[1.3rem] w-[1.3rem]' /></span></p>  </li>         
+          <li onClick={()=>setDisplaySearchInput(true)} className='w-full p-2 cursor-pointer font-medium text-gray-500  hover:text-black dark:text-gray-400 rounded hover:dark:text-white'><p className='flex items-center gap-2 '><span>Search</span><span><SearchIcon classname='h-[1.3rem] w-[1.3rem]' /></span></p>  </li>         
          </ul>
+         {displaySearchInput ? 
+         <SearchInput setDisplaySearchInput={setDisplaySearchInput} className='w-full absolute z-[3] top-full left-0' />
+         : "" 
+         }
           {/* UnAuthenticated */}
            <ul className='flex font-medium items-center gap-4'>
             <li className='py-2 px-4 cursor-pointer text-gray-500 dark:text-gray-400 hover:text-black rounded hover:dark:text-white border dark:border-gray-500 hover:dark:border-white hover:border-black'><Link className='w-full' href={''}>Login</Link></li>
@@ -44,7 +49,7 @@ const MainNavbar = (props: Props) => {
           <Theme 
            setDisplayTheme={setDisplayTheme} 
            setActiveTheme={setActiveTheme}
-           classname='w-[10rem] absolute border-2 top-[120%] z-[2] right-0' 
+           classname=' w-[10rem] absolute border-2 top-[120%] z-[2] right-0' 
            activeTheme={activeTheme}   /> 
           :""
           }

@@ -31,7 +31,7 @@ const Theme = (props:Props) => {
    
 
   return (
-    <div ref={ThemeRef} className={` ${classname} w-full flex flex-col rounded-md bg-white  dark:bg-slate-800 py-2`}>
+    <div ref={ThemeRef} className={` ${classname} flex flex-col rounded-md bg-white  dark:bg-slate-800 py-2`}>
     <button onClick={()=>onChangeTheme('dark')}  className={`  ${activeTheme==="dark"?'text-red-600':''} w-full p-2 flex items-center  gap-2 hover:bg-slate-500 `}>
      <span><DarkIcon classname='h-[1rem] w-[1rem]' /></span><span>Dark</span>
     </button>

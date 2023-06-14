@@ -3,12 +3,12 @@ import BookListDetail from '@/components/common/BookListDetail'
 import BrowseSubject from '@/components/home/BrowseSubject'
 import Hero from '@/components/home/Hero'
 import TrendingBooks from '@/components/home/TrendingBooks'
-import Banner from '@/components/ui/Banner'
+import { Banner, Main } from '@/components/ui'
 import Image from 'next/image'
 
 export default function Home() {
   return (
-    <main className="flex dark:bg-black min-h-screen flex-col items-center justify-between">
+    <Main >
      <Hero />
      <BrowseSubject/>
      <BookListDetail 
@@ -24,6 +24,6 @@ export default function Home() {
      <BookListDetail 
        title={'RECENTLY PUBLISHED'}
      />
-    </main>
+    </Main>
   )
 }
