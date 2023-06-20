@@ -22,6 +22,7 @@ const MainNavbar = (props: Props) => {
           <li className='p-2 cursor-pointer font-medium text-gray-500  w-fit dark:text-gray-400 hover:text-black text-center rounded hover:dark:text-white'><Link href={'/books'} className='w-full'>Books</Link></li>
           <li className='p-2 cursor-pointer font-medium text-gray-500 w-fit text-center dark:text-gray-400 hover:text-black rounded hover:dark:text-white'><Link href={'/my-library'} className='w-full'>my library</Link></li>
           <li className='p-2 cursor-pointer font-medium text-gray-500 w-fit text-center dark:text-gray-400 hover:text-black rounded hover:dark:text-white'><Link href={'/pricing'} className='w-full'>pricing</Link></li>
+          <li className='p-2 cursor-pointer font-medium text-gray-500 w-fit text-center dark:text-gray-400 hover:text-black rounded hover:dark:text-white'><Link href={'/contact'} className='w-full'>contact</Link></li>
           <li onClick={()=>setDisplaySearchInput(true)} className='w-fit p-2 cursor-pointer text-center font-medium text-gray-500  hover:text-black dark:text-gray-400 rounded hover:dark:text-white'><p className='flex items-center gap-2 '><span>Search</span><span><SearchIcon classname='h-[1.3rem] w-[1.3rem]' /></span></p>  </li>         
          </ul>
          {displaySearchInput ? 

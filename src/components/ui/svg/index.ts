@@ -7,3 +7,6 @@ export { default as SystemIcon} from './SystemIcon'
 export { default as SearchIcon } from "./SearchIcon"
 export { default as CheckIcon } from "./CheckIcon"
 export { default as ArrowRight } from "./ArrowRight"
+export { default as LocationIcon } from "./LocationIcon"
+export { default as EmailIcon } from "./EmailIcon"
+export { default as PhoneIcon } from "./PhoneIcon"
