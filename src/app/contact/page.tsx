@@ -61,11 +61,11 @@ const page = (props: Props) => {
                     <h3 className='dark:text-white text-[1.5rem] font-semibold'>How can we help?</h3>
                     <form className=''>
                       <div className='p-2 w-full flex flex-col md:flex-row md:justify-between'>
-                        <div className='md:w-[47%] w-full'>
+                        <div className='md:w-[48%] w-full'>
                            <label htmlFor="" className='dark:text-white block my-2'>First Name</label>
                            <input type="text" className='w-full p-2 dark:text-white outline-none dark:bg-gray-900 dark:border-b-gray-200 border-b-2' />
                         </div>
-                        <div className='md:w-[47%] w-full'>
+                        <div className='md:w-[48%] w-full'>
                            <label htmlFor="" className='dark:text-white block my-2'>Last Name</label>
                            <input type="text" className='w-full p-2 dark:text-white outline-none dark:bg-gray-900 dark:border-b-gray-200 border-b-2' />
                         </div>

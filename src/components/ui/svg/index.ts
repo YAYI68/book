@@ -10,3 +10,8 @@ export { default as ArrowRight } from "./ArrowRight"
 export { default as LocationIcon } from "./LocationIcon"
 export { default as EmailIcon } from "./EmailIcon"
 export { default as PhoneIcon } from "./PhoneIcon"
+export { default as UserIcon } from "./UserIcon"
+export { default as WalletIcon } from "./WalletIcon"
+export { default as KeyIcon } from "./KeyIcon"
+export { default as EditIcon } from "./EditIcon"
+
