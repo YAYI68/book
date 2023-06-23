@@ -1,10 +1,22 @@
+"use client"
 import { pacifico } from '@/utils/font'
 import Link from 'next/link'
 import React from 'react'
+import { signIn } from "next-auth/react";
 
 type Props = {}
 
 const LoginForm = (props: Props) => {
+  
+  const handleSubmit = async(e:any)=>{
+    e.preventDefault()
+    await  signIn('credentials',{
+      email:'biodun@gmail.com',
+      password:'1234',
+      redirect:false
+    })
+  }
+
   return (
     <div className='w-[80%] lg:w-[60%] lg:flex h-[90%] lg:h-[80%] flex flex-col items-center p-4 '>
     <h3 className={`text-[3rem] font-semibold dark:text-white  text-center ${pacifico.className}`}>Studee</h3>
@@ -16,7 +28,7 @@ const LoginForm = (props: Props) => {
         <input type="checkbox" name="" id="show_password" />
         <label htmlFor="show_password" className='dark:text-gray-300'>Show password</label>
       </div>
-      <button className='w-full text-center bg-red-500 text-white p-2 rounded-md font-medium'>Login</button>
+      <button className='w-full text-center bg-red-500 text-white p-2 rounded-md font-medium' onClick={(e)=>handleSubmit(e)} >Login</button>
     </form>
     <div className='flex w-fit self-end mt-[1rem] lg:mt-[1.5rem] gap-1'>
       <p className='dark:text-white'>Don&#39;t have an account?</p> 
