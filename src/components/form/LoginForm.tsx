@@ -18,7 +18,7 @@ const LoginForm = (props: Props) => {
   }
 
   return (
-    <div className='w-[80%] lg:w-[60%] lg:flex h-[90%] lg:h-[80%] flex flex-col items-center p-4 '>
+    <div className='w-[80%]  lg:w-[60%] lg:flex h-[90%] lg:h-[80%] flex flex-col items-center p-4 '>
     <h3 className={`text-[3rem] font-semibold dark:text-white  text-center ${pacifico.className}`}>Studee</h3>
     <p className='dark:text-gray-300 text-[1.2rem]'>login into your account</p>
     <form action="" className='mt-[2rem] w-full flex flex-col gap-4'>

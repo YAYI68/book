@@ -1,10 +1,9 @@
 "use client"
-import Header from '@/components/header/Header'
+
 import './globals.css'
 import { Roboto } from 'next/font/google'
-import Footer from '@/components/footer/Footer'
-import AppProvider from '@/context/AppProvider'
 import PageChildren from '@/components/children/PageChildren'
+import { SessionProvider } from "next-auth/react"
 
 
 const inter = Roboto({ 
@@ -33,9 +32,11 @@ export default function RootLayout({
   return (
     <html lang="en" className="">
       <body className={inter.className}>
-          <PageChildren >
+        <SessionProvider>
+          <PageChildren>
             {children}
           </PageChildren>  
+        </SessionProvider>
       </body>
     </html>
   )

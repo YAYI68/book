@@ -10,7 +10,8 @@ const SignUpForm = (props: Props) => {
       <h3 className={`text-[3rem] font-semibold dark:text-white  text-center ${pacifico.className}`}>Studee</h3>
       <p className='dark:text-gray-300 text-[1.2rem]'>create an account</p>
       <form action="" className='mt-[2rem] w-full flex flex-col gap-4'>
-        <input type="text" placeholder='Name' className='px-4  py-2 w-full outline-none border dark:bg-gray-800 dark:text-white rounded ' />
+        <input type="text" placeholder='FirstName' className='px-4  py-2 w-full outline-none border dark:bg-gray-800 dark:text-white rounded ' />
+        <input type="text" placeholder='LastName' className='px-4  py-2 w-full outline-none border dark:bg-gray-800 dark:text-white rounded ' />
         <input type="email" placeholder='Email' className='px-4  py-2 w-full outline-none border dark:bg-gray-800 dark:text-white rounded ' />
         <input type="text" placeholder='Phone No' className='px-4  py-2 w-full outline-none border dark:bg-gray-800 dark:text-white rounded ' />
         <input type="password" placeholder='Password' className='px-4  py-2 w-full outline-none border dark:bg-gray-800 dark:text-white rounded ' />
