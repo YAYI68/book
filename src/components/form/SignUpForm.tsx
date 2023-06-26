@@ -1,10 +1,16 @@
+"use client"
 import { pacifico } from '@/utils/font'
+import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 import React from 'react'
 
 type Props = {}
 
 const SignUpForm = (props: Props) => {
+
+  const session = useSession()
+  console.log({session})
+
   return (
     <div className='w-[80%] lg:w-[60%] lg:flex h-[90%] lg:h-[80%] flex flex-col items-center p-4 '>
       <h3 className={`text-[3rem] font-semibold dark:text-white  text-center ${pacifico.className}`}>Studee</h3>

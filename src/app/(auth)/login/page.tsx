@@ -2,10 +2,17 @@ import { LoginForm } from '@/components/form'
 import React from 'react'
 import LoginImg from '/public/images/login.webp'
 import Image from 'next/image'
+import getSession from '@/backend/getSession'
+import { redirect } from 'next/navigation'
 
 type Props = {}
 
-const page = (props: Props) => {
+const Page = async(props: Props) => {
+   const session = await getSession()
+
+   if (session){
+      redirect('/')
+   }
   return (
     <section className='w-full flex h-screen'>
     <div className='w-[50%] hidden lg:flex relative h-full '>
@@ -27,4 +34,4 @@ const page = (props: Props) => {
   )
 }
 
-export default page
+export default Page

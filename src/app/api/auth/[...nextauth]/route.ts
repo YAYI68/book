@@ -1,12 +1,30 @@
-import NextAuth from "next-auth"
+import NextAuth, { CallbacksOptions, CookiesOptions, EventCallbacks, LoggerInstance, PagesOptions, SessionOptions, Theme } from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
-import User from '@/backend/models/user.model'
-import { Console } from "console"
+import { Provider } from "next-auth/providers"
+import { JWTOptions } from "next-auth/jwt"
+import { Adapter } from "next-auth/adapters"
+
 
 
 const BASE_URL=process.env.BASE_URL
+
+export interface AuthOptions {
+  providers: Provider[];
+  secret?: string;
+  session?: Partial<SessionOptions>;
+  jwt?: Partial<JWTOptions>;
+  pages?: Partial<PagesOptions>;
+  callbacks?: Partial<CallbacksOptions>;
+  events?: Partial<EventCallbacks>;
+  adapter?: Adapter;
+  debug?: boolean;
+  logger?: Partial<LoggerInstance>;
+  theme?: Theme;
+  useSecureCookies?: boolean;
+  cookies?: Partial<CookiesOptions>;
+}
  
-export const authOptions = {
+export const authOptions:AuthOptions = {
      
     session: {
         strategy: "jwt",
@@ -31,8 +49,9 @@ export const authOptions = {
                 headers: { "Content-Type": "application/json" }
               })
               const {user} = await res.json()
-             console.log({user})
               if(res.ok && user.is_active){
+                user.password = undefined
+                console.log("Login successfully ")
                 return user
               }
               return null
@@ -40,9 +59,6 @@ export const authOptions = {
       })
       // ...add more providers here
     ],
-
-
-
     pages: {
       signIn: '/login',
       // signOut: '/auth/signout',

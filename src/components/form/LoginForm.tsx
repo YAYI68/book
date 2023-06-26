@@ -1,18 +1,23 @@
 "use client"
 import { pacifico } from '@/utils/font'
 import Link from 'next/link'
-import React from 'react'
-import { signIn } from "next-auth/react";
+import {useState} from 'react'
+import { signIn, useSession } from "next-auth/react";
 
 type Props = {}
 
 const LoginForm = (props: Props) => {
+
+  const [email,setEmail]=useState<string|null>('')
+  const [password,setPassword]=useState<string|null>('')
+
+ 
   
   const handleSubmit = async(e:any)=>{
     e.preventDefault()
     await  signIn('credentials',{
-      email:'biodun@gmail.com',
-      password:'1234',
+      email,
+      password,
       redirect:false
     })
   }
@@ -22,8 +27,8 @@ const LoginForm = (props: Props) => {
     <h3 className={`text-[3rem] font-semibold dark:text-white  text-center ${pacifico.className}`}>Studee</h3>
     <p className='dark:text-gray-300 text-[1.2rem]'>login into your account</p>
     <form action="" className='mt-[2rem] w-full flex flex-col gap-4'>
-      <input type="email" placeholder='Email' className='px-4  py-2 w-full outline-none border dark:bg-gray-800 dark:text-white rounded ' />
-      <input type="password" placeholder='Password' className='px-4  py-2 w-full outline-none border dark:bg-gray-800 dark:text-white rounded ' />
+      <input onChange={(e)=>setEmail(e.target.value)} type="email" placeholder='Email' className='px-4  py-2 w-full outline-none border dark:bg-gray-800 dark:text-white rounded ' />
+      <input onChange={(e)=>setPassword(e.target.value)} type="password" placeholder='Password' className='px-4  py-2 w-full outline-none border dark:bg-gray-800 dark:text-white rounded ' />
       <div className='w-fit flex items-center gap-2'>
         <input type="checkbox" name="" id="show_password" />
         <label htmlFor="show_password" className='dark:text-gray-300'>Show password</label>

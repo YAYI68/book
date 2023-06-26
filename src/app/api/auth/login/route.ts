@@ -18,9 +18,11 @@ export async function POST(req: Request) {
         return NextResponse.json({error:"Incomplete Credentials"},{status:401})
      }
 
-     if(password.length < 8){
+     if(password.length < 5){
         return  NextResponse.json({error:"Password is too weak. Password must be atleast 8 characters "},{status:400}) 
      }
+
+   console.log({email,password})
      
      if (!email.match(mailFormat)){
         return NextResponse.json({error:"Invalid Email Address"},{status:400})
