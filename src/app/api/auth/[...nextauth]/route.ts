@@ -28,7 +28,7 @@ export const authOptions:AuthOptions = {
      
     session: {
         strategy: "jwt",
-        maxAge: 3600,
+        maxAge: 3600, // 1 hour
       },
       secret: process.env.NEXTAUTH_SECRET,
     // Configure one or more authentication providers
@@ -57,8 +57,26 @@ export const authOptions:AuthOptions = {
               return null
         }
       })
+
       // ...add more providers here
     ],
+    callbacks: {
+      async signIn({ }) {
+        return true
+      },
+      async redirect({ url, baseUrl }) {
+        // console.log({url,baseUrl})
+        return baseUrl
+      },
+      async session({ session, user, token }) {
+        token && (session.user = token.user);
+        return session
+      },
+      async jwt({ token, user }) {
+        user && (token.user = user);
+        return token
+      }
+  },
     pages: {
       signIn: '/login',
       // signOut: '/auth/signout',
@@ -66,7 +84,7 @@ export const authOptions:AuthOptions = {
       // verifyRequest: '/auth/verify-request', // (used for check email message)
       // newUser: '/auth/new-user' // New users will be directed here on first sign in (leave the property out if not of interest)
     },
-    debug:false
+    debug:process.env.NODE_ENV === "development"
    
   }
 

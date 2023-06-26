@@ -3,7 +3,7 @@ import dbConnect from "@/backend/database";
 import User from '@/backend/models/user.model'
 
 import { NextResponse } from 'next/server'
-import { createJwt, hashPassword,  messageTemplate,  transporter } from '@/backend/utils';
+import { comparePassword, createJwt, hashPassword,  messageTemplate,  transporter } from '@/backend/utils';
 
 
 const BASE_URL=process.env.BASE_URL
@@ -31,8 +31,14 @@ export async function POST(req: Request) {
      try{
         const user = await User.findOne({email:email}).select("+password")
 
+      const   isValid = await comparePassword(password,user.password)
+
         if(!user){
            return NextResponse.json({error:"User not found"},{status:401})
+        }
+
+        if(user && isValid){
+         return NextResponse.json({user},{status:201})
         }
        
         // const options = { expiresIn: '1h' }
@@ -41,7 +47,7 @@ export async function POST(req: Request) {
         // if(token){
             
         // }
-        return NextResponse.json({user},{status:201})
+        return NextResponse.json({error:"Invalid Credentials"},{status:401})
      }
      catch(error){
         return NextResponse.json({error},{status:500})

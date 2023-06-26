@@ -5,6 +5,8 @@ import { Roboto } from 'next/font/google'
 import PageChildren from '@/components/children/PageChildren'
 import { SessionProvider } from "next-auth/react"
 import NextNProgress from "nextjs-progressbar";
+import getSession from '@/backend/getSession'
+import { redirect } from 'next/navigation'
 
 
 const inter = Roboto({ 
@@ -43,3 +45,4 @@ export default function RootLayout({
     </html>
   )
 }
+

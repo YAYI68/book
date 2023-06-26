@@ -6,11 +6,13 @@ import { DarkIcon, LightIcon, SearchIcon, SystemIcon } from '../ui/svg'
 import { Theme } from '../ui'
 import { useAppContext } from '@/context/AppProvider'
 import SearchInput from '../ui/SearchInput'
-import { signIn } from "next-auth/react";
+import { signIn,signOut, useSession } from "next-auth/react";
 
 type Props = {}
 
 const MainNavbar = (props: Props) => {
+  const {data:user,status} = useSession() 
+  console.log({user})
   const {activeTheme,setActiveTheme} = useAppContext()
   const [displayTheme,setDisplayTheme ] = useState<boolean | null>(false)
   const [ displaySearchInput, setDisplaySearchInput] = useState<boolean | null>(false)
@@ -32,8 +34,15 @@ const MainNavbar = (props: Props) => {
          }
           {/* UnAuthenticated */}
            <ul className='flex font-medium items-center gap-4'>
-            <li className='py-2 px-4 cursor-pointer text-gray-500 dark:text-gray-400 hover:text-black rounded hover:dark:text-white border dark:border-gray-500 hover:dark:border-white hover:border-black'><button className='w-full'  onClick={()=>signIn()}>Login</button></li>
-            <li className='py-2 px-4 cursor-pointer text-gray-500 dark:text-black  rounded bg-black hover:text-white dark:bg-white hover:dark:bg-black hover:dark:text-white border hover:dark:border-white hover:border-black'><Link href={'/sign-up'}>Signup</Link></li>
+            {!user?
+             <>
+             <li className='py-2 px-4 cursor-pointer text-gray-500 dark:text-gray-400 hover:text-black rounded hover:dark:text-white border dark:border-gray-500 hover:dark:border-white hover:border-black'><button className='w-full'  onClick={()=>signIn()}>Login</button></li>
+             <li className='py-2 px-4 cursor-pointer text-gray-500 dark:text-black  rounded bg-black hover:text-white dark:bg-white hover:dark:bg-black hover:dark:text-white border hover:dark:border-white hover:border-black'><Link href={'/sign-up'}>Signup</Link></li> 
+             </>
+             : 
+             <li className='py-2 px-4 cursor-pointer text-gray-500 dark:text-gray-400 hover:text-black rounded hover:dark:text-white border dark:border-gray-500 hover:dark:border-white hover:border-black'><button className='w-full'  onClick={()=>signOut()}>LogOut</button></li>
+          }
+            
            </ul>
             {/* <div className='h-[2.5rem] w-[2.5rem] rounded-[50%] bg-yellow-400'>
 

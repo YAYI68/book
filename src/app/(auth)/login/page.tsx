@@ -8,11 +8,11 @@ import { redirect } from 'next/navigation'
 type Props = {}
 
 const Page = async(props: Props) => {
-   const session = await getSession()
+   // const session = await getSession()
 
-   if (session){
-      redirect('/')
-   }
+   // if (session){
+   //    redirect('/')
+   // }
   return (
     <section className='w-full flex h-screen'>
     <div className='w-[50%] hidden lg:flex relative h-full '>

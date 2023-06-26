@@ -1,15 +1,18 @@
-"use client"
+
+import { authOptions } from '@/app/api/auth/[...nextauth]/route'
+import getSession from '@/backend/getSession'
 import { pacifico } from '@/utils/font'
-import { useSession } from 'next-auth/react'
+import { getServerSession } from 'next-auth'
+// import { getSession, useSession } from 'next-auth/react'
 import Link from 'next/link'
 import React from 'react'
 
 type Props = {}
 
-const SignUpForm = (props: Props) => {
+const SignUpForm = async (props: Props) => {
 
-  const session = useSession()
-  console.log({session})
+  const session = await getSession()
+  console.log({from_signup:session})
 
   return (
     <div className='w-[80%] lg:w-[60%] lg:flex h-[90%] lg:h-[80%] flex flex-col items-center p-4 '>
