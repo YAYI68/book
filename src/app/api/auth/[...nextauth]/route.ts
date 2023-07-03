@@ -1,5 +1,6 @@
 import NextAuth, { CallbacksOptions, CookiesOptions, EventCallbacks, LoggerInstance, PagesOptions, SessionOptions, Theme } from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
+import GoogleProvider from "next-auth/providers/google";
 import { Provider } from "next-auth/providers"
 import { JWTOptions } from "next-auth/jwt"
 import { Adapter } from "next-auth/adapters"
@@ -33,9 +34,13 @@ export const authOptions:AuthOptions = {
       secret: process.env.NEXTAUTH_SECRET,
     // Configure one or more authentication providers
     providers: [
+
+      GoogleProvider({
+        clientId: process.env.GOOGLE_CLIENT_ID,
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET
+      }),
      
       CredentialsProvider({
-
         name: 'credentials',
         credentials:{},
         async authorize(credentials, req){
