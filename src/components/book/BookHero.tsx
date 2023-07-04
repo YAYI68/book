@@ -6,7 +6,7 @@ type Props = {}
 
 const BookHero = (props: Props) => {
   return (
-    <div className='relative w-full lg:items-center h-[95vh] flex dark:bg-gray-900 flex-col lg:flex-row-reverse shadow-md dark:border-b'>
+    <div className='relative w-full lg:items-center h-[90vh] flex dark:bg-gray-900 flex-col lg:flex-row-reverse shadow-md dark:border-b'>
     <div className=' h-full w-full lg:w-[55%] md:bend_shape '>
       <Image src={BookHeroImg} alt='' className='h-full w-full' />
     </div>

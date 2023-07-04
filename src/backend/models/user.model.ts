@@ -22,6 +22,12 @@ const userSchema = new Schema({
        type:String,
        enum:["Male","Female"],
     },
+    pricing_plan:{
+      type:String,
+      enum:["Free","Starter","Professional"],
+      default:"Free"  
+    }
+    ,
     is_active:{
         type:Boolean,
         default:false
@@ -33,6 +39,18 @@ const userSchema = new Schema({
 
 },
 {
+    virtuals:{
+        fullname:{
+            get(){
+                return this.firstname + " " + this.lastname
+            }
+        },
+        id:{
+            get(){
+                return this._id
+            }
+        }
+    },
     timestamps:true
 })
 

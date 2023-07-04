@@ -6,7 +6,7 @@ type Props = {}
 
 const Hero = (props: Props) => {
   return (
-    <div className='relative w-full h-[95vh]'>
+    <div className='relative w-full h-[90vh]'>
       <div className='absolute h-full w-full '>
         <Image src={HomeHeroImg} alt='' className='h-full w-full' />
       </div>
