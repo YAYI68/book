@@ -1,15 +1,16 @@
 // import { NextRequest } from 'next/server'
 import dbConnect from "@/backend/database";
 import { NextResponse } from 'next/server'
+import Genre from '@/backend/models/genre.model'
 
 
 const BASE_URL=process.env.BASE_URL
 
 export async function POST(req: Request) {
      await dbConnect()
-     const {author,name,note,image,genre,edition} = await req.json()
-     
-     return NextResponse.json({message:"Book is created"},{status:201})
+     const {name} = await req.json()
+     const genre =  await Genre.create({name})
+     return NextResponse.json({message:"Genre is created",data:genre},{status:201})
   
 }
 

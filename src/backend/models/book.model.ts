@@ -1,4 +1,4 @@
-import { Schema,models,model} from "mongoose";
+import mongoose , { Schema,models,model} from "mongoose";
 
 
 const bookSchema = new Schema({
@@ -6,7 +6,7 @@ const bookSchema = new Schema({
         type: String,
         require:true 
        },
-    name: { 
+    title: { 
         type: String,
         require:true 
     },

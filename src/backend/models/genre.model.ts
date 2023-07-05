@@ -1,15 +1,13 @@
 import { Schema,models,model} from "mongoose";
 
 
-const bookSchema = new Schema({
+const GenreSchema = new Schema({
     name: { 
         type: String,
-        require:true 
+        require:true,
+        unique:true 
     },
-},
-{
-    timestamps:true
-})
+},)
 
-export default models.Genre || model('Genre',bookSchema)
+export default models.Genre || model('Genre',GenreSchema)
 
