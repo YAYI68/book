@@ -10,3 +10,4 @@ export function convertToBase64(file:any){
       }
     })
   }
+

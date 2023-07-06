@@ -45,9 +45,6 @@ export const createJwt = (user:JWTUSER,options:any)=>{
         return token;
 }
 
-
-
-
 export const messageTemplate=(name:string,url:string)=>{
 
 return`
@@ -75,15 +72,14 @@ return`
 `}
 
 
-// export function convertToBase64(file:any){
-//   return new Promise((resolve, reject) => {
-//     const fileReader = new FileReader();
-//     fileReader.readAsDataURL(file);
-//     fileReader.onload = () => {
-//       resolve(fileReader.result)
-//     };
-//     fileReader.onerror = (error) => {
-//       reject(error)
-//     }
-//   })
-// }
+export function dataURLtoFile(dataurl:string, filename:string) {
+  const arr = dataurl.split(',')
+     const mime = arr[0].match(/:(.*?);/)[1]
+     const bstr = atob(arr[arr.length - 1]) 
+     let n = bstr.length 
+     let u8arr = new Uint8Array(n);
+  while(n--){
+      u8arr[n] = bstr.charCodeAt(n);
+  }
+  return new File([u8arr], filename, {type:mime});
+}
