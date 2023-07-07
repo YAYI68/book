@@ -2,6 +2,7 @@
 import dbConnect from "@/backend/database";
 import { v2 as cloudinary } from "cloudinary";
 import { NextResponse } from 'next/server'
+import Book from '@/backend/models/book.model'
 import Genre from '@/backend/models/genre.model'
 import { cloudinaryConfig } from "@/config/cloudinary";
 
@@ -11,27 +12,41 @@ const BASE_URL=process.env.BASE_URL
 cloudinaryConfig
 export async function POST(req: Request) {
      await dbConnect()
-     const {author,title,image,genre,edition} = await req.json()
-     const data = {
-        author,
-        title,
-        image,
-        genre,
-        edition
+     const {author,title,description,image,genre,edition,note} = await req.json() 
+
+     if(!author || !title || !image || !note ){
+        return NextResponse.json({error:"Incomplete inFormation to register book "})
      }
-     console.log({data})
+     try{
+        const bookGenre = await Genre.findOne({name:genre})
+        const bookImage = await cloudinary.uploader.upload(image,{folder:"Book/covers"})
+        const bookFile = await cloudinary.uploader.upload(note,{folder:"Book/files"})
+        const book = await Book.create({
+            author,
+            title,
+            image:bookImage.secure_url,
+            note:bookFile.secure_url,
+            pages:bookFile.pages,
+            format:bookFile.format,
+            edition,
+            description,
+            genre:bookGenre,
+        })
+        return NextResponse.json({book},{status:201})
+     }
+     catch(error){
+        return NextResponse.json({error},{status:500})
+     }
 
-     const result = await cloudinary.uploader.upload(image,{folder:"Book/cover"})
-
-     console.log({result})
-    //  const genre =  await Genre.create({name})
-     return NextResponse.json({message:"Book is created"},{status:201})
-  
 }
 
 export async function GET(req: Request) {
     await dbConnect()
-    console.log("All book is here")
-    return NextResponse.json({message:"All books is here"},{status:201})
- 
+    try{
+       const books = await Book.find({})
+       return NextResponse.json({books},{status:200})
+    }
+    catch(error){
+      return NextResponse.json({error},{status:500})
+    }
 }
