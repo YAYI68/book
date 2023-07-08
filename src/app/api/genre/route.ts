@@ -16,7 +16,7 @@ export async function POST(req: Request) {
 
 export async function GET(req: Request) {
     await dbConnect()
-    console.log("All book is here")
-    return NextResponse.json({message:"All books is here"},{status:201})
+    const genre =  await Genre.find()
+    return NextResponse.json({data:genre},{status:200})
  
 }
