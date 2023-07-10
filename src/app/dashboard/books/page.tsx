@@ -6,7 +6,7 @@ type Props = {}
 
 const page = (props: Props) => {
   return (
-    <section className='w-full h-[30rem] '>
+    <section className='w-full h-full'>
        <div className='w-full h-full flex flex-col gap-4'>
          <div className='w-full'>
          <p className='dark:text-white font-semibold text-[2rem] text-center lg:text-start lg:text-[3rem]'>Welcome back! </p>
@@ -19,7 +19,7 @@ const page = (props: Props) => {
            </div>
          </div>
 
-         <div className='w-full'>
+         <div className='w-full overflow-x-scroll mt-[2rem]'>
            <Table />
          </div>
         

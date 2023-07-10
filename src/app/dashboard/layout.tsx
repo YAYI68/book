@@ -29,7 +29,7 @@ export default function Layout({
        <div className='w-full h-full  flex flex-col items-center'>
            <DashboardSideNav />
            <div className='w-[90%] flex flex-col items-end '>
-             <aside className='w-full lg:w-[90%] rounded bg-gray-200 dark:bg-gray-800 p-4'>
+             <aside className='w-full h-full lg:w-[90%] rounded bg-gray-200 dark:bg-gray-800 p-4'>
                 {children}
               </aside>
            </div>
