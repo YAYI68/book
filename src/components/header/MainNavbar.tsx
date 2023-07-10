@@ -22,7 +22,7 @@ const MainNavbar = (props: Props) => {
        <Link href="/" className={`${pacifico.className} block text-[2rem]`}>Studee</Link>
        <div className='flex relative items-center justify-between w-[80%] xl:w-[60%]'>
          <ul className='flex items-center w-[65%]  gap-4'>
-          <li className='p-2 cursor-pointer font-medium text-gray-500  w-fit dark:text-gray-400 hover:text-black text-center rounded hover:dark:text-white'><Link href={'/books'} className='w-full'>Books</Link></li>
+          <li className='p-2 cursor-pointer font-medium text-gray-500  w-fit dark:text-gray-400 hover:text-black text-center rounded hover:dark:text-white'><Link href={'/books'} className='w-full'>books</Link></li>
           <li className='p-2 cursor-pointer font-medium text-gray-500 w-fit text-center dark:text-gray-400 hover:text-black rounded hover:dark:text-white'><Link href={'/my-library'} className='w-full'>my library</Link></li>
           <li className='p-2 cursor-pointer font-medium text-gray-500 w-fit text-center dark:text-gray-400 hover:text-black rounded hover:dark:text-white'><Link href={'/pricing'} className='w-full'>pricing</Link></li>
           <li className='p-2 cursor-pointer font-medium text-gray-500 w-fit text-center dark:text-gray-400 hover:text-black rounded hover:dark:text-white'><Link href={'/contact'} className='w-full'>contact</Link></li>
