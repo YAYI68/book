@@ -2,6 +2,7 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { CheckIcon } from '../svg'
 import DropDown from '../DropDown'
+import EditDeleteDropDown from '../EditDeleteDropDown'
 
 type Props = {
     selectedNum?:number[]
@@ -67,7 +68,7 @@ const TableBody = (props: Props) => {
                 <span className="sr-only">Open menu</span>
             </button>
             {displayMenu ?
-            <DropDown setDropDown={setDisplayMenu} className='absolute top-[100%] border left-[-70%] lg:left-[-50%] z-[2] w-[5rem]' />
+            <EditDeleteDropDown setDropDown={setDisplayMenu} className='absolute top-[-100%] border left-[-70%] lg:left-[-70%] z-[2] w-[5.5rem]' />
              : ""  
             }
         </td>

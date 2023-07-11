@@ -17,6 +17,9 @@ const TableHeader = (props: TableHeaderProps) => {
     const {setSelectAllRow,selectedValue} = props
     const [checkedAll,setCheckedAll] = useState(false)
     const [genreDropDown,setGenreDropDown] = useState(false)
+    const [genre,setGenre] =useState('')
+
+    const genreStatus = ["Art","Science","Comic","History","Government"]
   
     const handleCheckedAll = ()=>{
         setCheckedAll(!checkedAll)
@@ -51,7 +54,7 @@ const TableHeader = (props: TableHeaderProps) => {
                     </svg>
                 </button>
                 {genreDropDown?
-                <DropDown setDropDown={setGenreDropDown} className='absolute top-[100%] w-full border left-0' />:
+                <DropDown value={genre} onSelect={setGenre} options={genreStatus} setDropDown={setGenreDropDown} className='absolute top-[100%] w-full border left-0' />:
                 ''
                 }
             </div>

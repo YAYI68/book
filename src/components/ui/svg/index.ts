@@ -1,6 +1,7 @@
+export { default as TrashIcon} from './TrashIcon'
 export { default as ChevronLeftIcon} from './ChevronLeftIcon'
 export { default as  ChevronRightIcon} from './ChevronRightIcon'
-export{ default as BarIcon } from './BarIcon'
+export { default as BarIcon } from './BarIcon'
 export { default as Times} from './Times'
 export { default as LightIcon} from './LightIcon'
 export { default as DarkIcon } from './DarkIcon'
