@@ -17,7 +17,6 @@ const UserTableHeader = (props: TableHeaderProps) => {
     const {setSelectAllRow,selectedValue} = props
     const [checkedAll,setCheckedAll] = useState(false)
     
-    const [genre,setGenre] =useState('')
     const [displayGender, setDisplayGender ]= useState(false)
     const [displayActive, setDisplayActive ]= useState(false)
     const [displayStatus, setDisplayStatus ]= useState(false)

@@ -2,6 +2,7 @@
 import React, { useState } from 'react'
 import { ChevronLeftIcon, ChevronRightIcon, SearchIcon } from '../ui/svg'
 import { BookTableBody, BookTableHeader, Table } from '../table'
+import Link from 'next/link'
 
 type Props = {}
 
@@ -14,11 +15,12 @@ const BookDashboardTable = (props: Props) => {
          <p className='dark:text-white font-semibold text-[2rem] text-center lg:text-start lg:text-[3rem]'>Welcome back! </p>
           <p className='dark:text-gray-400 text-center lg:text-start'>Here is a list of all the books</p>
          </div>
-         <div className='w-full flex flex-col items-center lg:items-start'>
+         <div className='w-full flex flex-col items-center lg:items-start lg:flex-row lg:justify-between'>
            <div className='w-[80%] lg:w-[40%] rounded-[.5rem] flex items-center border border-black dark:border-gray-400 p-1'>
             <input type="text" placeholder='filter by book title or author' className='w-[90%] focus:outline-none p-1 bg-transparent dark:text-gray-400'/>
             <button className='flex items-center justify-center w-[10%]'><SearchIcon classname='h-[70%] w-[70%] lg:w-[50%] lg:h-[50%] dark:text-white' /></button>
            </div>
+           <Link href={"/dashboard/books/new"} className='p-2 text-center rounded-md bg-red-500 text-white'>Create New Book</Link>
          </div>
          <div className='w-full overflow-x-scroll mt-[2rem]'>
            <Table>
