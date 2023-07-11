@@ -16,13 +16,19 @@ type TableHeaderProps = {
 const UserTableHeader = (props: TableHeaderProps) => {
     const {setSelectAllRow,selectedValue} = props
     const [checkedAll,setCheckedAll] = useState(false)
-    const [genreDropDown,setGenreDropDown] = useState(false)
+    
     const [genre,setGenre] =useState('')
     const [displayGender, setDisplayGender ]= useState(false)
     const [displayActive, setDisplayActive ]= useState(false)
     const [displayStatus, setDisplayStatus ]= useState(false)
 
-    const genreStatus = ["Art","Science","Comic","History","Government"]
+    const [ active,setActive] = useState("")
+    const [ gender,setGender] = useState("")
+    const [ status,setStatus] = useState("")
+
+    const activeOptions = ["Yes","No"]
+    const userStatus = ["admin","client"]
+    const genderOptions = ["Male","Female"]
   
     const handleCheckedAll = ()=>{
         setCheckedAll(!checkedAll)
@@ -53,47 +59,47 @@ const UserTableHeader = (props: TableHeaderProps) => {
         </th>
         <th className="h-10 px-2 text-left align-middle font-medium text-muted-foreground ">
             <div className="flex items-center space-x-2 relative">
-                <button onClick={()=>setGenreDropDown(!genreDropDown)} className="inline-flex items-center text-[1.5rem] justify-center font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground rounded-md px-3 text-xs -ml-3 h-8 data-[state=open]:bg-accent" type="button" id="radix-:R9d9mmkr9hja:" aria-haspopup="menu" aria-expanded="false" data-state="closed">
+                <button onClick={()=>setDisplayGender(!displayGender)} className="inline-flex items-center text-[1.5rem] justify-center font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground rounded-md px-3 text-xs -ml-3 h-8 data-[state=open]:bg-accent" type="button" id="radix-:R9d9mmkr9hja:" aria-haspopup="menu" aria-expanded="false" data-state="closed">
                     <span>Gender</span>
                     <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" className="ml-2 h-4 w-4">
                         <path d="M4.93179 5.43179C4.75605 5.60753 4.75605 5.89245 4.93179 6.06819C5.10753 6.24392 5.39245 6.24392 5.56819 6.06819L7.49999 4.13638L9.43179 6.06819C9.60753 6.24392 9.89245 6.24392 10.0682 6.06819C10.2439 5.89245 10.2439 5.60753 10.0682 5.43179L7.81819 3.18179C7.73379 3.0974 7.61933 3.04999 7.49999 3.04999C7.38064 3.04999 7.26618 3.0974 7.18179 3.18179L4.93179 5.43179ZM10.0682 9.56819C10.2439 9.39245 10.2439 9.10753 10.0682 8.93179C9.89245 8.75606 9.60753 8.75606 9.43179 8.93179L7.49999 10.8636L5.56819 8.93179C5.39245 8.75606 5.10753 8.75606 4.93179 8.93179C4.75605 9.10753 4.75605 9.39245 4.93179 9.56819L7.18179 11.8182C7.35753 11.9939 7.64245 11.9939 7.81819 11.8182L10.0682 9.56819Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path>
                     </svg>
                 </button>
-                {genreDropDown?
-                <DropDown value={genre} onSelect={setGenre} options={genreStatus} setDropDown={setGenreDropDown} className='absolute top-[100%] w-full border left-0' />:
+                {displayGender?
+                <DropDown value={gender} onSelect={setGender} options={genderOptions} setDropDown={setDisplayGender} className='absolute top-[100%] w-full border left-0' />:
                 ''
                 }
             </div>
         </th>
         <th className="h-10 px-2 text-left align-middle font-medium text-muted-foreground ">
             <div className="flex items-center space-x-2 relative">
-                <button onClick={()=>setGenreDropDown(!genreDropDown)} className="inline-flex items-center text-[1.5rem] justify-center font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground rounded-md px-3 text-xs -ml-3 h-8 data-[state=open]:bg-accent" type="button" id="radix-:R9d9mmkr9hja:" aria-haspopup="menu" aria-expanded="false" data-state="closed">
+                <button onClick={()=>setDisplayStatus(!displayStatus)} className="inline-flex items-center text-[1.5rem] justify-center font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground rounded-md px-3 text-xs -ml-3 h-8 data-[state=open]:bg-accent" type="button" id="radix-:R9d9mmkr9hja:" aria-haspopup="menu" aria-expanded="false" data-state="closed">
                     <span>Status</span>
                     <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" className="ml-2 h-4 w-4">
                         <path d="M4.93179 5.43179C4.75605 5.60753 4.75605 5.89245 4.93179 6.06819C5.10753 6.24392 5.39245 6.24392 5.56819 6.06819L7.49999 4.13638L9.43179 6.06819C9.60753 6.24392 9.89245 6.24392 10.0682 6.06819C10.2439 5.89245 10.2439 5.60753 10.0682 5.43179L7.81819 3.18179C7.73379 3.0974 7.61933 3.04999 7.49999 3.04999C7.38064 3.04999 7.26618 3.0974 7.18179 3.18179L4.93179 5.43179ZM10.0682 9.56819C10.2439 9.39245 10.2439 9.10753 10.0682 8.93179C9.89245 8.75606 9.60753 8.75606 9.43179 8.93179L7.49999 10.8636L5.56819 8.93179C5.39245 8.75606 5.10753 8.75606 4.93179 8.93179C4.75605 9.10753 4.75605 9.39245 4.93179 9.56819L7.18179 11.8182C7.35753 11.9939 7.64245 11.9939 7.81819 11.8182L10.0682 9.56819Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path>
                     </svg>
                 </button>
-                {genreDropDown?
-                <DropDown value={genre} onSelect={setGenre} options={genreStatus} setDropDown={setGenreDropDown} className='absolute top-[100%] w-full border left-0' />:
+                { displayStatus?
+                <DropDown value={status} onSelect={setStatus} options={userStatus} setDropDown={setDisplayStatus} className='absolute top-[100%] w-full border left-0 z-[2]' />:
                 ''
                 }
             </div>
         </th>
         <th className="h-10 px-2 text-left align-middle font-medium text-muted-foreground ">
             <div className="flex items-center space-x-2 relative">
-                <button onClick={()=>setGenreDropDown(!genreDropDown)} className="inline-flex items-center text-[1.5rem] justify-center font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground rounded-md px-3 text-xs -ml-3 h-8 data-[state=open]:bg-accent" type="button" id="radix-:R9d9mmkr9hja:" aria-haspopup="menu" aria-expanded="false" data-state="closed">
+                <button onClick={()=>setDisplayActive(!displayActive)} className="inline-flex items-center text-[1.5rem] justify-center font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 hover:bg-accent hover:text-accent-foreground rounded-md px-3 text-xs -ml-3 h-8 data-[state=open]:bg-accent" type="button" id="radix-:R9d9mmkr9hja:" aria-haspopup="menu" aria-expanded="false" data-state="closed">
                     <span>Active</span>
                     <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" className="ml-2 h-4 w-4">
                         <path d="M4.93179 5.43179C4.75605 5.60753 4.75605 5.89245 4.93179 6.06819C5.10753 6.24392 5.39245 6.24392 5.56819 6.06819L7.49999 4.13638L9.43179 6.06819C9.60753 6.24392 9.89245 6.24392 10.0682 6.06819C10.2439 5.89245 10.2439 5.60753 10.0682 5.43179L7.81819 3.18179C7.73379 3.0974 7.61933 3.04999 7.49999 3.04999C7.38064 3.04999 7.26618 3.0974 7.18179 3.18179L4.93179 5.43179ZM10.0682 9.56819C10.2439 9.39245 10.2439 9.10753 10.0682 8.93179C9.89245 8.75606 9.60753 8.75606 9.43179 8.93179L7.49999 10.8636L5.56819 8.93179C5.39245 8.75606 5.10753 8.75606 4.93179 8.93179C4.75605 9.10753 4.75605 9.39245 4.93179 9.56819L7.18179 11.8182C7.35753 11.9939 7.64245 11.9939 7.81819 11.8182L10.0682 9.56819Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path>
                     </svg>
                 </button>
-                {genreDropDown?
-                <DropDown value={genre} onSelect={setGenre} options={genreStatus} setDropDown={setGenreDropDown} className='absolute top-[100%] w-full border left-0' />:
+                {displayActive?
+                <DropDown value={active} onSelect={setActive} options={activeOptions} setDropDown={setDisplayActive} className='absolute top-[100%] w-full border left-0' />:
                 ''
                 }
             </div>
         </th>
-        <th className="h-10 px-2 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0 [&amp;&gt;[role=checkbox]]:translate-y-[2px]">
+        <th className="h-10 px-2 text-left align-middle font-medium text-muted-foreground ">
             <p className="">Published</p>
         </th>
         <th className="h-10 px-2 text-left align-middle font-medium text-muted-foreground "></th>
