@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react'
+import React, { Dispatch, SetStateAction, useState } from 'react'
 import { CheckIcon } from '../svg'
 import DropDown from '../DropDown'
 
@@ -8,17 +8,32 @@ import DropDown from '../DropDown'
 
 
 
-type TableHeaderProps = {}
+type TableHeaderProps = {
+    setSelectAllRow?:Dispatch<SetStateAction<number[] | null>>;
+    selectedValue?:number[]
+}
 
 const TableHeader = (props: TableHeaderProps) => {
-    const [selectAll,setSelectAll] = useState(false)
+    const {setSelectAllRow,selectedValue} = props
+    const [checkedAll,setCheckedAll] = useState(false)
     const [genreDropDown,setGenreDropDown] = useState(false)
+  
+    const handleCheckedAll = ()=>{
+        setCheckedAll(!checkedAll)
+        if(!checkedAll){
+            setSelectAllRow(selectedValue)  
+        }
+        else{
+            setSelectAllRow([])
+        }    
+    }
+
   return (
-    <thead className="[&amp;_tr]:border-b">
-    <tr className="border-b border-b-black transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
+    <thead className="">
+    <tr className="border-b  border-b-black transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
         <th className="h-10 px-2 text-left align-middle font-medium  ">
-              <button onClick={()=>setSelectAll(!selectAll)} className= {` h-4 w-4  border-black dark:border-white ${selectAll?"dark:bg-white bg-black":""} shrink-0 rounded-sm border border-primary shadow flex flex-col items-center justify-center translate-y-[2px]`}>
-              <CheckIcon classname={`h-[80%] w-[80%] dark:fill-black dark:text-black text-white fill-white ${selectAll?"opacity-1":"opacity-0" } text-[2rem] `} />              
+              <button onClick={handleCheckedAll} className= {` h-4 w-4  border-black dark:border-white ${checkedAll?"dark:bg-white bg-black":""} shrink-0 rounded-sm border border-primary shadow flex flex-col items-center justify-center translate-y-[2px]`}>
+              <CheckIcon classname={`h-[80%] w-[80%] dark:fill-black dark:text-black text-white fill-white ${checkedAll?"opacity-1":"opacity-0" } text-[2rem] `} />              
               </button>
         </th>
         <th className="h-10 px-2 text-left align-middle font-medium text-muted-foreground ">

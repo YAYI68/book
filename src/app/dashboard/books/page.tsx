@@ -1,4 +1,4 @@
-import { SearchIcon } from '@/components/ui/svg'
+import { ArrowRight, ChevronLeftIcon, ChevronRightIcon, SearchIcon } from '@/components/ui/svg'
 import Table from '@/components/ui/table/Table'
 import React from 'react'
 
@@ -7,7 +7,7 @@ type Props = {}
 const page = (props: Props) => {
   return (
     <section className='w-full h-full'>
-       <div className='w-full h-full flex flex-col gap-4'>
+       <div className='w-full h-full flex flex-col gap-2'>
          <div className='w-full'>
          <p className='dark:text-white font-semibold text-[2rem] text-center lg:text-start lg:text-[3rem]'>Welcome back! </p>
           <p className='dark:text-gray-400 text-center lg:text-start'>Here is a list of all the books</p>
@@ -18,9 +18,24 @@ const page = (props: Props) => {
             <button className='flex items-center justify-center w-[10%]'><SearchIcon classname='h-[70%] w-[70%] lg:w-[50%] lg:h-[50%] dark:text-white' /></button>
            </div>
          </div>
-
          <div className='w-full overflow-x-scroll mt-[2rem]'>
            <Table />
+         </div>
+         <div className='w-full bg-red h-[3rem] flex justify-center items-center lg:justify-between'>
+           <div className='hidden lg:block'>
+             <p className='dark:text-white text-[1rem] font-medium'>0 of 100 row(s) selected.</p>
+           </div>
+           <div className='px-4 w-[70%] flex items-center justify-between lg:w-[30%] p-2'>
+             <p className='flex items-center text-[1rem] dark:text-white font-medium gap-2'>page <span>1</span> of <span>10</span> </p>
+             <div className='flex items-center gap-4'>
+                <button className='flex flex-col border-black dark:border-white items-center justify-center p-2 border rounded-md'>
+                  <ChevronLeftIcon className='h-4 w-4 dark:text-white disabled:text-gray-500' />
+                </button>
+                <button disabled={true} className='flex group disabled:border-gray-500 flex-col items-center border-black dark:border-white justify-center p-2 border rounded-md'>
+                  <ChevronRightIcon className='h-4 w-4 dark:text-white group-disabled:text-gray-500' />
+                </button>
+             </div>
+           </div>
          </div>
         
        </div>

@@ -1,19 +1,36 @@
 "use client"
-import React, { useState } from 'react'
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { CheckIcon } from '../svg'
 import DropDown from '../DropDown'
 
-type Props = {}
+type Props = {
+    selectedNum?:number[]
+    rowId?:number
+    setSelect?:Dispatch<SetStateAction<number[] | null>>;
+}
 
 const TableBody = (props: Props) => {
-    const [ checked, setChecked ] = useState(false)
+    const {selectedNum,rowId,setSelect} = props
+    const [ checked,setChecked] = useState(false)
     const [displayMenu, setDisplayMenu ]= useState(false)
+     const currentChecked = selectedNum.includes(rowId)
+    
+     const handleChange = ()=>{
+        setChecked(!checked)
+        if(!checked){
+            setSelect(prev=>[...prev,rowId])
+        }
+        else{
+            setSelect(selectedNum.filter((currentNum)=>currentNum !==rowId))
+        }
+     }
+    
   return (
-    <tbody className="[&amp;_tr:last-child]:border-0">
-    <tr className={`border-b border-b-black dark:border-b-gray-400 transition-colors hover:bg-muted/50 ${checked?"bg-red-200":""}`} data-state="false">
+    <tbody className="w-full">
+    <tr className={`border-b border-b-black dark:border-b-gray-400 transition-colors hover:bg-muted/50 ${currentChecked ? "bg-red-200":""}`} data-state="false">
     <th className="h-10 px-2 text-left align-middle font-medium  ">
-              <button onClick={()=>setChecked(!checked)} className= {` h-4 w-4  border-black dark:border-white ${checked?"dark:bg-white bg-black":""} shrink-0 rounded-sm border border-primary shadow flex flex-col items-center justify-center translate-y-[2px]`}>
-              <CheckIcon classname={`h-[80%] w-[80%] dark:fill-black dark:text-black text-white fill-white ${checked?"opacity-1":"opacity-0" } text-[2rem] `} />              
+              <button onClick={handleChange} className= {` h-4 w-4  border-black dark:border-white ${currentChecked ?"dark:bg-white bg-black":""} shrink-0 rounded-sm border border-primary shadow flex flex-col items-center justify-center translate-y-[2px]`}>
+              <CheckIcon classname={`h-[80%] w-[80%] dark:fill-black dark:text-black text-white fill-white ${currentChecked ?"opacity-1":"opacity-0" } text-[2rem] `} />              
               </button>
         </th>
         <td className="p-2 align-middle ">
@@ -50,7 +67,7 @@ const TableBody = (props: Props) => {
                 <span className="sr-only">Open menu</span>
             </button>
             {displayMenu ?
-            <DropDown setDropDown={setDisplayMenu} className='absolute top-[100%] border left-[-50%] z-[2] w-[5rem]' />
+            <DropDown setDropDown={setDisplayMenu} className='absolute top-[100%] border left-[-70%] lg:left-[-50%] z-[2] w-[5rem]' />
              : ""  
             }
         </td>

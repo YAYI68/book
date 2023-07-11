@@ -1,4 +1,5 @@
-
+export { default as ChevronLeftIcon} from './ChevronLeftIcon'
+export { default as  ChevronRightIcon} from './ChevronRightIcon'
 export{ default as BarIcon } from './BarIcon'
 export { default as Times} from './Times'
 export { default as LightIcon} from './LightIcon'
@@ -14,4 +15,3 @@ export { default as UserIcon } from "./UserIcon"
 export { default as WalletIcon } from "./WalletIcon"
 export { default as KeyIcon } from "./KeyIcon"
 export { default as EditIcon } from "./EditIcon"
-
