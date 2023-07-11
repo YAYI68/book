@@ -1,3 +1,4 @@
+"use client"
 import { useClickAway } from '@/hooks';
 import React, { Dispatch, SetStateAction, useRef, useState } from 'react'
 import { EditIcon, TrashIcon } from './svg';

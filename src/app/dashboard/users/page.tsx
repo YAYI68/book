@@ -1,10 +1,13 @@
 import React from 'react'
+import { UserDashboardTable } from '@/components/dashboard'
 
 type Props = {}
 
 const page = (props: Props) => {
   return (
-    <div>All Users</div>
+   <section className='w-full h-full'>
+       <UserDashboardTable />
+    </section>
   )
 }
 

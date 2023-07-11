@@ -1,8 +1,7 @@
 "use client"
 import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
-import { CheckIcon } from '../svg'
-import DropDown from '../DropDown'
-import EditDeleteDropDown from '../EditDeleteDropDown'
+import { CheckIcon } from '../ui/svg'
+import { EditDeleteDropDown } from '../ui'
 
 type Props = {
     selectedNum?:number[]
@@ -10,7 +9,7 @@ type Props = {
     setSelect?:Dispatch<SetStateAction<number[] | null>>;
 }
 
-const TableBody = (props: Props) => {
+const BookTableBody = (props: Props) => {
     const {selectedNum,rowId,setSelect} = props
     const [ checked,setChecked] = useState(false)
     const [displayMenu, setDisplayMenu ]= useState(false)
@@ -77,4 +76,4 @@ const TableBody = (props: Props) => {
   )
 }
 
-export default TableBody
+export default BookTableBody

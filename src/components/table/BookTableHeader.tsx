@@ -1,11 +1,6 @@
-"use client"
 import React, { Dispatch, SetStateAction, useState } from 'react'
-import { CheckIcon } from '../svg'
-import DropDown from '../DropDown'
-
-
-
-
+import { CheckIcon } from '../ui/svg';
+import { DropDown } from '../ui';
 
 
 type TableHeaderProps = {
@@ -13,7 +8,8 @@ type TableHeaderProps = {
     selectedValue?:number[]
 }
 
-const TableHeader = (props: TableHeaderProps) => {
+
+const BookTableHeader = (props: TableHeaderProps) => {
     const {setSelectAllRow,selectedValue} = props
     const [checkedAll,setCheckedAll] = useState(false)
     const [genreDropDown,setGenreDropDown] = useState(false)
@@ -30,7 +26,6 @@ const TableHeader = (props: TableHeaderProps) => {
             setSelectAllRow([])
         }    
     }
-
   return (
     <thead className="">
     <tr className="border-b  border-b-black transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
@@ -60,6 +55,12 @@ const TableHeader = (props: TableHeaderProps) => {
             </div>
         </th>
         <th className="h-10 px-2 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0 [&amp;&gt;[role=checkbox]]:translate-y-[2px]">
+            <p className="">format</p>
+        </th>
+        <th className="h-10 px-2 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0 [&amp;&gt;[role=checkbox]]:translate-y-[2px]">
+            <p className="">Edition</p>
+        </th>
+        <th className="h-10 px-2 text-left align-middle font-medium text-muted-foreground [&amp;:has([role=checkbox])]:pr-0 [&amp;&gt;[role=checkbox]]:translate-y-[2px]">
             <p className="">Published Date</p>
         </th>
         <th className="h-10 px-2 text-left align-middle font-medium text-muted-foreground "></th>
@@ -68,5 +69,4 @@ const TableHeader = (props: TableHeaderProps) => {
   )
 }
 
-export default TableHeader
-
+export default BookTableHeader
