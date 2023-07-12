@@ -47,8 +47,8 @@ const UserTableHeader = (props: TableHeaderProps) => {
               <CheckIcon classname={`h-[80%] w-[80%] dark:fill-black dark:text-black text-white fill-white ${checkedAll?"opacity-1":"opacity-0" } text-[2rem] `} />              
               </button>
         </th>
-        <th className="h-10 px-2 text-left align-middle font-medium text-muted-foreground ">
-            <p className="">Full name</p>
+        <th className="h-10 px-2 text-left align-middle font-medium text-muted-foreground  w-fit">
+            <p className="">Full Name</p>
         </th>
         <th className="h-10 px-2 text-left align-middle font-medium text-muted-foreground ">
             <p className="">Email</p>

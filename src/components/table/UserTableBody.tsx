@@ -34,12 +34,11 @@ const UserTableBody = (props: Props) => {
               </button>
         </th>
         <td className="p-2 align-middle ">
-            <div className="w-[80px]">TASK-8782</div>
+            <div className="w-[120px]">Yayi Abiodun</div>
         </td>
         <td className="p-2 align-middle ">
             <div className="flex space-x-2">
-                <div className="inline-flex items-center rounded-md border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 text-foreground">Documentation</div>
-                <span className="max-w-[500px] truncate font-medium">You can &#x27;t compress the program without quantifying the open-source SSD pixel!</span>
+                <span className="max-w-[500px] truncate font-medium">youremail@gmail.com</span>
             </div>
         </td>
         <td className="p-2 align-middle ">
