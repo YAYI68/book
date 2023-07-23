@@ -55,5 +55,4 @@ export const useAppContext = ()=>{
       throw new Error('useAppContext must be within a App provider')
     }
     return context
-
 }
