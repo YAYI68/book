@@ -12,10 +12,10 @@ const page = (props: Props) => {
       <BookHero />
       <section className="bg-white w-full flex flex-col items-center py-[3rem] dark:bg-black ">
         <div className="w-[90%] flex ">
-          <div className="md:w-[20%]">
+          <div className="md:w-[15%]">
             <BookCategorySideBar />
           </div>
-          <div className="md:w-[80%] flex flex-col gap-2 md:py-[3rem]">
+          <div className="md:w-[85%] flex flex-col gap-2 md:py-[3rem]">
             <BookCategoryList title="Art" />
             <BookCategoryList title="Top pick for you" />
             <BookListDetail title={"RECENTLY PUBLISHED"} />

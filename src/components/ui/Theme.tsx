@@ -41,7 +41,7 @@ const Theme = (props: Props) => {
         onClick={() => onChangeTheme("dark")}
         className={`  ${
           activeTheme === "dark" ? "text-red-600" : ""
-        } w-full p-2 flex items-center  gap-2 hover:bg-slate-500 `}
+        } w-full p-2 flex items-center text-xs gap-2 hover:bg-slate-500 `}
       >
         <span>
           <DarkIcon classname="h-[1rem] w-[1rem]" />
@@ -52,7 +52,7 @@ const Theme = (props: Props) => {
         onClick={() => onChangeTheme("light")}
         className={`  ${
           activeTheme === "light" ? "text-red-600" : ""
-        } w-full p-2 flex items-center gap-2 hover:bg-slate-500 `}
+        } w-full p-2 flex items-center text-xs gap-2 hover:bg-slate-500 `}
       >
         <span>
           <LightIcon classname="h-[1rem] w-[1rem]" />
@@ -63,7 +63,7 @@ const Theme = (props: Props) => {
         onClick={() => onChangeTheme("system")}
         className={` ${
           activeTheme === "system" ? "text-red-600" : ""
-        } w-full p-2 flex items-center  gap-2 hover:bg-slate-500 `}
+        } w-full p-2 flex items-center text-xs  gap-2 hover:bg-slate-500 `}
       >
         <span>
           <SystemIcon classname="h-[1rem] w-[1rem]" />

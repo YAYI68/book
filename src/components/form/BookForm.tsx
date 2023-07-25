@@ -3,6 +3,10 @@
 import React, { useState } from "react";
 import { EditIcon } from "../ui/svg";
 import Image from "next/image";
+import SelectInput from "./SelectInput";
+import TextInputField from "./TextInputField";
+import TextAreaField from "./TextAreaField";
+import FileInPutField from "./FileInPutField";
 type Props = {};
 
 const BookForm = (props: Props) => {
@@ -30,7 +34,6 @@ const BookForm = (props: Props) => {
     const file = event.target.files[0];
     const reader = new FileReader();
     reader.addEventListener("load", () => {
-      console.log({ result: reader.result });
       setImageFile(reader.result);
     });
     if (file) {
@@ -93,90 +96,49 @@ const BookForm = (props: Props) => {
 
           <div className="w-full lg:w-[60%]  p-4">
             <form className="flex flex-col gap-2">
-              <div className="">
-                <label htmlFor="email" className="text-red-500 font-medium">
-                  Title
-                </label>
-                <br />
-                <input
-                  type="email"
+              <div>
+                <TextInputField
                   defaultValue={""}
-                  id="title"
+                  className="dark:text-white"
+                  label="Title"
                   name="title"
                   placeholder="Book Title"
-                  className="p-2 w-full outline-none border-primary border rounded-md"
                 />
               </div>
-              <div className="">
-                <label htmlFor="email" className="text-red-500 font-medium">
-                  Author
-                </label>
-                <br />
-                <input
-                  type="email"
+              <div>
+                <TextInputField
                   defaultValue={""}
-                  id="author"
+                  className="dark:text-white"
+                  label="Author"
                   name="author"
                   placeholder="Book Author"
-                  className="p-2 w-full outline-none border-primary border rounded-md"
                 />
               </div>
-              <div className="w-full flex flex-col lg:flex-row gap-2 lg:justify-between lg:flex-wrap">
-                <div className="">
-                  <label htmlFor="edition" className="text-red-500 font-medium">
-                    Edition
-                  </label>
-                  <br />
-                  <input
-                    type="text"
-                    defaultValue={""}
-                    id="edition"
-                    name="edition"
-                    placeholder="Book Edition"
-                    className="p-2 w-full outline-none border-primary border rounded-md"
-                  />
-                </div>
-                <div className="">
-                  <label htmlFor="genre" className="text-red-500 font-medium">
-                    Genre
-                  </label>
-                  <br />
-                  <input
-                    type="genre"
-                    defaultValue={""}
-                    id="genre"
-                    name="genre"
-                    placeholder="Book Genre"
-                    className="p-2 w-full outline-none border-primary border rounded-md"
-                  />
-                </div>
+              <div className="w-full flex flex-col lg:flex-row gap-2 lg:justify-between lg:flex-wrap lg:items-center">
+                <TextInputField
+                  label="Editon"
+                  className="dark:text-white"
+                  defaultValue={""}
+                  name="edition"
+                  placeholder="Book Edition"
+                />
+              </div>
+              <div className="w-full lg:w-[45%]">
+                <SelectInput
+                  className="dark:text-white dark:border-white"
+                  placeholder="Gender"
+                  options={["boy", "girl"]}
+                  label="Gender"
+                />
               </div>
               <div className="">
                 <div className="w-full flex flex-col lg:flex-row gap-2 lg:justify-between lg:flex-wrap">
-                  <div className="w-full">
-                    <label htmlFor="note" className="text-red-500">
-                      Upload Note | Document
-                    </label>
-                    <input
-                      name="note"
-                      defaultValue={""}
-                      onChange={handleOnChange}
-                      type="file"
-                      className="p-2 w-full lg:w-full outline-none border-primary border rounded-md"
-                    />
-                  </div>
-                  <div className="w-full ">
-                    <label htmlFor="description" className="text-red-500">
-                      Description
-                    </label>
-                    <textarea
-                      name="description"
-                      defaultValue={""}
-                      onChange={handleOnChange}
-                      placeholder="Book Description"
-                      className="p-2 w-full lg:w-full outline-none border-primary border rounded-md"
-                    />
-                  </div>
+                  <FileInPutField
+                    label="Upload Note"
+                    className="dark:text-white "
+                    name="note"
+                  />
+                  <TextAreaField className="dark:text-white" />
                 </div>
               </div>
             </form>

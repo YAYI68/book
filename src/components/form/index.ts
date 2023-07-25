@@ -1,4 +1,11 @@
+import FileInPutField from "./FileInPutField";
 export { default as SignUpForm } from "./SignUpForm";
 export { default as LoginForm } from "./LoginForm";
 export { default as ProfileForm } from "./ProfileForm";
 export { default as BookForm } from "./BookForm";
+export { default as UserDashboardForm } from "./UserDashboardForm";
+export { default as UserProfileForm } from "./UserProfileForm";
+export { default as SelectInput } from "./SelectInput";
+export { default as TextInputField } from "./TextInputField";
+export { default as TextAreaField } from "./TextAreaField";
+export { default as FileInPutField } from "./FileInPutField";
