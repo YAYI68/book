@@ -2,6 +2,7 @@ import NextAuth, { AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import dbConnect from "@/backend/database";
+import User from "@/backend/models/user.model";
 
 const BASE_URL = process.env.BASE_URL;
 
@@ -45,7 +46,6 @@ export const authOptions: AuthOptions = {
   ],
   callbacks: {
     async signIn({ user, account }) {
-      console.log({ user, account });
       if (account.provider === "google") {
         const { name, email, image } = user;
         const firstname = name.split(" ")[0];
@@ -76,7 +76,12 @@ export const authOptions: AuthOptions = {
       return session;
     },
     async jwt({ token, user }) {
-      user && (token.user = user);
+      if (user) {
+        await dbConnect();
+        const dbUser = await User.findOne({ email: user.email });
+        token.user = dbUser;
+        return token;
+      }
       return token;
     },
   },

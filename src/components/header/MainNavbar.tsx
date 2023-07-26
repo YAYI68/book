@@ -35,7 +35,7 @@ const DropDownLink = (props: DropDownLinkProps) => (
   <li className="w-full">
     <Link
       href={props.url}
-      className=" w-full block dark:text-white text-xs hover:dark:bg-gray-500 p-2 rounded-md"
+      className=" w-full block dark:text-white text-xs hover:bg-gray-500  hover:text-white p-2 rounded-md"
     >
       {props.name}
     </Link>
@@ -53,13 +53,18 @@ const UserDropdownLink = (props: UserDropdownLinkProps) => {
   return (
     <div
       ref={DropdownRef}
-      className="w-[8rem] p-2 absolute top-[120%] border rounded dark:bg-gray-800 "
+      className="w-[8rem] p-2 absolute top-[120%] border rounded dark:bg-gray-800 bg-white"
     >
       <DropDownLink url="/my-library" name="My Library" />
       <DropDownLink url="/wishlist" name="Wishlist" />
       <DropDownLink url="/profile" name="profile" />
       <DropDownLink url="" name="Subscription" />
-      <DropDownLink url="" name="Logout" />
+      <button
+        onClick={() => signOut()}
+        className="text-xs w-full bg-red-400 p-2 rounded-md mt-1"
+      >
+        Logout
+      </button>
     </div>
   );
 };

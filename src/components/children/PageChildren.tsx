@@ -15,18 +15,12 @@ const PageChildren = (props: Props) => {
   const pathname = usePathname();
 
   if (pathname === "/login" || pathname === "/sign-up") {
-    return (
-      <AppProvider>
-        <SessionProvider refetchInterval={5 * 60}>{children}</SessionProvider>
-      </AppProvider>
-    );
+    return <AppProvider>{children}</AppProvider>;
   }
   return (
     <AppProvider>
-      <SessionProvider>
-        <Header />
-        {children}
-      </SessionProvider>
+      <Header />
+      {children}
       <Footer />
     </AppProvider>
   );
