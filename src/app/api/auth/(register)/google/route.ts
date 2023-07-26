@@ -25,5 +25,5 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: err }, { status: 500 });
     }
   }
-  return NextResponse.json({ error: "User already exists!" }, { status: 409 });
+  return NextResponse.json({ user: userExit }, { status: 200 });
 }

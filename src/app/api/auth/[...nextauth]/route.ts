@@ -50,11 +50,20 @@ export const authOptions: AuthOptions = {
         const { name, email, image } = user;
         const firstname = name.split(" ")[0];
         const lastname = name.split(" ")[1];
-        const res = await fetch(`${BASE_URL}/api/auth/regitser`, {
-          method: "POST",
-          body: JSON.stringify({ firstname, lastname, email, avatar: image }),
-          headers: { "Content-Type": "application/json" },
-        });
+        try {
+          const res = await fetch(`${BASE_URL}/api/auth/google`, {
+            method: "POST",
+            body: JSON.stringify({ firstname, lastname, email, image }),
+            headers: { "Content-Type": "application/json" },
+          });
+          const { user: newUser } = await res.json();
+          if (res.ok && newUser.is_active) {
+            user = newUser;
+            return true;
+          }
+        } catch (err) {
+          return false;
+        }
       }
       return true;
     },
