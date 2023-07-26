@@ -10,7 +10,7 @@ const userSchema = new Schema(
       type: String,
       require: true,
     },
-    avatar: {
+    image: {
       type: String,
       require: true,
     },
@@ -33,9 +33,10 @@ const userSchema = new Schema(
       type: Boolean,
       default: false,
     },
-    is_Admin: {
-      type: Boolean,
-      default: false,
+    role: {
+      type: String,
+      enum: ["Admin", "User"],
+      default: "User",
     },
   },
   {

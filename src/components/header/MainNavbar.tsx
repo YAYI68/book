@@ -55,9 +55,9 @@ const UserDropdownLink = (props: UserDropdownLinkProps) => {
       ref={DropdownRef}
       className="w-[8rem] p-2 absolute top-[120%] border rounded dark:bg-gray-800 "
     >
-      <DropDownLink url="" name="My Library" />
-      <DropDownLink url="" name="Wishlist" />
-      <DropDownLink url="" name="profile" />
+      <DropDownLink url="/my-library" name="My Library" />
+      <DropDownLink url="/wishlist" name="Wishlist" />
+      <DropDownLink url="/profile" name="profile" />
       <DropDownLink url="" name="Subscription" />
       <DropDownLink url="" name="Logout" />
     </div>

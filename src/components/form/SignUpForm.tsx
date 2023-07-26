@@ -1,5 +1,6 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import getSession from "@/backend/getSession";
+import { getCurrentSession } from "@/utils";
 import { pacifico } from "@/utils/font";
 
 import Link from "next/link";
@@ -8,9 +9,6 @@ import React from "react";
 type Props = {};
 
 const SignUpForm = async (props: Props) => {
-  const session = await getSession();
-  console.log({ from_signup: session });
-
   return (
     <div className="w-[80%] lg:w-[60%] lg:flex h-[90%] lg:h-[80%] flex flex-col items-center p-4 ">
       <h3

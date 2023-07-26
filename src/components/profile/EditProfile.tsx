@@ -2,6 +2,7 @@ import React from "react";
 import { SelectInput, TextInputField } from "../form";
 import { Button } from "../ui";
 import { ArrowleftIcon } from "../ui/svg";
+import Link from "next/link";
 
 type Props = {};
 
@@ -11,12 +12,15 @@ const EditProfile = (props: Props) => {
       <div className="w-[10rem] h-[10rem] lg:w-[20%] lg:justify-between lg:h-[15rem] rounded-[50%] bg-green-500"></div>
       <div className="flex w-full  flex-col lg:w-[70%]">
         <div className="w-full">
-          <button className="dark:bg-white dark:text-black bg-black items-center text-white flex gap-2 py-2  px-2 rounded">
+          <Link
+            href={"/profile"}
+            className="dark:bg-white dark:text-black bg-black items-center text-white flex gap-2 py-2 w-fit  px-2 rounded"
+          >
             <span>
               <ArrowleftIcon className="h-4 w-4 " />
             </span>{" "}
             <span>back</span>
-          </button>
+          </Link>
           <h3 className="text-[1.5rem] lg:text-[2rem] text-center lg:text-start font-semibold dark:text-white">
             Personal Information
           </h3>

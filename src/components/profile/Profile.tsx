@@ -5,7 +5,7 @@ type Props = {};
 const Profile = (props: Props) => {
   return (
     <div className="w-full flex flex-col gap-4 items-center lg:items-start lg:flex-row">
-      <div className="w-[14rem] h-[14rem] lg:w-[25%] lg:justify-between lg:h-[18rem] rounded-[50%] bg-green-500"></div>
+      <div className="w-[14rem] h-[14rem] lg:w-[20%] lg:justify-between lg:h-[15rem] rounded-[50%] bg-green-500"></div>
       <div className="flex w-full  flex-col lg:w-[70%]">
         <h3 className="text-[1.5rem] lg:text-[2rem] text-center lg:text-start font-semibold dark:text-white">
           Personal Information

@@ -6,7 +6,7 @@ type Props = {};
 
 const SideNavbar = (props: Props) => {
   return (
-    <nav className="w lg:w-[12%] py-[1.5rem] px-2 rounded-md dark:bg-gray-900 fixed left-0 bg-gray-200">
+    <nav className="w lg:w-[12%] py-[1.5rem] px-2 rounded-md dark:bg-gray-900 fixed z-[5] left-0 bg-gray-200">
       <ul className="flex flex-col">
         <li>
           <Link
