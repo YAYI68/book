@@ -73,13 +73,13 @@ type MainNavbarProps = {};
 
 const MainNavbar = (props: MainNavbarProps) => {
   const { data: user, status } = useSession();
-
   const { activeTheme, setActiveTheme } = useAppContext();
   const [displayTheme, setDisplayTheme] = useState<boolean | null>(false);
   const [displayUserDropdown, setDisplayUserDropDown] = useState(false);
   const [displaySearchInput, setDisplaySearchInput] = useState<boolean | null>(
     false
   );
+
   return (
     <nav className="hidden h-full w-full lg:flex lg:flex-col lg:items-center  bg-white dark:bg-black dark:text-white border-b-2 dark:border-b-gray-500">
       <div className="w-[90%]  px-2 h-full flex justify-between items-center">

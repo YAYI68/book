@@ -2,14 +2,10 @@ import BookCategoryList from "@/components/common/BookCategoryList";
 import BookListDetail from "@/components/common/BookListDetail";
 import BrowseSubject from "@/components/home/BrowseSubject";
 import Hero from "@/components/home/Hero";
-import TrendingBooks from "@/components/home/TrendingBooks";
 import { Banner, Main } from "@/components/ui";
-import { getCurrentSession } from "@/utils";
-import Image from "next/image";
+import { useSession } from "next-auth/react";
 
 export default async function Home() {
-  const session = await getCurrentSession();
-  console.log({ sigup: session });
   return (
     <Main>
       <Hero />

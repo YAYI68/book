@@ -1,16 +1,16 @@
-import React from 'react'
-import MainNavbar from './MainNavbar'
-import MobileNavbar from './MobileNavbar'
+import React from "react";
+import MainNavbar from "./MainNavbar";
+import MobileNavbar from "./MobileNavbar";
 
-type Props = {}
+type Props = {};
 
 const Header = (props: Props) => {
   return (
-    <header className='h-[4rem] z-[5] fixed dark:bg-black bg-white  w-full'>
-        <MainNavbar />
-        <MobileNavbar />
+    <header className="h-[4rem] z-[5] fixed dark:bg-black bg-white  w-full">
+      <MainNavbar />
+      <MobileNavbar />
     </header>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

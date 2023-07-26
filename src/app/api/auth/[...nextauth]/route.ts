@@ -68,7 +68,6 @@ export const authOptions: AuthOptions = {
       return true;
     },
     async redirect({ url, baseUrl }) {
-      // console.log({url,baseUrl})
       return baseUrl;
     },
     async session({ session, user, token }) {
