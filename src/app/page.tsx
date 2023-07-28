@@ -3,7 +3,6 @@ import BookListDetail from "@/components/common/BookListDetail";
 import BrowseSubject from "@/components/home/BrowseSubject";
 import Hero from "@/components/home/Hero";
 import { Banner, Main } from "@/components/ui";
-import { useSession } from "next-auth/react";
 
 async function getAllBooks() {
   const res = await fetch(`http://localhost:3000/api/book/`, {

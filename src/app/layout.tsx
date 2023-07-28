@@ -1,9 +1,8 @@
-"use client";
 import "./globals.css";
 import { Roboto } from "next/font/google";
 import PageChildren from "@/components/children/PageChildren";
 import NextNProgress from "nextjs-progressbar";
-import { SessionProvider } from "next-auth/react";
+// import { SessionProvider } from "next-auth/react";
 
 const inter = Roboto({
   subsets: ["latin"],
@@ -23,12 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="">
       <body className={inter.className}>
-        <SessionProvider refetchInterval={5 * 60}>
-          <PageChildren>
-            <NextNProgress color="red" />
-            {children}
-          </PageChildren>
-        </SessionProvider>
+        <PageChildren>{children}</PageChildren>
       </body>
     </html>
   );
