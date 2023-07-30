@@ -10,10 +10,11 @@ import NextNProgress from "nextjs-progressbar";
 
 type Props = {
   children: ReactNode;
+  session: any;
 };
 
 const PageChildren = (props: Props) => {
-  const { children } = props;
+  const { children, session } = props;
   const pathname = usePathname();
 
   if (pathname === "/login" || pathname === "/sign-up") {
@@ -21,7 +22,7 @@ const PageChildren = (props: Props) => {
   }
   return (
     <AppProvider>
-      <SessionProvider>
+      <SessionProvider session={session} refetchInterval={5 * 60}>
         <Header />
         <NextNProgress color="red" />
         {children}

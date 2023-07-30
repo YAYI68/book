@@ -1,3 +1,4 @@
+import { headers } from "next/headers";
 import BookCategoryList from "@/components/common/BookCategoryList";
 import BookListDetail from "@/components/common/BookListDetail";
 import BrowseSubject from "@/components/home/BrowseSubject";
@@ -7,7 +8,14 @@ import { Banner, Main } from "@/components/ui";
 async function getAllBooks() {
   const res = await fetch(`http://localhost:3000/api/book/`, {
     cache: "no-store",
+    credentials: "include",
+    method: "GET",
+    headers: headers(),
   });
+
+  if (!res.ok) {
+    console.error("Failed to fetch All Books!");
+  }
   return res.json();
 }
 export default async function Home() {

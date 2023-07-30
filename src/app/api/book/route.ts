@@ -51,8 +51,7 @@ export async function POST(req: Request) {
 export async function GET(request: Request) {
   await dbConnect();
   const session = await getServerSession(authOptions);
-  console.log("hello I dey book");
-  console.log({ session });
+  console.log({ serverSession: session });
   if (!session) {
     return NextResponse.json({ message: "Unauthorized" }, { status: 500 });
   }
