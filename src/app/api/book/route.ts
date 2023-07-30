@@ -6,9 +6,6 @@ import Book from "@/backend/models/book.model";
 import Genre from "@/backend/models/genre.model";
 import { cloudinaryConfig } from "@/config/cloudinary";
 import { getCurrentSession } from "@/utils";
-import { getServerSession } from "next-auth/next";
-import { authOptions } from "../auth/[...nextauth]/route";
-import { NextRequest } from "next/server";
 
 const BASE_URL = process.env.BASE_URL;
 cloudinaryConfig;
@@ -50,9 +47,9 @@ export async function POST(req: Request) {
 
 export async function GET(request: Request) {
   await dbConnect();
-  const session = await getServerSession(authOptions);
+  const session = await getCurrentSession();
   console.log({ serverSession: session });
-  if (!session) {
+  if (session?.role !== "User") {
     return NextResponse.json({ message: "Unauthorized" }, { status: 500 });
   }
   try {

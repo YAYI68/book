@@ -3,6 +3,8 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import dbConnect from "@/backend/database";
 import User from "@/backend/models/user.model";
+import { GoogleProfile } from "next-auth/providers/google";
+import { UserType } from "../../../../../types/next-auth";
 
 const BASE_URL = process.env.BASE_URL;
 
@@ -70,18 +72,22 @@ export const authOptions: AuthOptions = {
     async redirect({ url, baseUrl }) {
       return baseUrl;
     },
-    async session({ session, user, token }) {
-      token && (session.user = token.user);
-      return session;
-    },
     async jwt({ token, user }) {
       if (user) {
         await dbConnect();
-        const dbUser = await User.findOne({ email: user.email });
+        const dbUser: UserType = await User.findOne({ email: user.email });
+        token.role = dbUser.role;
         token.user = dbUser;
         return token;
       }
       return token;
+    },
+    async session({ session, user, token }) {
+      if (token) {
+        session.role = token.role;
+        session.user = token.user;
+      }
+      return session;
     },
   },
   pages: {
