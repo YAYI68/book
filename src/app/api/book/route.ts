@@ -47,6 +47,9 @@ export async function POST(req: Request) {
 
 export async function GET(request: Request) {
   await dbConnect();
+  const { searchParams } = new URL(request.url);
+  const id = searchParams.get("id");
+  console.log({ id });
   const session = await getCurrentSession();
   if (session?.role !== "User") {
     return NextResponse.json({ message: "Unauthorized" }, { status: 500 });

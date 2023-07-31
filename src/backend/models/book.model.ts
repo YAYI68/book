@@ -36,6 +36,14 @@ const bookSchema = new Schema(
     edition: {
       type: Number,
     },
+    downloadCount: {
+      type: Number,
+      default: 0,
+    },
+    readCount: {
+      type: Number,
+      default: 0,
+    },
   },
   {
     virtuals: {
