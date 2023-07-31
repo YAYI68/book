@@ -19,6 +19,7 @@ const bookSchema = new Schema(
     note: {
       type: String,
       require: true,
+      select: false,
     },
     image: {
       type: String,
@@ -29,12 +30,15 @@ const bookSchema = new Schema(
     },
     format: {
       type: String,
+      select: false,
     },
     pages: {
       type: Number,
+      select: false,
     },
     edition: {
       type: Number,
+      select: false,
     },
     downloadCount: {
       type: Number,

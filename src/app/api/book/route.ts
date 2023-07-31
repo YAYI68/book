@@ -48,14 +48,16 @@ export async function POST(req: Request) {
 export async function GET(request: Request) {
   await dbConnect();
   const { searchParams } = new URL(request.url);
-  const id = searchParams.get("id");
-  console.log({ id });
-  const session = await getCurrentSession();
-  if (session?.role !== "User") {
-    return NextResponse.json({ message: "Unauthorized" }, { status: 500 });
-  }
+  const page = parseInt(searchParams.get("page")) || 1;
+  const limit = parseInt(searchParams.get("limit")) || 10;
+  const skip = (page - 1) * limit;
+
   try {
     const books = await Book.find({});
+    console.log({ data: books[0] });
+    // .sort({ updatedAt: -1 })
+    // .skip(skip)
+    // .limit(limit);
     return NextResponse.json({ books }, { status: 200 });
   } catch (error) {
     return NextResponse.json({ error }, { status: 500 });

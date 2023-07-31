@@ -6,12 +6,15 @@ import Hero from "@/components/home/Hero";
 import { Banner, Main } from "@/components/ui";
 
 async function getAllBooks() {
-  const res = await fetch(`http://localhost:3000/api/book/`, {
-    cache: "no-store",
-    credentials: "include",
-    method: "GET",
-    headers: headers(),
-  });
+  const res = await fetch(
+    `http://localhost:3000/api/book/?id=hello&name=yayi`,
+    {
+      cache: "no-store",
+      credentials: "include",
+      method: "GET",
+      headers: headers(),
+    }
+  );
 
   if (!res.ok) {
     console.error("Failed to fetch All Books!");
@@ -20,7 +23,7 @@ async function getAllBooks() {
 }
 export default async function Home() {
   const data = await getAllBooks();
-  // console.log({ data });
+  console.log({ data: data[0] });
   return (
     <Main>
       <Hero />
