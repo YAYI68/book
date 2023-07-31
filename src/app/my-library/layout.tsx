@@ -10,8 +10,9 @@ const layout = async (props: Props) => {
   const session = await getCurrentSession();
   if (!session) {
     redirect("/login");
+  } else {
+    return <>{props.children}</>;
   }
-  return <>{props.children}</>;
 };
 
 export default layout;

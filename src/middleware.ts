@@ -6,26 +6,25 @@ export default withAuth(
   async function middleware(request) {
     let pathname = request.nextUrl.pathname;
     const token = request.nextauth.token;
+    console.log({ pathname });
 
     if (pathname.startsWith("/dashboard") && token?.role !== "Admin") {
       return NextResponse.redirect(new URL("/profile", request.url));
     }
 
-    // if (request.nextUrl.pathname.startsWith("/client")
-    //     && request.nextauth.token?.role !== "admin"
-    //     && request.nextauth.token?.role !== "manager") {
-    //     return NextResponse.rewrite(
-    //         new URL("/denied", request.url)
-    //     )
-    // }
+    if (pathname.startsWith("/api/auth") && token) {
+      return NextResponse.rewrite(new URL("/", request.url));
+    }
   },
   {
-    // callbacks: {
-    //   authorized: ({ token }) => !!token,
-    // },
+    callbacks: {
+      authorized: ({ token }) => !!token,
+    },
   }
 );
 
 // Applies next-auth only to matching routes - can be regex
 // Ref: https://nextjs.org/docs/app/building-your-application/routing/middleware#matcher
-export const config = { matcher: ["/dashboard", "/api/auth", "/profile"] };
+export const config = {
+  matcher: ["/dashboard", "/api/auth/:path*", "/profile", "/my-library"],
+};
