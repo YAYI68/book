@@ -19,7 +19,7 @@
     "eslint-config-next": "13.4.4",
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^7.3.1",
-    "next": "13.4.4",
+    "next": "13.4.7",
     "next-auth": "^4.22.1",
     "nextjs-progressbar": "^0.0.16",
     "nodemailer": "^6.9.3",

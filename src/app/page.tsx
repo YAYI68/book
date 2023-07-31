@@ -20,7 +20,7 @@ async function getAllBooks() {
 }
 export default async function Home() {
   const data = await getAllBooks();
-  console.log({ data });
+  // console.log({ data });
   return (
     <Main>
       <Hero />

@@ -1,12 +1,18 @@
 import SideNavbar from "@/components/header/SideNavbar";
 import { Main } from "@/components/ui";
+import { getCurrentSession } from "@/utils";
+import { redirect } from "next/navigation";
 import React from "react";
 
 type Props = {
   children: React.ReactNode;
 };
 
-const layout = (props: Props) => {
+const layout = async (props: Props) => {
+  const session = await getCurrentSession();
+  if (!session) {
+    redirect("/login");
+  }
   return (
     <Main>
       <section className=" w-full  lg:pt-[3rem] pb-[2rem]">

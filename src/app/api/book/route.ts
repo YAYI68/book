@@ -48,7 +48,6 @@ export async function POST(req: Request) {
 export async function GET(request: Request) {
   await dbConnect();
   const session = await getCurrentSession();
-  console.log({ serverSession: session });
   if (session?.role !== "User") {
     return NextResponse.json({ message: "Unauthorized" }, { status: 500 });
   }
