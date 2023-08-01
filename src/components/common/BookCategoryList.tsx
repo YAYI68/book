@@ -1,12 +1,14 @@
 import React from "react";
 import Book from "./Book";
+import { SeeMoreLink } from "../ui";
 
 type Props = {
   title: string;
+  seeMoreHref?: string;
 };
 
 const BookCategoryList = (props: Props) => {
-  const { title } = props;
+  const { title, seeMoreHref } = props;
   return (
     <div className="bg-white w-full flex flex-col items-center py-[3rem] dark:bg-black">
       <div className="w-[90%] flex items-center md:items-start flex-col gap-4 ">
@@ -20,6 +22,11 @@ const BookCategoryList = (props: Props) => {
           <Book />
           <Book />
         </div>
+        {seeMoreHref ? (
+          <SeeMoreLink className="md:self-end" href="/books?catalog=classic" />
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );

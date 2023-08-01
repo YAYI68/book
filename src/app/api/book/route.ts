@@ -78,7 +78,7 @@ export async function GET(request: Request) {
         { status: 200 }
       );
     }
-    if (catalog === "picked") {
+    if (catalog === "top_picked") {
       const topPickedBooks = await Book.find(genre ? { genre: genre } : {})
         .populate("genre", "name")
         .sort({ updatedAt: -1, downloadCount: -1 })

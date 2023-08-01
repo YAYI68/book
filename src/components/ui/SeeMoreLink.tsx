@@ -3,13 +3,14 @@ import React from "react";
 
 type Props = {
   href: string;
+  className?: string;
 };
 
 const SeeMoreLink = (props: Props) => {
-  const { href } = props;
+  const { href, className } = props;
   return (
     <Link
-      className="w-fit py-2 px-6 text-center rounded bg-red-500 text-white"
+      className={` ${className} hover:text-red-600 w-fit py-2 px-6 text-center rounded bg-red-500 text-white`}
       href={href}
     >
       See more

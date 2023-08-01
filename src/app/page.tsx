@@ -3,7 +3,7 @@ import BookCategoryList from "@/components/common/BookCategoryList";
 import BookListDetail from "@/components/common/BookListDetail";
 import BrowseSubject from "@/components/home/BrowseSubject";
 import Hero from "@/components/home/Hero";
-import { Banner, Main, SeeMoreLink } from "@/components/ui";
+import { Banner, Main } from "@/components/ui";
 
 async function getAllBooks() {
   const res = await fetch(
@@ -28,22 +28,23 @@ export default async function Home() {
     <Main>
       <Hero />
       <BrowseSubject />
-      <div>
-        <BookListDetail title={"TRENDING BOOKS"} />
-        <SeeMoreLink href="/books?catalog=classic" />
-      </div>
-
-      <div className="w-full flex flex-col items-center">
-        <BookCategoryList title="TOP PICKS FOR YOU" />
-        <SeeMoreLink href="/books?catalog=classic" />
-      </div>
+      <BookListDetail
+        seeMoreHref="/books?catalog=recent"
+        title={"TRENDING BOOKS"}
+      />
+      <BookCategoryList
+        seeMoreHref="/books?catalog=top_picked"
+        title="TOP PICKS FOR YOU"
+      />
       <Banner />
-      <div className="w-full flex flex-col items-center">
-        <BookCategoryList title="POPULAR CLASSIC" />
-        <SeeMoreLink href="/books?catalog=classic" />
-      </div>
-
-      <BookListDetail title={"RECENTLY PUBLISHED"} />
+      <BookCategoryList
+        seeMoreHref="/books?catalog=classic"
+        title="POPULAR CLASSIC"
+      />
+      <BookListDetail
+        seeMoreHref="/books?catalog=recent"
+        title={"RECENTLY PUBLISHED"}
+      />
     </Main>
   );
 }
