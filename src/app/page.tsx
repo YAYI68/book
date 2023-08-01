@@ -3,11 +3,11 @@ import BookCategoryList from "@/components/common/BookCategoryList";
 import BookListDetail from "@/components/common/BookListDetail";
 import BrowseSubject from "@/components/home/BrowseSubject";
 import Hero from "@/components/home/Hero";
-import { Banner, Main } from "@/components/ui";
+import { Banner, Main, SeeMoreLink } from "@/components/ui";
 
 async function getAllBooks() {
   const res = await fetch(
-    `http://localhost:3000/api/book/?page=2&limit=4&catalog=trends&category=history`,
+    `http://localhost:3000/api/book/?page=2&limit=4&catalog=trends&category=science`,
     {
       cache: "no-store",
       credentials: "include",
@@ -28,11 +28,21 @@ export default async function Home() {
     <Main>
       <Hero />
       <BrowseSubject />
-      <BookListDetail title={"TRENDING BOOKS"} />
-      <BookCategoryList title="TOP PICKS FOR YOU" />
+      <div>
+        <BookListDetail title={"TRENDING BOOKS"} />
+        <SeeMoreLink href="/books?catalog=classic" />
+      </div>
+
+      <div className="w-full flex flex-col items-center">
+        <BookCategoryList title="TOP PICKS FOR YOU" />
+        <SeeMoreLink href="/books?catalog=classic" />
+      </div>
       <Banner />
-      {/* <BookCategoryList title="EDITORS CHOICE" /> */}
-      <BookCategoryList title="POPULAR CLASSIC" />
+      <div className="w-full flex flex-col items-center">
+        <BookCategoryList title="POPULAR CLASSIC" />
+        <SeeMoreLink href="/books?catalog=classic" />
+      </div>
+
       <BookListDetail title={"RECENTLY PUBLISHED"} />
     </Main>
   );
