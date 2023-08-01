@@ -6,6 +6,7 @@ import Book from "@/backend/models/book.model";
 import Genre from "@/backend/models/genre.model";
 import { cloudinaryConfig } from "@/config/cloudinary";
 import { getCurrentSession } from "@/utils";
+import genreModel from "@/backend/models/genre.model";
 
 const BASE_URL = process.env.BASE_URL;
 cloudinaryConfig;
@@ -37,7 +38,7 @@ export async function POST(req: Request) {
       format: bookFile.format,
       edition,
       description,
-      genre: bookGenre,
+      genre: bookGenre._id,
     });
     return NextResponse.json({ book }, { status: 201 });
   } catch (error) {
@@ -48,17 +49,79 @@ export async function POST(req: Request) {
 export async function GET(request: Request) {
   await dbConnect();
   const { searchParams } = new URL(request.url);
+  const category = searchParams.get("category") || "";
+  const catalog = searchParams.get("catalog") || "";
   const page = parseInt(searchParams.get("page")) || 1;
-  const limit = parseInt(searchParams.get("limit")) || 10;
+  const limit = parseInt(searchParams.get("limit")) || 5;
   const skip = (page - 1) * limit;
+  let genre;
 
   try {
-    const books = await Book.find({});
-    console.log({ data: books[0] });
-    // .sort({ updatedAt: -1 })
-    // .skip(skip)
-    // .limit(limit);
-    return NextResponse.json({ books }, { status: 200 });
+    if (category) {
+      genre = await genreModel.findOne({ name: category.toLowerCase() });
+    }
+
+    if (catalog === "trends") {
+      const trendBoooks = await Book.find(genre ? { genre: genre } : {})
+        .populate("genre", "name")
+        .sort({ updatedAt: -1, readCount: -1 })
+        .skip(skip)
+        .limit(limit);
+      console.log({ trend: trendBoooks });
+      const totalTrendBooks = await Book.countDocuments(
+        genre ? { genre: genre } : {}
+      );
+      const totalPages = Math.ceil(totalTrendBooks / limit);
+      console.log("trends is returned");
+      return NextResponse.json(
+        { data: trendBoooks, page, limit, totalPages },
+        { status: 200 }
+      );
+    }
+    if (catalog === "picked") {
+      const topPickedBooks = await Book.find(genre ? { genre: genre } : {})
+        .populate("genre", "name")
+        .sort({ updatedAt: -1, downloadCount: -1 })
+        .skip(skip)
+        .limit(limit);
+      const totalPickedBooks = await Book.countDocuments(
+        genre ? { genre: genre } : {}
+      );
+      const totalPages = Math.ceil(totalPickedBooks / limit);
+      console.log("Picked is returned");
+      return NextResponse.json(
+        { data: topPickedBooks, page, limit, totalPages },
+        { status: 200 }
+      );
+    }
+    if (catalog === "classic") {
+      const topPickedBooks = await Book.find(
+        genre ? { genre: genre, catalog: "classic" } : { catalog: "classic" }
+      )
+        .populate("genre", "name")
+        .sort({ updatedAt: -1 })
+        .skip(skip)
+        .limit(limit);
+      const totalPickedBooks = await Book.countDocuments(
+        genre ? { genre: genre } : {}
+      );
+      const totalPages = Math.ceil(totalPickedBooks / limit);
+      return NextResponse.json(
+        { data: topPickedBooks, page, limit, totalPages },
+        { status: 200 }
+      );
+    }
+    const books = await Book.find(genre ? { genre: genre } : {})
+      .populate("genre", "name")
+      .sort({ updatedAt: -1 })
+      .skip(skip)
+      .limit(limit);
+    const totalBooks = await Book.countDocuments(genre ? { genre: genre } : {});
+    const totalPages = Math.ceil(totalBooks / limit);
+    return NextResponse.json(
+      { data: books, page, limit, totalPages },
+      { status: 200 }
+    );
   } catch (error) {
     return NextResponse.json({ error }, { status: 500 });
   }

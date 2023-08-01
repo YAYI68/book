@@ -22,11 +22,11 @@ const userSchema = new Schema(
     password: { type: String, minLength: 8, select: false },
     gender: {
       type: String,
-      enum: ["Male", "Female"],
+      enum: ["male", "female"],
     },
     pricing_plan: {
       type: String,
-      enum: ["Free", "Starter", "Professional"],
+      enum: ["free", "starter", "professional"],
       default: "Free",
     },
     is_active: {
@@ -35,8 +35,8 @@ const userSchema = new Schema(
     },
     role: {
       type: String,
-      enum: ["Admin", "User"],
-      default: "User",
+      enum: ["admin", "user"],
+      default: "user",
     },
   },
   {

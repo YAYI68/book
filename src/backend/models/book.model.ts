@@ -16,6 +16,11 @@ const bookSchema = new Schema(
       type: String,
       require: true,
     },
+    catalog: {
+      type: String,
+      enum: ["recent", "classic"],
+      default: "recent",
+    },
     note: {
       type: String,
       require: true,

@@ -17,7 +17,7 @@ export default async function Layout({
   if (!session) {
     redirect("/login");
   }
-  if (session && session.role !== "Admin") {
+  if (session && session.role !== "admin") {
     redirect("/profile");
   } else {
     return (
