@@ -11,16 +11,18 @@ type AllBookProps = {
 const AllBookList = (props: AllBookProps) => {
   const { title } = props;
   return (
-    <section className="bg-white w-full flex flex-col items-center py-[3rem] dark:bg-black ">
-      <div className="w-[90%] flex ">
-        <div className="md:w-[15%]">
-          <BookCategorySideBar />
+    <Main>
+      <section className="bg-white w-full flex flex-col items-center py-[3rem] dark:bg-black ">
+        <div className="w-[90%] flex ">
+          <div className="md:w-[15%]">
+            <BookCategorySideBar />
+          </div>
+          <div className="md:w-[85%] flex flex-col gap-2 md:py-[3rem]">
+            <BookCategoryList title={title} />
+          </div>
         </div>
-        <div className="md:w-[85%] flex flex-col gap-2 md:py-[3rem]">
-          <BookCategoryList title={title} />
-        </div>
-      </div>
-    </section>
+      </section>
+    </Main>
   );
 };
 

@@ -11,7 +11,7 @@ const BookCategorySideBar = (props: Props) => {
         <ul className="w-full ">
           <li className="w-full">
             <Link
-              href=""
+              href="/books?category=art"
               className="w-full font-semibold px-4 py-2 block  dark:text-white dark:hover:text-red-500  hover:bg-red-200 hover:text-red-500 rounded-2xl"
             >
               Art
@@ -19,7 +19,7 @@ const BookCategorySideBar = (props: Props) => {
           </li>
           <li className="w-full">
             <Link
-              href=""
+              href="/books?category=science"
               className="w-full font-semibold px-4 py-2 block  dark:text-white dark:hover:text-red-500 hover:bg-red-200 hover:text-red-500 rounded-2xl"
             >
               Science
@@ -27,7 +27,7 @@ const BookCategorySideBar = (props: Props) => {
           </li>
           <li className="w-full">
             <Link
-              href=""
+              href="/books?category=social"
               className="w-full font-semibold px-4 py-2 block  dark:text-white dark:hover:text-red-500 hover:bg-red-200 hover:text-red-500 rounded-2xl"
             >
               Social Science
@@ -35,7 +35,7 @@ const BookCategorySideBar = (props: Props) => {
           </li>
           <li className="w-full">
             <Link
-              href=""
+              href="/books?category=history"
               className="w-full font-semibold px-4 py-2 block  dark:text-white dark:hover:text-red-500 hover:bg-red-200 hover:text-red-500 rounded-2xl"
             >
               History
@@ -43,7 +43,7 @@ const BookCategorySideBar = (props: Props) => {
           </li>
           <li className="w-full">
             <Link
-              href=""
+              href="/books?category=government"
               className="w-full font-semibold px-4 py-2 block  dark:text-white dark:hover:text-red-500 hover:bg-red-200 hover:text-red-500 rounded-2xl"
             >
               Government
@@ -51,7 +51,7 @@ const BookCategorySideBar = (props: Props) => {
           </li>
           <li className="w-full">
             <Link
-              href=""
+              href="/books?category=Computer"
               className="w-full font-semibold px-4 py-2 block  dark:text-white dark:hover:text-red-500 hover:bg-red-200 hover:text-red-500 rounded-2xl"
             >
               Computer science
