@@ -4,9 +4,41 @@ import BookListDetail from "@/components/common/BookListDetail";
 import { Main } from "@/components/ui";
 import React from "react";
 
+type AllBookProps = {
+  title?: string;
+};
+
+const AllBookList = (props: AllBookProps) => {
+  const { title } = props;
+  return (
+    <section className="bg-white w-full flex flex-col items-center py-[3rem] dark:bg-black ">
+      <div className="w-[90%] flex ">
+        <div className="md:w-[15%]">
+          <BookCategorySideBar />
+        </div>
+        <div className="md:w-[85%] flex flex-col gap-2 md:py-[3rem]">
+          <BookCategoryList title={title} />
+        </div>
+      </div>
+    </section>
+  );
+};
+
 type Props = {};
 
-const page = (props: Props) => {
+const Page = ({ searchParams }) => {
+  console.log({ searchParams });
+  const { catalog, search, category } = searchParams;
+  if (catalog) {
+    return <AllBookList title={catalog} />;
+  }
+  if (search) {
+    return <AllBookList title={search} />;
+  }
+  if (category) {
+    return <AllBookList title={category} />;
+  }
+
   return (
     <Main>
       <BookHero />
@@ -26,4 +58,4 @@ const page = (props: Props) => {
   );
 };
 
-export default page;
+export default Page;
