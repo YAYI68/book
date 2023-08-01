@@ -1,4 +1,5 @@
 import { Main } from "@/components/ui";
+import Link from "next/link";
 import React from "react";
 
 type InfoTabProps = {
@@ -57,9 +58,12 @@ const page = ({ params }: { params: { slug: string } }) => {
               <InfoTab category="Appprox TIME" name="3hrs40mins" />
             </div>
             <div className="flex flex-col md:flex-row md:gap-4 md:w-[70%]">
-              <button className="text-center md:w-[45%] py-2 px-4 border dark:text-white dark:border-gray-400 font-semibold border-black rounded hover:bg-red-500 hover:border-red-500 hover:text-white">
+              <Link
+                href={"/my-libray"}
+                className="text-center md:w-[45%] py-2 px-4 border dark:text-white dark:border-gray-400 font-semibold border-black rounded hover:bg-red-500 hover:border-red-500 hover:text-white"
+              >
                 Add to Library
-              </button>
+              </Link>
               <button className="text-center md:w-[45%] py-2 px-4 border font-semibold hover:bg-red-700 border-red-500 bg-red-500 text-white rounded">
                 Read Now
               </button>
