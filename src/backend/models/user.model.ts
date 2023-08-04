@@ -27,7 +27,7 @@ const userSchema = new Schema(
     pricing_plan: {
       type: String,
       enum: ["free", "starter", "professional"],
-      default: "Free",
+      default: "free",
     },
     is_active: {
       type: Boolean,
