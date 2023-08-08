@@ -5,16 +5,15 @@ import BrowseSubject from "@/components/home/BrowseSubject";
 import Hero from "@/components/home/Hero";
 import { Banner, Main } from "@/components/ui";
 
+// `http://localhost:3000/api/book/?page=2&limit=4&catalog=trends&category=science`,
 async function getAllBooks() {
-  const res = await fetch(
-    `http://localhost:3000/api/book/?page=2&limit=4&catalog=trends&category=science`,
-    {
-      cache: "no-store",
-      credentials: "include",
-      method: "GET",
-      headers: headers(),
-    }
-  );
+  const res = await fetch(`http://localhost:3000/api/readbook/basic/`, {
+    // cache: "no-store",
+    // credentials: "include",
+    method: "GET",
+    headers: headers(),
+    // body: JSON.stringify({ bookId: "64d1f05d3915ce3b66a1da37" }),
+  });
 
   if (!res.ok) {
     console.error("Failed to fetch All Books!");

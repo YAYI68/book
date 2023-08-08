@@ -41,6 +41,8 @@ const BookForm = (props: Props) => {
     }
   };
 
+  console.log({ imageUrl: imageFile });
+
   const handleSubmit = () => {};
 
   const goBack = () => {};

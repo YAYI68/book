@@ -8,7 +8,7 @@ export default withAuth(
     const token = request.nextauth.token;
     console.log({ pathname });
 
-    if (pathname.startsWith("/dashboard") && token?.role !== "Admin") {
+    if (pathname.startsWith("/dashboard") && token?.role !== "admin") {
       return NextResponse.redirect(new URL("/profile", request.url));
     }
 

@@ -1,4 +1,4 @@
-import { Schema, models, model } from "mongoose";
+import mongoose, { Schema, models, model } from "mongoose";
 
 const ReadSchema = new Schema({
   user: {
@@ -8,7 +8,7 @@ const ReadSchema = new Schema({
   },
   book: {
     type: mongoose.Types.ObjectId,
-    ref: "User",
+    ref: "Book",
     require: true,
   },
 });

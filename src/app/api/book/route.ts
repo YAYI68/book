@@ -22,7 +22,7 @@ export async function POST(req: Request) {
     });
   }
   try {
-    const bookGenre = await Genre.findOne({ name: genre });
+    const bookGenre = await Genre.findOne({ name: genre.toLowerCase() });
     const bookImage = await cloudinary.uploader.upload(image, {
       folder: "Book/covers",
     });

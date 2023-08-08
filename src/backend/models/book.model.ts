@@ -58,7 +58,9 @@ const bookSchema = new Schema(
     virtuals: {
       slug: {
         get() {
-          return this.title.replaceAll(" ", "_").toLowerCase();
+          return this.title
+            ? this.title.replaceAll(" ", "_").toLowerCase()
+            : "";
         },
       },
     },
