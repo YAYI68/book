@@ -8,8 +8,9 @@ export type UserType = {
   lastname: string;
   image: string;
   email: string;
-  pricing_plan: string;
+  plan: string;
   is_active: boolean;
+  duration: number;
   role: string;
   createdAt: string;
   updatedAt: string;

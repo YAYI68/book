@@ -24,7 +24,7 @@ const userSchema = new Schema(
       type: String,
       enum: ["male", "female"],
     },
-    pricing_plan: {
+    plan: {
       type: String,
       enum: ["free", "starter", "professional"],
       default: "free",
@@ -37,6 +37,10 @@ const userSchema = new Schema(
       type: String,
       enum: ["admin", "user"],
       default: "user",
+    },
+    duration: {
+      type: Date,
+      default: +new Date() + 7 * 24 * 60 * 60 * 1000,
     },
   },
   {

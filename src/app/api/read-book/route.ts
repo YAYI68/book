@@ -16,7 +16,7 @@ export async function POST(req: Request) {
     }
 
     let totalReadBook = await ReadBook.countDocuments({ user: userId });
-    if (user.pricing_plan === "free" && totalReadBook < 5) {
+    if (user.plan === "free" && totalReadBook < 5) {
       const read = await ReadBook.create({
         user: userId,
         book: bookId,
