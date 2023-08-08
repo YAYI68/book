@@ -12,9 +12,14 @@ const BASE_URL = process.env.BASE_URL;
 export async function POST(req: Request) {
   await dbConnect();
   const { bookId } = await req.json();
-  const { user } = await getCurrentSession();
-  const currentDuration = Date.now();
-  const lastDuration = user.duration;
+
+  const session = await getCurrentSession();
+  if (!session) {
+    return NextResponse.json({ message: "UnAuthorized" }, { status: 401 });
+  }
+  const { user } = session;
+  const currentDuration = +new Date();
+  const lastDuration = +new Date(`${user.duration}`);
 
   if (user.plan !== "free") {
     redirect("/read-book/starter");
@@ -22,7 +27,10 @@ export async function POST(req: Request) {
   try {
     const book = await Book.find({ _id: bookId }).select("note");
     if (!book) {
-      return NextResponse.json({ message: "Book is not Available" });
+      return NextResponse.json(
+        { message: "Book is not Available" },
+        { status: 404 }
+      );
     }
     let totalReadBook = await ReadBook.countDocuments({ user: user._id });
     if (currentDuration <= lastDuration && totalReadBook <= 5) {
@@ -44,11 +52,19 @@ export async function POST(req: Request) {
           user: user._id,
           book: bookId,
         });
-        await User.updateOne({ _id: user._id }, { duration: currentDuration });
+        await User.updateOne(
+          { _id: user._id },
+          { duration: new Date(+new Date() + 7 * 24 * 60 * 60 * 1000) }
+        );
         return NextResponse.json({ data: book });
       } else {
         return NextResponse.json({ data: book });
       }
+    } else {
+      return NextResponse.json({
+        message:
+          "Sorry You have exceed your total read for the week,Kindly upgrade your plan to get unlimited access",
+      });
     }
   } catch (error) {
     return NextResponse.json({ error }, { status: 500 });

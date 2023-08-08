@@ -10,7 +10,7 @@ export type UserType = {
   email: string;
   plan: string;
   is_active: boolean;
-  duration: number;
+  duration: Date;
   role: string;
   createdAt: string;
   updatedAt: string;
