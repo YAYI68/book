@@ -20,7 +20,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ message: "UnAuthorized" }, { status: 401 });
   }
   const { user } = session;
-  const reponse = await fetch(`${BASE_URL}/api/canread`, {
+  const reponse = await fetch(`${BASE_URL}/api/candownload`, {
     cache: "no-store",
     method: "POST",
     body: JSON.stringify({ user }),
@@ -31,7 +31,7 @@ export async function POST(req: Request) {
     return NextResponse.json(
       {
         message:
-          "Sorry You have exceed your total read for the week,Kindly upgrade your plan to get unlimited access",
+          "Sorry You have exceed your total downloads for the week,Kindly upgrade your plan to get unlimited access",
       },
       { status: 401 }
     );

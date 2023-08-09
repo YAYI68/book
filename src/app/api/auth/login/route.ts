@@ -44,6 +44,16 @@ export async function POST(req: Request) {
 
     const isValid = await comparePassword(password, user.password);
 
+    // const currentDuration = +new Date();
+    // const lastDuration = +new Date(`${user.duration}`);
+
+    // if (currentDuration > lastDuration) {
+    //   await User.updateOne(
+    //     { _id: user._id },
+    //     { duration: new Date(+new Date() + 7 * 24 * 60 * 60 * 1000) }
+    //   );
+    // }
+
     if (!user) {
       return NextResponse.json({ error: "User not found" }, { status: 401 });
     }

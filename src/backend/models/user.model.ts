@@ -29,6 +29,42 @@ const userSchema = new Schema(
       enum: ["free", "starter", "professional"],
       default: "free",
     },
+    readLimit: {
+      type: Number,
+      default: function () {
+        if (this.plan === "free") {
+          return 5;
+        }
+        if (this.plan === "starter") {
+          return 15;
+        }
+        if (this.plan === "professional") {
+          return Number.POSITIVE_INFINITY;
+        }
+      },
+    },
+    downloadLimit: {
+      type: Number,
+      default: function () {
+        if (this.plan === "free") {
+          return 10;
+        }
+        if (this.plan === "starter") {
+          return 20;
+        }
+        if (this.plan === "professional") {
+          return Number.POSITIVE_INFINITY;
+        }
+      },
+    },
+    readCount: {
+      type: Number,
+      default: 0,
+    },
+    downloadCount: {
+      type: Number,
+      default: 0,
+    },
     is_active: {
       type: Boolean,
       default: false,

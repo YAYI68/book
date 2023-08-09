@@ -11,6 +11,10 @@ export type UserType = {
   plan: string;
   is_active: boolean;
   duration: Date;
+  readLimit: number;
+  downloadLimit: number;
+  readCount: number;
+  downloadCount: number;
   role: string;
   createdAt: string;
   updatedAt: string;

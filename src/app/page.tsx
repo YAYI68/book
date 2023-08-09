@@ -7,12 +7,12 @@ import { Banner, Main } from "@/components/ui";
 
 // `http://localhost:3000/api/book/?page=2&limit=4&catalog=trends&category=science`,
 async function getAllBooks() {
-  const res = await fetch(`http://localhost:3000/api/readbook/basic/`, {
+  const res = await fetch(`http://localhost:3000/api/readbook/`, {
     // cache: "no-store",
     // credentials: "include",
-    method: "GET",
+    method: "POST",
     headers: headers(),
-    // body: JSON.stringify({ bookId: "64d1f05d3915ce3b66a1da37" }),
+    body: JSON.stringify({ bookId: "64d1f05d3915ce3b66a1da37" }),
   });
 
   if (!res.ok) {
@@ -22,7 +22,7 @@ async function getAllBooks() {
 }
 export default async function Home() {
   const { data } = await getAllBooks();
-  console.log({ books: data });
+  console.log({ data });
   return (
     <Main>
       <Hero />

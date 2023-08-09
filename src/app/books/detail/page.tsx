@@ -67,6 +67,9 @@ const page = ({ params }: { params: { slug: string } }) => {
               <button className="text-center md:w-[45%] py-2 px-4 border font-semibold hover:bg-red-700 border-red-500 bg-red-500 text-white rounded">
                 Read Now
               </button>
+              <button className="text-center md:w-[45%] py-2 px-4 border font-semibold hover:bg-red-700 border-red-500 bg-red-500 text-white rounded">
+                Download Now
+              </button>
             </div>
           </div>
         </div>
