@@ -1,10 +1,10 @@
-import React, { Dispatch } from "react";
+import React, { useState } from "react";
 
 type Props = {
   name?: string;
   value?: string;
   defaultValue?: string;
-  onChange?: () => {};
+  onChange?: (event: any) => void;
   placeholder?: string;
   className?: string;
 };
@@ -20,7 +20,7 @@ const TextAreaField = (props: Props) => {
         name={name}
         value={value}
         defaultValue={defaultValue}
-        onChange={onChange}
+        onChange={(event) => onChange(event)}
         placeholder={placeholder}
         className="p-2 w-full lg:w-full text-black outline-none border-primary border rounded-md"
       />

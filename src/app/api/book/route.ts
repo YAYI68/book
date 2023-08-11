@@ -38,7 +38,7 @@ export async function POST(req: Request) {
       format: bookFile.format,
       edition,
       description,
-      genre: bookGenre._id,
+      genre: bookGenre ? bookGenre._id : "",
     });
     return NextResponse.json({ book }, { status: 201 });
   } catch (error) {

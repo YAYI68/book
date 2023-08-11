@@ -1,14 +1,6 @@
 import dbConnect from "@/backend/database";
-import { v2 as cloudinary } from "cloudinary";
 import { NextResponse } from "next/server";
-import Book from "@/backend/models/book.model";
-import Genre from "@/backend/models/genre.model";
 import User from "@/backend/models/user.model";
-import { cloudinaryConfig } from "@/config/cloudinary";
-import { getCurrentSession } from "@/utils";
-import genreModel from "@/backend/models/genre.model";
-import { redirect } from "next/navigation";
-import ReadBook from "@/backend/models/read.model";
 
 export async function POST(req: Request) {
   await dbConnect();

@@ -1,28 +1,47 @@
 "use client";
 
 import React, { useState } from "react";
+import useSWR from "swr";
 import { EditIcon } from "../ui/svg";
 import Image from "next/image";
 import SelectInput from "./SelectInput";
 import TextInputField from "./TextInputField";
 import TextAreaField from "./TextAreaField";
 import FileInPutField from "./FileInPutField";
-type Props = {};
+import { headers } from "next/headers";
+import { useDataFetcher } from "@/hooks";
 
+const BASE_URL = process.env.BASE_URL;
+type BookInputType = {
+  author: string;
+  title: string;
+  description: string;
+  image: string | ArrayBuffer;
+  genre: string;
+  edition: string;
+  note: string | ArrayBuffer;
+};
+type Props = {};
 const BookForm = (props: Props) => {
-  const [imageFile, setImageFile] = useState<string | null>();
-  const [formValues, setFormValues] = useState({
-    firstname: "",
-    lastname: "",
-    gender: "",
-    phonenumber: "",
-    state: "",
-    country: "",
-    blood_group: "",
-    age: "",
-    genotype: "",
-    medical_history: "",
+  const {
+    data: genreData,
+    isLoading,
+    error,
+  } = useDataFetcher({
+    key: "/api/genre",
+    path: "genre",
   });
+  const [file, setFile] = useState<any>({
+    image: "",
+    note: "",
+  });
+  const [formValues, setFormValues] = useState({
+    author: "",
+    title: "",
+    description: "",
+    edition: "",
+  });
+
   const handleOnChange = (event) => {
     setFormValues((prev) => ({
       ...prev,
@@ -30,22 +49,50 @@ const BookForm = (props: Props) => {
     }));
   };
 
+  const [genre, setGenre] = useState("");
+
   const handleUpload = (event) => {
     const file = event.target.files[0];
     const reader = new FileReader();
     reader.addEventListener("load", () => {
-      setImageFile(reader.result);
+      setFile({ [event.target.name]: reader.result });
     });
     if (file) {
       reader.readAsDataURL(file);
     }
   };
 
-  console.log({ imageUrl: imageFile });
+  console.log({ file });
 
-  const handleSubmit = () => {};
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const data = {
+      author: formValues.author,
+      title: formValues.title,
+      description: formValues.description,
+      image: file.image,
+      genre: genre,
+      edition: formValues.author,
+      note: file.note,
+    };
+    try {
+      const res = await fetch(`${BASE_URL}/api/book`, {
+        method: "POST",
+        body: JSON.stringify({ ...data }),
+      });
+      if (!res.ok) {
+        console.log(" Error is here");
+      }
+    } catch (error) {}
+  };
 
   const goBack = () => {};
+
+  if (isLoading) {
+    return <div>loadind....</div>;
+  }
+
+  console.log({ genreData });
 
   return (
     <div className="w-full flex flex-col items-center">
@@ -72,10 +119,10 @@ const BookForm = (props: Props) => {
         <div className="w-full mt-4 flex flex-col lg:flex-row lg:justify-between gap-4 ">
           <div className="w-full flex items-center lg:items-baseline justify-center lg:w-[30%] lg:py-8">
             <div className="h-[10rem] w-[10rem] flex items-center justify-center lg:h-[15rem]  lg:w-[15rem] rounded-[50%] relative overflow-hidden">
-              {imageFile ? (
-                <Image src={imageFile} alt="" fill />
+              {file.image ? (
+                <Image src={file.image} alt="" fill />
               ) : (
-                <div className="w-[80%] h-[80%] rounded-[50%] bg-gray-400 absolute flex items-center justify-center border border-yellow-500">
+                <div className="w-[80%] h-[80%] bg-gray-400 absolute flex items-center justify-center border border-yellow-500">
                   <p className="text-red-500">Book Cover</p>
                 </div>
               )}
@@ -88,7 +135,7 @@ const BookForm = (props: Props) => {
                   type="file"
                   onChange={handleUpload}
                   id="upload"
-                  name=""
+                  name="image"
                   value=""
                   className="hidden"
                 />
@@ -105,6 +152,7 @@ const BookForm = (props: Props) => {
                   label="Title"
                   name="title"
                   placeholder="Book Title"
+                  onChange={handleOnChange}
                 />
               </div>
               <div>
@@ -114,6 +162,7 @@ const BookForm = (props: Props) => {
                   label="Author"
                   name="author"
                   placeholder="Book Author"
+                  onChange={handleOnChange}
                 />
               </div>
               <div className="w-full flex flex-col lg:flex-row gap-2 lg:justify-between lg:flex-wrap lg:items-center">
@@ -123,14 +172,16 @@ const BookForm = (props: Props) => {
                   defaultValue={""}
                   name="edition"
                   placeholder="Book Edition"
+                  onChange={handleOnChange}
                 />
               </div>
               <div className="w-full lg:w-[45%]">
                 <SelectInput
                   className="dark:text-white dark:border-white"
-                  placeholder="Gender"
+                  placeholder="Genre"
                   options={["boy", "girl"]}
-                  label="Gender"
+                  label="genre"
+                  onChange={setGenre}
                 />
               </div>
               <div className="">
@@ -140,7 +191,10 @@ const BookForm = (props: Props) => {
                     className="dark:text-white "
                     name="note"
                   />
-                  <TextAreaField className="dark:text-white" />
+                  <TextAreaField
+                    className="dark:text-white"
+                    onChange={handleOnChange}
+                  />
                 </div>
               </div>
             </form>

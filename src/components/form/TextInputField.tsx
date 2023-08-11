@@ -5,7 +5,7 @@ type Props = {
   className?: string;
   name?: string;
   defaultValue?: string;
-  onChange?: React.Dispatch<React.SetStateAction<string | null>>;
+  onChange?: (event: any) => void;
   placeholder?: string;
 };
 
@@ -22,6 +22,7 @@ const TextInputField = (props: Props) => {
         id={props.name}
         name={props.name}
         placeholder={props.placeholder}
+        onChange={(event) => props.onChange(event)}
         className="p-2 w-full text-black outline-none border-primary border rounded-md"
       />
     </div>
