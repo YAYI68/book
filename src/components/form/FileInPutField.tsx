@@ -2,7 +2,7 @@ import React from "react";
 
 type Props = {
   name?: string;
-  onChange?: () => {};
+  onChange?: (event: any) => void;
   label?: string;
   className?: string;
 };
@@ -17,7 +17,7 @@ const FileInPutField = (props: Props) => {
       <input
         name={name}
         defaultValue={""}
-        onChange={onChange}
+        onChange={(e) => onChange(e)}
         type="file"
         className="p-2 w-full lg:w-full  outline-none border-primary border rounded-md"
       />

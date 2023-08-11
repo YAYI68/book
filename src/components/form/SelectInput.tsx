@@ -6,7 +6,7 @@ type Props = {
   placeholder?: string;
   value?: string;
   className?: string;
-  options?: string[];
+  options?: any[];
   label?: string;
   onChange?: Dispatch<React.SetStateAction<string | null>>;
 };
@@ -31,11 +31,11 @@ const SelectInput = (props: Props) => {
           {options.length > 0 ? (
             options.map((option, i) => (
               <button
-                key={i}
-                onClick={() => onChange(option)}
-                className="hover:bg-black hover:text-white dark:text-black dar w-full p-1 text-left rounded-sm"
+                key={option.name}
+                onClick={() => onChange(option.name)}
+                className="hover:bg-black hover:text-white dark:text-black dar w-full p-1 text-left rounded-sm capitalize"
               >
-                {option}
+                {option.name}
               </button>
             ))
           ) : (

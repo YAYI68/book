@@ -8,13 +8,18 @@ import { cloudinaryConfig } from "@/config/cloudinary";
 import { getCurrentSession } from "@/utils";
 import genreModel from "@/backend/models/genre.model";
 
-const BASE_URL = process.env.BASE_URL;
 cloudinaryConfig;
 export async function POST(req: Request) {
   await dbConnect();
   console.log("Book is here");
+  const session = await getCurrentSession();
+  if (!session) {
+    return NextResponse.json({ message: "UnAuthorized" }, { status: 401 });
+  }
   const { author, title, description, image, genre, edition, note } =
     await req.json();
+
+  console.log({ author, title, description, genre, edition, image, note });
 
   if (!author || !title || !image || !note) {
     return NextResponse.json({

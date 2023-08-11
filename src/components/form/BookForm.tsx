@@ -8,7 +8,7 @@ import SelectInput from "./SelectInput";
 import TextInputField from "./TextInputField";
 import TextAreaField from "./TextAreaField";
 import FileInPutField from "./FileInPutField";
-import { headers } from "next/headers";
+// import { headers } from "next/headers";
 import { useDataFetcher } from "@/hooks";
 
 const BASE_URL = process.env.BASE_URL;
@@ -21,19 +21,25 @@ type BookInputType = {
   edition: string;
   note: string | ArrayBuffer;
 };
+
+const createBook = async (data: BookInputType) => {
+  const response = await fetch(`/api/book/`, {
+    method: "POST",
+    cache: "no-cache",
+    // headers: headers(),
+    body: JSON.stringify({ ...data }),
+  });
+  return await response.json();
+};
 type Props = {};
 const BookForm = (props: Props) => {
-  const {
-    data: genreData,
-    isLoading,
-    error,
-  } = useDataFetcher({
+  const { data: genreData, isLoading } = useDataFetcher({
     key: "/api/genre",
     path: "genre",
   });
   const [file, setFile] = useState<any>({
-    image: "",
     note: "",
+    image: "",
   });
   const [formValues, setFormValues] = useState({
     author: "",
@@ -55,7 +61,7 @@ const BookForm = (props: Props) => {
     const file = event.target.files[0];
     const reader = new FileReader();
     reader.addEventListener("load", () => {
-      setFile({ [event.target.name]: reader.result });
+      setFile((prev) => ({ ...prev, [event.target.name]: reader.result }));
     });
     if (file) {
       reader.readAsDataURL(file);
@@ -66,24 +72,25 @@ const BookForm = (props: Props) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // ("use server ");
     const data = {
       author: formValues.author,
       title: formValues.title,
       description: formValues.description,
       image: file.image,
       genre: genre,
-      edition: formValues.author,
+      edition: formValues.edition,
       note: file.note,
     };
+    console.log({ data });
     try {
-      const res = await fetch(`${BASE_URL}/api/book`, {
-        method: "POST",
-        body: JSON.stringify({ ...data }),
-      });
+      const res = await createBook(data);
       if (!res.ok) {
         console.log(" Error is here");
       }
-    } catch (error) {}
+    } catch (error) {
+      console.log({ error });
+    }
   };
 
   const goBack = () => {};
@@ -91,8 +98,6 @@ const BookForm = (props: Props) => {
   if (isLoading) {
     return <div>loadind....</div>;
   }
-
-  console.log({ genreData });
 
   return (
     <div className="w-full flex flex-col items-center">
@@ -179,7 +184,7 @@ const BookForm = (props: Props) => {
                 <SelectInput
                   className="dark:text-white dark:border-white"
                   placeholder="Genre"
-                  options={["boy", "girl"]}
+                  options={genreData.data}
                   label="genre"
                   onChange={setGenre}
                 />
@@ -190,8 +195,10 @@ const BookForm = (props: Props) => {
                     label="Upload Note"
                     className="dark:text-white "
                     name="note"
+                    onChange={handleUpload}
                   />
                   <TextAreaField
+                    name="description"
                     className="dark:text-white"
                     onChange={handleOnChange}
                   />

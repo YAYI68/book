@@ -11,7 +11,7 @@ type Props = {
 const useDataFetcher = (props: Props) => {
   const { key, path } = props;
   const fetcher = async () => {
-    const response = await fetch(`${BASE_URL}/api/${path}`);
+    const response = await fetch(`/api/${path}`);
     if (!response.ok) {
       throw Error("error");
     }
