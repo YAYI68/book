@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import useSWR from "swr";
 import { EditIcon } from "../ui/svg";
 import Image from "next/image";
 import SelectInput from "./SelectInput";
@@ -10,6 +9,7 @@ import TextAreaField from "./TextAreaField";
 import FileInPutField from "./FileInPutField";
 // import { headers } from "next/headers";
 import { useDataFetcher } from "@/hooks";
+import { headers } from "next/headers";
 
 const BASE_URL = process.env.BASE_URL;
 type BookInputType = {
@@ -23,10 +23,11 @@ type BookInputType = {
 };
 
 const createBook = async (data: BookInputType) => {
+  "use server";
   const response = await fetch(`/api/book/`, {
     method: "POST",
     cache: "no-cache",
-    // headers: headers(),
+    headers: headers(),
     body: JSON.stringify({ ...data }),
   });
   return await response.json();

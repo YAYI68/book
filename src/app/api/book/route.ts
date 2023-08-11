@@ -14,6 +14,7 @@ export async function POST(req: Request) {
   console.log("Book is here");
   const session = await getCurrentSession();
   if (!session) {
+    console.log("Unauthorized");
     return NextResponse.json({ message: "UnAuthorized" }, { status: 401 });
   }
   const { author, title, description, image, genre, edition, note } =
