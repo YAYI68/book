@@ -31,7 +31,13 @@ const PageChildren = (props: Props) => {
     <AppProvider headers={headers}>
       <SessionProvider session={session} refetchInterval={5 * 60}>
         <Header />
-        <NextNProgress color="red" />
+        <NextNProgress
+          color="red"
+          startPosition={0.3}
+          stopDelayMs={200}
+          height={3}
+          showOnShallow={true}
+        />
         {children}
         <Footer />
       </SessionProvider>

@@ -1,5 +1,6 @@
 "use client";
 
+import { Loader } from "@/components/shared";
 import useTheme from "@/hooks/useTheme";
 import React, {
   Dispatch,
@@ -47,7 +48,7 @@ const AppProvider = (props: Props) => {
 
   return (
     <AppContext.Provider value={value}>
-      {loading ? <h1>Loading.....</h1> : props.children}
+      {loading ? <Loader /> : props.children}
     </AppContext.Provider>
   );
 };

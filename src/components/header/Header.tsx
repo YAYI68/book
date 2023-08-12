@@ -6,7 +6,7 @@ type Props = {};
 
 const Header = (props: Props) => {
   return (
-    <header className="h-[4rem] z-[5] fixed dark:bg-black bg-white  w-full">
+    <header className="h-[4rem] top-0 left-0 z-[5] fixed dark:bg-black bg-white  w-full">
       <MainNavbar />
       <MobileNavbar />
     </header>
