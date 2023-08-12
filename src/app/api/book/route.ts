@@ -8,6 +8,14 @@ import { cloudinaryConfig } from "@/config/cloudinary";
 import { getCurrentSession } from "@/utils";
 import genreModel from "@/backend/models/genre.model";
 
+// export const config = {
+//   api: {
+//     bodyParser: {
+//       sizeLimit: "20mb",
+//     },
+//   },
+// };
+
 cloudinaryConfig;
 export async function POST(req: Request) {
   await dbConnect();
@@ -19,8 +27,6 @@ export async function POST(req: Request) {
   }
   const { author, title, description, image, genre, edition, note } =
     await req.json();
-
-  console.log({ author, title, description, genre, edition, image, note });
 
   if (!author || !title || !image || !note) {
     return NextResponse.json({
@@ -46,6 +52,7 @@ export async function POST(req: Request) {
       description,
       genre: bookGenre ? bookGenre._id : "",
     });
+    console.log({ book });
     return NextResponse.json({ book }, { status: 201 });
   } catch (error) {
     return NextResponse.json({ error }, { status: 500 });

@@ -7,33 +7,16 @@ import SelectInput from "./SelectInput";
 import TextInputField from "./TextInputField";
 import TextAreaField from "./TextAreaField";
 import FileInPutField from "./FileInPutField";
-// import { headers } from "next/headers";
 import { useDataFetcher } from "@/hooks";
-import { headers } from "next/headers";
+import { createBook } from "@/utils/actions";
+import { useAppContext } from "@/context/AppProvider";
 
 const BASE_URL = process.env.BASE_URL;
-type BookInputType = {
-  author: string;
-  title: string;
-  description: string;
-  image: string | ArrayBuffer;
-  genre: string;
-  edition: string;
-  note: string | ArrayBuffer;
-};
 
-const createBook = async (data: BookInputType) => {
-  "use server";
-  const response = await fetch(`/api/book/`, {
-    method: "POST",
-    cache: "no-cache",
-    headers: headers(),
-    body: JSON.stringify({ ...data }),
-  });
-  return await response.json();
-};
 type Props = {};
 const BookForm = (props: Props) => {
+  const { headers } = useAppContext();
+  console.log({ headers });
   const { data: genreData, isLoading } = useDataFetcher({
     key: "/api/genre",
     path: "genre",
@@ -85,7 +68,14 @@ const BookForm = (props: Props) => {
     };
     console.log({ data });
     try {
-      const res = await createBook(data);
+      const res = await fetch(`/api/book/`, {
+        method: "POST",
+        cache: "no-store",
+        credentials: "include",
+        headers: headers,
+        body: JSON.stringify({ ...data }),
+      });
+      console.log({ res });
       if (!res.ok) {
         console.log(" Error is here");
       }

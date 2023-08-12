@@ -4,6 +4,7 @@ import PageChildren from "@/components/children/PageChildren";
 import NextNProgress from "nextjs-progressbar";
 import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]/route";
+import { headers } from "next/headers";
 // import { SessionProvider } from "next-auth/react";
 
 const inter = Roboto({
@@ -22,11 +23,14 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const session = await getServerSession(authOptions);
+  const reqHeaders = headers();
   // console.log({ clientSession: session });
   return (
     <html lang="en" className="">
       <body className={inter.className}>
-        <PageChildren session={session}>{children}</PageChildren>
+        <PageChildren headers={reqHeaders} session={session}>
+          {children}
+        </PageChildren>
       </body>
     </html>
   );
