@@ -16,10 +16,8 @@ import genreModel from "@/backend/models/genre.model";
 //   },
 // };
 
-cloudinaryConfig;
+cloudinaryConfig();
 export async function POST(req: Request) {
-  await dbConnect();
-  console.log("Book is here");
   const session = await getCurrentSession();
   if (!session) {
     console.log("Unauthorized");
@@ -34,6 +32,7 @@ export async function POST(req: Request) {
     });
   }
   try {
+    await dbConnect();
     const bookGenre = await Genre.findOne({ name: genre.toLowerCase() });
     const bookImage = await cloudinary.uploader.upload(image, {
       folder: "Book/covers",

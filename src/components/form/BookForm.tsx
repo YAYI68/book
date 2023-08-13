@@ -10,6 +10,7 @@ import FileInPutField from "./FileInPutField";
 import { useDataFetcher } from "@/hooks";
 import { createBook } from "@/utils/actions";
 import { useAppContext } from "@/context/AppProvider";
+import { Loader } from "../shared";
 
 const BASE_URL = process.env.BASE_URL;
 
@@ -66,7 +67,6 @@ const BookForm = (props: Props) => {
       edition: formValues.edition,
       note: file.note,
     };
-    console.log({ data });
     try {
       const res = await fetch(`/api/book/`, {
         method: "POST",
@@ -87,7 +87,7 @@ const BookForm = (props: Props) => {
   const goBack = () => {};
 
   if (isLoading) {
-    return <div>loadind....</div>;
+    return <Loader />;
   }
 
   return (

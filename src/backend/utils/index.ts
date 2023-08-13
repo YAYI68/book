@@ -1,6 +1,8 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
+import { cloudinaryConfig } from "@/config/cloudinary";
+import { v2 as cloudinary } from "cloudinary";
 
 // type User = {
 //     id:string,
@@ -88,4 +90,12 @@ export const dateDiff = (firstDate: Date, secondDate: Date) => {
   let oneDay = 1000 * 3600 * 24;
   let diffDay = Math.ceil(diff / oneDay);
   return diffDay;
+};
+
+export const uploadToCloudinary = async ({ file, folder }) => {
+  cloudinaryConfig();
+  const file_url = await cloudinary.uploader.upload(file, {
+    folder: folder,
+  });
+  return file_url.secure_url;
 };
