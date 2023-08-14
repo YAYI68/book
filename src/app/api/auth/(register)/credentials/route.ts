@@ -16,8 +16,7 @@ const mailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
 export async function POST(req: Request) {
   await dbConnect();
-  const { firstname, lastname, email, password, phoneNumber } =
-    await req.json();
+  const { firstname, lastname, email, password } = await req.json();
   if (
     !firstname.trim() ||
     !lastname.trim() ||
@@ -60,7 +59,6 @@ export async function POST(req: Request) {
       lastname,
       email,
       password: hash,
-      phoneNumber,
     });
 
     const options = { expiresIn: "30d" };
