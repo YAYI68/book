@@ -5,6 +5,7 @@ import NextNProgress from "nextjs-progressbar";
 import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]/route";
 import { headers } from "next/headers";
+
 // import { SessionProvider } from "next-auth/react";
 
 const inter = Roboto({

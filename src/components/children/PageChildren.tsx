@@ -7,6 +7,8 @@ import Footer from "../footer/Footer";
 import AppProvider from "@/context/AppProvider";
 import { SessionProvider } from "next-auth/react";
 import NextNProgress from "nextjs-progressbar";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 
 type Props = {
   children: ReactNode;
@@ -22,6 +24,18 @@ const PageChildren = (props: Props) => {
     return (
       <AppProvider headers={headers}>
         <SessionProvider session={session} refetchInterval={5 * 60}>
+          <ToastContainer
+            position="top-center"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="dark"
+          />
           {children}
         </SessionProvider>
       </AppProvider>
@@ -30,6 +44,18 @@ const PageChildren = (props: Props) => {
   return (
     <AppProvider headers={headers}>
       <SessionProvider session={session} refetchInterval={5 * 60}>
+        <ToastContainer
+          position="top-center"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="dark"
+        />
         <Header />
         <NextNProgress
           color="red"

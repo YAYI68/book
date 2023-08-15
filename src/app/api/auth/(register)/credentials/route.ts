@@ -43,17 +43,16 @@ export async function POST(req: Request) {
     );
   }
 
-  const userExit = await User.findOne({ email });
-
-  if (userExit) {
-    return NextResponse.json(
-      { error: "User already exists!" },
-      { status: 409 }
-    );
-  }
-
   const hash = await hashPassword(password);
   try {
+    const userExit = await User.findOne({ email });
+
+    if (userExit) {
+      return NextResponse.json(
+        { error: "User already exists!" },
+        { status: 409 }
+      );
+    }
     const user = await User.create({
       firstname,
       lastname,
@@ -70,7 +69,6 @@ export async function POST(req: Request) {
       from: process.env.EMAIL_USER, // sender address
       to: "yayiabiodun68@gmail.com", // list of receivers
       subject: "Verify your email ", // Subject line
-      // text: "Email Confirmation", // plain text body
       html: htmlMessage, // html body
     });
     return NextResponse.json(
