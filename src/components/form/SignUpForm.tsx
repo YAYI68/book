@@ -16,11 +16,27 @@ const SignUpForm = (props: Props) => {
     confirmPassword: "",
   });
   const [loading, setLoading] = useState(false);
-
   const [showPassword, setShowPassword] = useState(false);
+  const [required, setRequired] = useState({
+    firstname: false,
+    lastname: false,
+    email: false,
+    password: false,
+    confirmPassword: false,
+  });
+  console.log({ required });
 
   const handleOnChecked = (event) => {
     setShowPassword(event.target.checked);
+  };
+
+  const handleOnBlur = (event) => {
+    if (!event.target.value.trim()) {
+      setRequired((prev) => ({
+        ...prev,
+        [event.target.name]: true,
+      }));
+    }
   };
 
   const handleOnChange = (event) => {
@@ -28,6 +44,12 @@ const SignUpForm = (props: Props) => {
       ...prev,
       [event.target.name]: event.target.value,
     }));
+    if (event.target.value.trim()) {
+      setRequired((prev) => ({
+        ...prev,
+        [event.target.name]: false,
+      }));
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -85,42 +107,95 @@ const SignUpForm = (props: Props) => {
         onSubmit={handleSubmit}
         className="mt-[2rem] w-full flex flex-col gap-4"
       >
-        <input
-          onChange={handleOnChange}
-          type="text"
-          name="firstname"
-          placeholder="FirstName"
-          className="px-4  py-2 w-full outline-none border dark:bg-gray-800 dark:text-white rounded "
-        />
-        <input
-          onChange={handleOnChange}
-          type="text"
-          placeholder="LastName"
-          name="lastname"
-          className="px-4  py-2 w-full outline-none border dark:bg-gray-800 dark:text-white rounded "
-        />
-        <input
-          onChange={handleOnChange}
-          type="email"
-          placeholder="Email"
-          name="email"
-          className="px-4  py-2 w-full outline-none border dark:bg-gray-800 dark:text-white rounded "
-        />
+        <div className="w-full flex flex-col">
+          <input
+            onChange={handleOnChange}
+            onBlur={handleOnBlur}
+            type="text"
+            name="firstname"
+            placeholder="FirstName*"
+            className="px-4  py-2 w-full outline-none border dark:bg-gray-800 dark:text-white rounded "
+          />
+          {required.firstname ? (
+            <small className="text-red-500 text-xs">
+              This field is required *
+            </small>
+          ) : (
+            ""
+          )}
+        </div>
+        <div className="w-full flex flex-col">
+          <input
+            onChange={handleOnChange}
+            onBlur={handleOnBlur}
+            type="text"
+            placeholder="LastName*"
+            name="lastname"
+            className="px-4  py-2 w-full outline-none border dark:bg-gray-800 dark:text-white rounded "
+          />
+          {required.lastname ? (
+            <small className="text-red-500 text-xs">
+              This field is required *
+            </small>
+          ) : (
+            ""
+          )}
+        </div>
 
-        <input
-          onChange={handleOnChange}
-          type={showPassword ? "text" : "password"}
-          placeholder="Password"
-          name="password"
-          className="px-4  py-2 w-full outline-none border dark:bg-gray-800 dark:text-white rounded "
-        />
-        <input
-          onChange={handleOnChange}
-          type={showPassword ? "text" : "password"}
-          placeholder="Confirm Password"
-          name="confirmPassword"
-          className="px-4  py-2 w-full outline-none border dark:bg-gray-800 dark:text-white rounded "
-        />
+        <div className="w-full flex flex-col">
+          <input
+            onChange={handleOnChange}
+            onBlur={handleOnBlur}
+            type="email"
+            placeholder="Email*"
+            name="email"
+            className="px-4  py-2 w-full outline-none border dark:bg-gray-800 dark:text-white rounded "
+          />
+          {required.email ? (
+            <small className="text-red-500 text-xs">
+              This field is required *
+            </small>
+          ) : (
+            ""
+          )}
+        </div>
+        <div className="w-full flex flex-col">
+          <input
+            onChange={handleOnChange}
+            onBlur={handleOnBlur}
+            type={showPassword ? "text" : "password"}
+            placeholder="Password*"
+            name="password"
+            className="px-4  py-2 w-full outline-none border dark:bg-gray-800 dark:text-white rounded "
+          />
+          {required.password ? (
+            <small className="text-red-500 text-xs">
+              This field is required *
+            </small>
+          ) : (
+            ""
+          )}
+          <small className="dark:text-gray-300">
+            hint:The password must contain atleast 8 character
+          </small>
+        </div>
+        <div className="w-full flex flex-col">
+          <input
+            onChange={handleOnChange}
+            onBlur={handleOnBlur}
+            type={showPassword ? "text" : "password"}
+            placeholder="Confirm Password *"
+            name="confirmPassword"
+            className="px-4  py-2 w-full outline-none border dark:bg-gray-800 dark:text-white rounded "
+          />
+          {required.confirmPassword ? (
+            <small className="text-red-500 text-xs">
+              This field is required *
+            </small>
+          ) : (
+            ""
+          )}
+        </div>
         <div className="w-fit flex items-center gap-2">
           <input
             onChange={handleOnChecked}
