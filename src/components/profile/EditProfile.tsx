@@ -73,8 +73,8 @@ const EditProfile = (props: Props) => {
   };
   return (
     <div className="w-full flex flex-col gap-4 items-center lg:items-start lg:flex-row">
-      <div className="w-[10rem] h-[10rem] relative lg:w-[20%] lg:justify-between lg:h-[15rem] rounded-[50%] bg-green-500">
-        {!imgFile || !data.image ? (
+      <div className="w-[10rem] h-[10rem] relative overflow-hidden lg:w-[20%] lg:justify-between lg:h-[15rem] rounded-[50%] bg-green-500">
+        {!imgFile && !data.profile.image ? (
           <Image src={DefaultImage} alt="profile" fill />
         ) : (
           <Image src={imgFile ?? data.profile.image} alt="profile" fill />

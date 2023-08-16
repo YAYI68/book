@@ -10,7 +10,7 @@ const SideNavbar = (props: Props) => {
       <ul className="flex flex-col">
         <li>
           <Link
-            href={"/profile"}
+            href={"/account/profile"}
             className="p-2 rounded-xl dark:text-white hover:bg-red-200 dark:text-gary-400 dark:hover:text-white font-semibold  flex justify-between"
           >
             {" "}
@@ -25,7 +25,7 @@ const SideNavbar = (props: Props) => {
         </li>
         <li>
           <Link
-            href={"/profile/edit"}
+            href={"/account/profile/edit"}
             className="p-2 rounded-xl dark:text-white hover:bg-red-200 dark:text-gary-400 dark:hover:text-white font-semibold  flex justify-between"
           >
             {" "}
@@ -55,7 +55,7 @@ const SideNavbar = (props: Props) => {
         </li>
         <li>
           <Link
-            href={""}
+            href={"/account/my-library"}
             className="p-2 rounded-xl dark:text-white hover:bg-red-200 dark:text-gary-400 dark:hover:text-white font-semibold  flex justify-between"
           >
             {" "}
