@@ -2,12 +2,15 @@
 import React, { useState } from "react";
 import { SelectInput, TextInputField } from "../form";
 import { Button } from "../ui";
-import { ArrowleftIcon } from "../ui/svg";
+import { ArrowleftIcon, EditIcon } from "../ui/svg";
 import Link from "next/link";
 import { useDataFetcher } from "@/hooks";
 import { Loader } from "../shared";
 import { toast } from "react-toastify";
 import { redirect, useRouter } from "next/navigation";
+import { convertToBase64 } from "@/utils/utils";
+import Image from "next/image";
+import DefaultImage from "../../../public/images/defaultImage.png";
 
 type Props = {};
 
@@ -23,7 +26,19 @@ const EditProfile = (props: Props) => {
     lastname: "",
     email: "",
   });
+  const [imgFile, setImageFile] = useState();
   const [gender, setGender] = useState("");
+
+  const handleUpload = (event) => {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+    reader.addEventListener("load", () => {
+      setImageFile(reader.result);
+    });
+  };
 
   const handleOnChange = (event) => {
     setFormValues((prev) => ({
@@ -49,10 +64,31 @@ const EditProfile = (props: Props) => {
     });
     const result = await response.json();
     console.log({ result });
+    router.push("/profile");
   };
   return (
     <div className="w-full flex flex-col gap-4 items-center lg:items-start lg:flex-row">
-      <div className="w-[10rem] h-[10rem] lg:w-[20%] lg:justify-between lg:h-[15rem] rounded-[50%] bg-green-500"></div>
+      <div className="w-[10rem] h-[10rem] relative lg:w-[20%] lg:justify-between lg:h-[15rem] rounded-[50%] bg-green-500">
+        {!imgFile && !data.image ? (
+          <Image src={DefaultImage} alt="profile" fill />
+        ) : (
+          <Image src={imgFile ?? data.image} alt="profile" fill />
+        )}
+        <label
+          htmlFor="upload"
+          className="absolute cursor-pointer bottom-8 right-8 lg:bottom-12 lg:right-12 rounded-[50%]  h-[2rem] bg-secondary w-[2rem] flex flex-col justify-center items-center"
+        >
+          <EditIcon classname=" text-red-500" />
+          <input
+            type="file"
+            onChange={handleUpload}
+            id="upload"
+            name="image"
+            value=""
+            className="hidden"
+          />
+        </label>
+      </div>
       <div className="flex w-full  flex-col lg:w-[70%]">
         <div className="w-full">
           <Link

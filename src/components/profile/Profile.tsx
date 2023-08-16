@@ -37,33 +37,34 @@ type Props = {};
 
 const Profile = async (props: Props) => {
   const { data: profile } = await getUserProfile();
-  // console.log({ userProfile: profile });
+  console.log({ userProfile: profile });
   return (
-    <div className="w-full flex flex-col gap-4 items-center lg:items-start lg:flex-row">
-      <div className="w-[14rem] h-[14rem] lg:w-[20%] lg:justify-between lg:h-[15rem] rounded-[50%] bg-green-500 overflow-hidden">
-        <Image
-          src={profile.image ? profile.image : DefaultImage}
-          alt="profile Image"
-          className="h-full w-full"
-        />
-      </div>
-      <div className="flex w-full  flex-col lg:w-[70%]">
-        <h3 className="text-[1.5rem] lg:text-[2rem] text-center lg:text-start font-semibold dark:text-white">
-          Personal Information
-        </h3>
-        <div className="w-full py-2 flex flex-col lg:flex-row lg:flex-wrap lg:justify-between">
-          <ProfileDetail name="First Name" content={profile.firstname} />
-          <ProfileDetail name="Last Name" content={profile.lastname} />
-          <ProfileDetail name="Email" content={profile.email} />
-          {profile.gender ? (
-            <ProfileDetail name="Gender" content={profile.gender} />
-          ) : (
-            ""
-          )}
-          <ProfileDetail name="Subscription Plan" content={profile.plan} />
-        </div>
-      </div>
-    </div>
+    // <div className="w-full flex flex-col gap-4 items-center lg:items-start lg:flex-row">
+    //   <div className="w-[14rem] h-[14rem] lg:w-[20%] lg:justify-between lg:h-[15rem] rounded-[50%] bg-green-500 overflow-hidden">
+    //     <Image
+    //       src={profile?.image ? profile.image : DefaultImage}
+    //       alt="profile Image"
+    //       className="h-full w-full"
+    //     />
+    //   </div>
+    //   <div className="flex w-full  flex-col lg:w-[70%]">
+    //     <h3 className="text-[1.5rem] lg:text-[2rem] text-center lg:text-start font-semibold dark:text-white">
+    //       Personal Information
+    //     </h3>
+    //     <div className="w-full py-2 flex flex-col lg:flex-row lg:flex-wrap lg:justify-between">
+    //       <ProfileDetail name="First Name" content={profile.firstname} />
+    //       <ProfileDetail name="Last Name" content={profile.lastname} />
+    //       <ProfileDetail name="Email" content={profile.email} />
+    //       {profile.gender ? (
+    //         <ProfileDetail name="Gender" content={profile.gender} />
+    //       ) : (
+    //         ""
+    //       )}
+    //       <ProfileDetail name="Subscription Plan" content={profile.plan} />
+    //     </div>
+    //   </div>
+    // </div>
+    <h1>Hello</h1>
   );
 };
 
