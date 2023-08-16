@@ -6,6 +6,8 @@ import { ArrowleftIcon } from "../ui/svg";
 import Link from "next/link";
 import { useDataFetcher } from "@/hooks";
 import { Loader } from "../shared";
+import { toast } from "react-toastify";
+import { redirect, useRouter } from "next/navigation";
 
 type Props = {};
 
@@ -14,6 +16,7 @@ const EditProfile = (props: Props) => {
     key: "profile",
     path: "account/profile",
   });
+  const router = useRouter();
 
   const [formValues, setFormValues] = useState({
     firstname: "",
@@ -32,14 +35,20 @@ const EditProfile = (props: Props) => {
     return <Loader />;
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     const data = {
       ...formValues,
       gender,
     };
-    console.log({ data });
+    const response = await fetch("/api/account/profile", {
+      method: "PATCH",
+      cache: "no-store",
+      body: JSON.stringify({ data }),
+    });
+    const result = await response.json();
+    console.log({ result });
   };
   return (
     <div className="w-full flex flex-col gap-4 items-center lg:items-start lg:flex-row">

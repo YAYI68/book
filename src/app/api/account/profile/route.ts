@@ -22,6 +22,14 @@ export async function GET(request: Request) {
 
 export async function PATCH(request: Request) {
   const { image, email, firstname, lastname, gender } = await request.json();
+  const data = {
+    image,
+    email,
+    firstname,
+    lastname,
+    gender,
+  };
+  console.log({ data });
 
   const session = await getCurrentSession();
   const { user } = session;

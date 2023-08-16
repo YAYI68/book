@@ -22,7 +22,7 @@ const userSchema = new Schema(
     password: { type: String, minLength: 8, select: false },
     gender: {
       type: String,
-      enum: ["male", "female"],
+      enum: ["Male", "Female"],
     },
     plan: {
       type: String,
