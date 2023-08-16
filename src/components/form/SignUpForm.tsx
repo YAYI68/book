@@ -4,6 +4,7 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { Spinner } from "../ui";
+import { redirect } from "next/navigation";
 
 type Props = {};
 
@@ -85,7 +86,7 @@ const SignUpForm = (props: Props) => {
       if (response.ok) {
         toast.success(res_data.message);
         setLoading(false);
-        return;
+        redirect("/login");
       }
       toast.error(res_data.error);
       setLoading(false);

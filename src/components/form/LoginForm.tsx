@@ -1,8 +1,9 @@
 "use client";
 import { pacifico } from "@/utils/font";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { useState } from "react";
-import { signIn, useSession } from "next-auth/react";
+import { signIn } from "next-auth/react";
 import { toast } from "react-toastify";
 import { Spinner } from "../ui";
 
@@ -12,6 +13,7 @@ const LoginForm = (props: Props) => {
   const [email, setEmail] = useState<string | null>("");
   const [password, setPassword] = useState<string | null>("");
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -22,15 +24,15 @@ const LoginForm = (props: Props) => {
         password,
         redirect: false,
       });
-      if (reponse.ok) {
-        toast.success("User Successfully Login");
+      if (reponse.url) {
+        toast.success("User Successfully login ");
         setLoading(false);
+        location.reload();
       } else {
-        toast.error(reponse.error);
+        toast.error("Incorrect Credentials ");
         setLoading(false);
       }
     } catch (error) {
-      toast.error("Incorrect email/password");
       setLoading(false);
     }
   };
@@ -54,12 +56,17 @@ const LoginForm = (props: Props) => {
         />
         <input
           onChange={(e) => setPassword(e.target.value)}
-          type="password"
+          type={showPassword ? "text" : "password"}
           placeholder="Password"
           className="px-4  py-2 w-full outline-none border dark:bg-gray-800 dark:text-white rounded "
         />
         <div className="w-fit flex items-center gap-2">
-          <input type="checkbox" name="" id="show_password" />
+          <input
+            type="checkbox"
+            name=""
+            id="show_password"
+            onChange={(e) => setShowPassword(e.target.checked)}
+          />
           <label htmlFor="show_password" className="dark:text-gray-300">
             Show password
           </label>

@@ -30,7 +30,7 @@ export const authOptions: AuthOptions = {
           password: string;
         };
         if (!email || !password) {
-          throw new Error("Incomplete  Credentials");
+          return null;
         }
         const res = await fetch(`${BASE_URL}/api/auth/login`, {
           method: "POST",
@@ -93,7 +93,7 @@ export const authOptions: AuthOptions = {
   pages: {
     signIn: "/login",
     // signOut: '/auth/signout',
-    // error: '/auth/error', // Error code passed in query string as ?error=
+    error: "/login", // Error code passed in query string as ?error=
     // verifyRequest: '/auth/verify-request', // (used for check email message)
     // newUser: '/auth/new-user' // New users will be directed here on first sign in (leave the property out if not of interest)
   },
