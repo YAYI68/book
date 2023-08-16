@@ -1,7 +1,6 @@
 import "./globals.css";
 import { Roboto } from "next/font/google";
 import PageChildren from "@/components/children/PageChildren";
-import NextNProgress from "nextjs-progressbar";
 import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]/route";
 import { headers } from "next/headers";
@@ -25,7 +24,6 @@ export default async function RootLayout({
 }) {
   const session = await getServerSession(authOptions);
   const reqHeaders = headers();
-  // console.log({ clientSession: session });
   return (
     <html lang="en" className="">
       <body className={inter.className}>

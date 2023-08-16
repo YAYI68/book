@@ -10,3 +10,16 @@ export function convertToBase64(file: any) {
     };
   });
 }
+
+export const filteredInput = (input) => {
+  const newInput = Object.keys(input)
+    //Filter Object with key for empty values
+    .filter((key) => input[key] !== undefined && input[key])
+    .reduce((obj, key) => {
+      return Object.assign(obj, {
+        [key]: input[key],
+      });
+    }, {});
+
+  return newInput;
+};

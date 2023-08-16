@@ -49,30 +49,35 @@ const EditProfile = (props: Props) => {
   if (isLoading) {
     return <Loader />;
   }
-
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     const data = {
       ...formValues,
+      image: imgFile,
       gender,
     };
     const response = await fetch("/api/account/profile", {
       method: "PATCH",
       cache: "no-store",
-      body: JSON.stringify({ data }),
+      body: JSON.stringify({ ...data }),
     });
     const result = await response.json();
     console.log({ result });
-    router.push("/profile");
+    if (response.ok) {
+      toast.success("Profile Updated Successfully");
+      router.push("/profile");
+    } else {
+      toast.error("Error occur while updating your status");
+    }
   };
   return (
     <div className="w-full flex flex-col gap-4 items-center lg:items-start lg:flex-row">
       <div className="w-[10rem] h-[10rem] relative lg:w-[20%] lg:justify-between lg:h-[15rem] rounded-[50%] bg-green-500">
-        {!imgFile && !data.image ? (
+        {!imgFile || !data.image ? (
           <Image src={DefaultImage} alt="profile" fill />
         ) : (
-          <Image src={imgFile ?? data.image} alt="profile" fill />
+          <Image src={imgFile ?? data.profile.image} alt="profile" fill />
         )}
         <label
           htmlFor="upload"
@@ -120,6 +125,7 @@ const EditProfile = (props: Props) => {
           <div className="flex flex-col w-full lg:w-[47%]">
             <TextInputField
               label="Last Name"
+              name="lastname"
               placeholder="lastname"
               defaultValue={data.profile.lastname}
               onChange={handleOnChange}
@@ -128,6 +134,7 @@ const EditProfile = (props: Props) => {
           <div className="flex flex-col w-full lg:w-[47%]">
             <TextInputField
               label="Email Address"
+              name="email"
               placeholder="youremail@email.com"
               defaultValue={data.profile.email}
               onChange={handleOnChange}

@@ -3,6 +3,7 @@ import User from "@/backend/models/user.model";
 import dbConnect from "@/backend/database";
 import { getCurrentSession } from "@/utils";
 import { uploadToCloudinary } from "@/backend/utils";
+import { filteredInput } from "@/utils/utils";
 
 export async function GET(request: Request) {
   const session = await getCurrentSession();
@@ -22,14 +23,6 @@ export async function GET(request: Request) {
 
 export async function PATCH(request: Request) {
   const { image, email, firstname, lastname, gender } = await request.json();
-  const data = {
-    image,
-    email,
-    firstname,
-    lastname,
-    gender,
-  };
-  console.log({ data });
 
   const session = await getCurrentSession();
   const { user } = session;
@@ -37,23 +30,30 @@ export async function PATCH(request: Request) {
     console.log("Unauthorized");
     return NextResponse.json({ message: "UnAuthorized" }, { status: 401 });
   }
+
   let profile_url;
   if (image) {
     profile_url = await uploadToCloudinary({
       file: image,
       folder: "userprofile",
     });
+    console.log({ profile_url });
   }
+  console.log({ profile_url });
   await dbConnect();
   try {
+    const inputData = filteredInput({
+      image: profile_url,
+      email,
+      firstname,
+      lastname,
+      gender,
+    });
+
     const profile = await User.findOneAndUpdate(
       { _id: user._id },
       {
-        image: profile_url,
-        email,
-        firstname,
-        lastname,
-        gender,
+        ...inputData,
       }
     );
     return NextResponse.json({ data: profile }, { status: 200 });
