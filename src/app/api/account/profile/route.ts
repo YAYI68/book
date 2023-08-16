@@ -6,7 +6,6 @@ import { uploadToCloudinary } from "@/backend/utils";
 
 export async function GET(request: Request) {
   const session = await getCurrentSession();
-  console.log({ session });
   const { user } = session;
   if (!session) {
     console.log("Unauthorized");

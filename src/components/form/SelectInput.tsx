@@ -37,7 +37,6 @@ const SelectInput = (props: Props) => {
                 className="hover:bg-black hover:text-white   w-full p-1 text-left rounded-sm capitalize"
               >
                 {option.name}
-                Hello
               </button>
             ))
           ) : (

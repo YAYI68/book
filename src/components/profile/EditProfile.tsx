@@ -19,14 +19,28 @@ const EditProfile = (props: Props) => {
     firstname: "",
     lastname: "",
     email: "",
-    gender: "",
   });
-  console.log({ data });
+  const [gender, setGender] = useState("");
+
+  const handleOnChange = (event) => {
+    setFormValues((prev) => ({
+      ...prev,
+      [event.target.name]: event.target.value,
+    }));
+  };
   if (isLoading) {
     return <Loader />;
   }
 
-  const handleSubmit = () => {};
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    const data = {
+      ...formValues,
+      gender,
+    };
+    console.log({ data });
+  };
   return (
     <div className="w-full flex flex-col gap-4 items-center lg:items-start lg:flex-row">
       <div className="w-[10rem] h-[10rem] lg:w-[20%] lg:justify-between lg:h-[15rem] rounded-[50%] bg-green-500"></div>
@@ -45,13 +59,17 @@ const EditProfile = (props: Props) => {
             Personal Information
           </h3>
         </div>
-        <form className="w-full py-2 flex gap-4 flex-col lg:flex-row lg:flex-wrap lg:justify-between">
+        <form
+          onSubmit={handleSubmit}
+          className="w-full py-2 flex gap-4 flex-col lg:flex-row lg:flex-wrap lg:justify-between"
+        >
           <div className="flex flex-col w-full lg:w-[47%]">
             <TextInputField
               label="First Name"
+              name="firstname"
               placeholder="firstname"
               defaultValue={data.profile.firstname}
-              onChange={}
+              onChange={handleOnChange}
             />
           </div>
           <div className="flex flex-col w-full lg:w-[47%]">
@@ -59,6 +77,7 @@ const EditProfile = (props: Props) => {
               label="Last Name"
               placeholder="lastname"
               defaultValue={data.profile.lastname}
+              onChange={handleOnChange}
             />
           </div>
           <div className="flex flex-col w-full lg:w-[47%]">
@@ -66,14 +85,16 @@ const EditProfile = (props: Props) => {
               label="Email Address"
               placeholder="youremail@email.com"
               defaultValue={data.profile.email}
+              onChange={handleOnChange}
             />
           </div>
           <div className="flex flex-col w-full lg:w-[47%] lg:mt-6">
             <SelectInput
               placeholder="Gender"
               className="bg-white"
-              value={data.profile?.gender}
-              options={["MALE", "FEMALE"]}
+              value={gender ? gender : data.profile?.gender}
+              options={[{ name: "Male" }, { name: "Female" }]}
+              onChange={setGender}
             />
           </div>
           <Button
