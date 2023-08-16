@@ -4,6 +4,7 @@ import { ArrowDownIcon } from "../ui/svg";
 
 type Props = {
   placeholder?: string;
+  defaultValue?: string;
   value?: string;
   className?: string;
   options?: any[];
@@ -33,9 +34,10 @@ const SelectInput = (props: Props) => {
               <button
                 key={option.name}
                 onClick={() => onChange(option.name)}
-                className="hover:bg-black hover:text-white dark:text-black dar w-full p-1 text-left rounded-sm capitalize"
+                className="hover:bg-black hover:text-white   w-full p-1 text-left rounded-sm capitalize"
               >
                 {option.name}
+                Hello
               </button>
             ))
           ) : (

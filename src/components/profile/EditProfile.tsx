@@ -1,12 +1,32 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import { SelectInput, TextInputField } from "../form";
 import { Button } from "../ui";
 import { ArrowleftIcon } from "../ui/svg";
 import Link from "next/link";
+import { useDataFetcher } from "@/hooks";
+import { Loader } from "../shared";
 
 type Props = {};
 
 const EditProfile = (props: Props) => {
+  const { data, isLoading, error } = useDataFetcher({
+    key: "profile",
+    path: "account/profile",
+  });
+
+  const [formValues, setFormValues] = useState({
+    firstname: "",
+    lastname: "",
+    email: "",
+    gender: "",
+  });
+  console.log({ data });
+  if (isLoading) {
+    return <Loader />;
+  }
+
+  const handleSubmit = () => {};
   return (
     <div className="w-full flex flex-col gap-4 items-center lg:items-start lg:flex-row">
       <div className="w-[10rem] h-[10rem] lg:w-[20%] lg:justify-between lg:h-[15rem] rounded-[50%] bg-green-500"></div>
@@ -27,22 +47,32 @@ const EditProfile = (props: Props) => {
         </div>
         <form className="w-full py-2 flex gap-4 flex-col lg:flex-row lg:flex-wrap lg:justify-between">
           <div className="flex flex-col w-full lg:w-[47%]">
-            <TextInputField label="First Name" placeholder="firstname" />
+            <TextInputField
+              label="First Name"
+              placeholder="firstname"
+              defaultValue={data.profile.firstname}
+              onChange={}
+            />
           </div>
           <div className="flex flex-col w-full lg:w-[47%]">
-            <TextInputField label="Last Name" placeholder="lastname" />
+            <TextInputField
+              label="Last Name"
+              placeholder="lastname"
+              defaultValue={data.profile.lastname}
+            />
           </div>
           <div className="flex flex-col w-full lg:w-[47%]">
             <TextInputField
               label="Email Address"
               placeholder="youremail@email.com"
+              defaultValue={data.profile.email}
             />
           </div>
           <div className="flex flex-col w-full lg:w-[47%] lg:mt-6">
             <SelectInput
-              placeholder="gender"
+              placeholder="Gender"
               className="bg-white"
-              value="FEMALE"
+              value={data.profile?.gender}
               options={["MALE", "FEMALE"]}
             />
           </div>

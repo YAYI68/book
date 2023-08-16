@@ -21,8 +21,8 @@ async function getAllBooks() {
   return res.json();
 }
 export default async function Home() {
-  const { data } = await getAllBooks();
-  console.log({ data });
+  // const { data } = await getAllBooks();
+  // console.log({ data });
   return (
     <Main>
       <Hero />

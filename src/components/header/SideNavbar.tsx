@@ -64,7 +64,7 @@ const SideNavbar = (props: Props) => {
               <WalletIcon classname="h-6 w-6 text-red-500" />{" "}
             </span>{" "}
             <span className="hidden w-[80%] text-[.9rem] lg:block">
-              Subscription
+              My Library
             </span>
           </Link>
         </li>
