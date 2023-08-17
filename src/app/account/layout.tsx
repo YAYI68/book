@@ -10,8 +10,6 @@ type Props = {
 
 const layout = async (props: Props) => {
   const session = await getCurrentSession();
-  const { user } = session;
-  console.log({ profile: user });
   if (!session) {
     redirect("/login");
   }

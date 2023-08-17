@@ -1,11 +1,11 @@
 "use client";
 import { pacifico } from "@/utils/font";
 import Link from "next/link";
-import { redirect } from "next/navigation";
 import { useState } from "react";
 import { signIn } from "next-auth/react";
 import { toast } from "react-toastify";
 import { Spinner } from "../ui";
+import { useRouter } from "next/router";
 
 type Props = {};
 
@@ -14,6 +14,7 @@ const LoginForm = (props: Props) => {
   const [password, setPassword] = useState<string | null>("");
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const router = useRouter();
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -27,6 +28,7 @@ const LoginForm = (props: Props) => {
       if (reponse.url) {
         toast.success("User Successfully login ");
         setLoading(false);
+        router.push("/");
         location.reload();
       } else {
         toast.error("Incorrect Credentials ");
