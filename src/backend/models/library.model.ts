@@ -1,6 +1,6 @@
 import mongoose, { Schema, models, model } from "mongoose";
 
-const ReadSchema = new Schema({
+const LibrarySchema = new Schema({
   user: {
     type: mongoose.Types.ObjectId,
     ref: "User",
@@ -11,6 +11,10 @@ const ReadSchema = new Schema({
     ref: "Book",
     require: true,
   },
+  status: {
+    type: String,
+    enum: ["read", "download"],
+  },
 });
 
-export default models.ReadBook || model("ReadBook", ReadSchema);
+export default models.ReadBook || model("ReadBook", LibrarySchema);

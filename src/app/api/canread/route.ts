@@ -8,7 +8,7 @@ import { cloudinaryConfig } from "@/config/cloudinary";
 import { getCurrentSession } from "@/utils";
 import genreModel from "@/backend/models/genre.model";
 import { redirect } from "next/navigation";
-import ReadBook from "@/backend/models/read.model";
+import ReadBook from "@/backend/models/library.model";
 
 export async function POST(req: Request) {
   await dbConnect();

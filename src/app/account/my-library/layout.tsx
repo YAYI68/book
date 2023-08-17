@@ -1,11 +1,16 @@
+"use client";
 import TabNav from "@/components/header/TabNav";
-import React, { ReactNode } from "react";
+import React, { ReactNode, useState } from "react";
 
 type Props = {
   children: ReactNode;
 };
 
-const layout = (props: Props) => {
+const Layout = (props: Props) => {
+  const [tab, SetTab] = useState("all");
+  const handleTabChange = (text: string) => {
+    SetTab(text);
+  };
   return (
     <div className="">
       <div className="" id="tab">
@@ -14,11 +19,11 @@ const layout = (props: Props) => {
             My Library
           </h3>
         </div>
-        <TabNav />
+        <TabNav tab={tab} onChange={handleTabChange} />
       </div>
       <div>{props.children}</div>
     </div>
   );
 };
 
-export default layout;
+export default Layout;

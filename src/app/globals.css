@@ -6,20 +6,22 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
-  --scroll-color:rgb(3 7 18)
+  --scroll-color: rgb(3 7 18);
 }
 
- @layer components{
-  .bend_shape{
-    clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 0% 100%)
+@layer components {
+  .bend_shape {
+    clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 0% 100%);
   }
 }
 
-
-
+@layer components {
+  .nav_link {
+    @apply relative before:w-0 hover:before:w-full before:h-1 before:rounded before:transition-[width] cursor-pointer before:duration-150 before:absolute before:left-0 before:bottom-[-.25rem] before:dark:bg-white text-gray-700 before:bg-gray-700;
+  }
+}
 
 /* clip-path: polygon(36% 0, 100% 0%, 100% 99%, 0% 100%); */
-
 
 /* @media (prefers-color-scheme: dark) {
   :root {
@@ -30,12 +32,12 @@
   }
 } */
 
-::-webkit-scrollbar-thumb{
-  background: var(--scroll-color); 
+::-webkit-scrollbar-thumb {
+  background: var(--scroll-color);
   border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--scroll-color); 
+  background: var(--scroll-color);
 }
 
 ::-webkit-scrollbar {

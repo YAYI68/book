@@ -1,15 +1,8 @@
 import dbConnect from "@/backend/database";
-import { v2 as cloudinary } from "cloudinary";
 import { NextResponse } from "next/server";
 import Book from "@/backend/models/book.model";
-import Genre from "@/backend/models/genre.model";
-import User from "@/backend/models/user.model";
-import { cloudinaryConfig } from "@/config/cloudinary";
 import { getCurrentSession } from "@/utils";
-import genreModel from "@/backend/models/genre.model";
-import { redirect } from "next/navigation";
-import ReadBook from "@/backend/models/read.model";
-import { headers } from "next/headers";
+import LibraryBook from "@/backend/models/library.model";
 
 const BASE_URL = process.env.BASE_URL;
 export async function POST(req: Request) {
@@ -44,18 +37,19 @@ export async function POST(req: Request) {
         { status: 404 }
       );
     }
-    const readbook = await ReadBook.findOne({
+    const readbook = await LibraryBook.findOne({
       user: user._id,
       book: bookId,
+      status: "read",
     });
     if (!readbook) {
-      const read = await ReadBook.create({
+      const read = await LibraryBook.create({
         user: user._id,
         book: bookId,
+        status: "read",
       });
       return NextResponse.json({ data: book });
     } else {
-      console.log("This condition is working now");
       return NextResponse.json({ data: book });
     }
   } catch (error) {
@@ -65,9 +59,14 @@ export async function POST(req: Request) {
 
 export async function GET(request: Request) {
   await dbConnect();
+  const session = await getCurrentSession();
+  if (!session) {
+    return NextResponse.json({ message: "UnAuthorized" }, { status: 401 });
+  }
+  const { user } = session;
+
   try {
-    const books = await ReadBook.find({});
-    console.log({ read: books });
+    const books = await LibraryBook.find({ user: user._id, status: "read" });
     return NextResponse.json({ data: books }, { status: 200 });
   } catch (error) {
     return NextResponse.json({ error }, { status: 500 });

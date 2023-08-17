@@ -44,7 +44,6 @@ const BookListDetail = (props: Props) => {
           <Book />
           <Book />
           <Book />
-          <Book />
         </div>
         {seeMoreHref ? (
           <SeeMoreLink className="md:self-end" href={seeMoreHref} />

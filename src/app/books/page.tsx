@@ -29,7 +29,6 @@ const AllBookList = (props: AllBookProps) => {
 type Props = {};
 
 const Page = ({ searchParams }) => {
-  console.log({ searchParams });
   const { catalog, search, category } = searchParams;
   if (catalog) {
     return <AllBookList title={catalog} />;

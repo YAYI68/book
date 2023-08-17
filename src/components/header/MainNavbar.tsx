@@ -126,7 +126,7 @@ const MainNavbar = (props: MainNavbarProps) => {
               </>
             ) : (
               <>
-                <MainNavLink name="my library" url="my-library" />
+                <MainNavLink name="wishlist" url="wishlist" />
                 <button
                   onClick={() => setDisplayUserDropDown(!displayUserDropdown)}
                   className="w-[2.5rem] h-[2.5rem] cursor-pointer rounded-[50%] bg-red-500"

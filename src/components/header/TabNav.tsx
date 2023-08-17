@@ -1,32 +1,40 @@
 import Link from "next/link";
 import React from "react";
 
-type Props = {};
+type Props = {
+  tab: string;
+  onChange: (text: string) => void;
+};
 
 const TabNav = (props: Props) => {
-  const active = true;
+  const { tab, onChange } = props;
+
   return (
     <div className="flex w-full flex-col items-center lg:items-start ">
       <ul className="w-[80%] flex items-center p-2 lg:w-[40%] justify-center gap-4">
         <li>
-          <Link
-            href={""}
+          <button
             className={`${
-              active ? "dark:text-white" : "dark:text-gray-400"
-            } cursor-pointer relative before:hover:w-fit before:w-0  before:h-1 before:rounded before:transition-[width] before:duration-150 before:absolute before:left-0 before:bottom-[-.2rem] before:bg-blue-500;`}
+              tab === "all"
+                ? "dark:text-white before:w-full"
+                : "dark:text-gray-400"
+            }  nav_link`}
+            onClick={() => onChange("all")}
           >
             AllBooks
-          </Link>
+          </button>
         </li>
         <li>
-          <Link href={""} className="dark:text-gray-400">
-            Wishlist
-          </Link>
-        </li>
-        <li>
-          <Link href={""} className="dark:text-gray-400">
-            LocalBooks
-          </Link>
+          <button
+            className={`${
+              tab === "saved"
+                ? "dark:text-white before:w-full"
+                : "dark:text-gray-400"
+            }  nav_link`}
+            onClick={() => onChange("saved")}
+          >
+            SavedBooks
+          </button>
         </li>
       </ul>
     </div>
