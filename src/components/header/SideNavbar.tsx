@@ -1,5 +1,4 @@
 import Link from "next/link";
-import React from "react";
 import { UserIcon, EditIcon, WalletIcon, KeyIcon } from "../ui/svg";
 
 type Props = {};
@@ -40,7 +39,7 @@ const SideNavbar = (props: Props) => {
         </li>
         <li>
           <Link
-            href={""}
+            href={"/account/changepassword"}
             className="p-2 rounded-xl dark:text-white hover:bg-red-200 dark:text-gary-400 dark:hover:text-white font-semibold  flex justify-between"
           >
             {" "}

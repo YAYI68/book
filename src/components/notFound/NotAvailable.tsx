@@ -1,4 +1,3 @@
-import React from "react";
 import Nopage from "./Nopage";
 
 type Props = {};
@@ -10,8 +9,10 @@ const NotAvailable = (props: Props) => {
         <div className="w-full h-[80%]">
           <Nopage className="h-full w-full" />
         </div>
-        <div className="w-[70%] text-dullBlack">
-          <p>This page is unavailable at the moment. We’ll be right back.</p>
+        <div className="w-[70%] dark:text-white">
+          <p className="font-medium">
+            This page is unavailable at the moment. We’ll be right back.
+          </p>
         </div>
       </div>
     </div>

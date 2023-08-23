@@ -1,16 +1,15 @@
-import BookCategoryList from "@/components/common/BookCategoryList";
-import React from "react";
+import LibraryBookList from "@/components/common/LibraryBookList";
 
 type Props = {};
 
 const AllLibraryBooks = (props: Props) => {
   return (
     <div className="w-full mt-4 flex flex-col">
-      <BookCategoryList
+      <LibraryBookList
         seeMoreHref="/books?catalog=classic"
         title="Reading Books"
       />
-      <BookCategoryList
+      <LibraryBookList
         seeMoreHref="/books?catalog=classic"
         title="Downloaded Books"
       />
