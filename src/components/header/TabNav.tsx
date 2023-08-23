@@ -1,13 +1,9 @@
-import Link from "next/link";
-import React from "react";
-
-type Props = {
-  tab: string;
-  onChange: (text: string) => void;
-};
+"use client";
+import { useTabStore } from "@/store";
+type Props = {};
 
 const TabNav = (props: Props) => {
-  const { tab, onChange } = props;
+  const { tab, changeTab } = useTabStore();
 
   return (
     <div className="flex w-full flex-col items-center lg:items-start ">
@@ -19,7 +15,7 @@ const TabNav = (props: Props) => {
                 ? "dark:text-white before:w-full"
                 : "dark:text-gray-400"
             }  nav_link`}
-            onClick={() => onChange("all")}
+            onClick={() => changeTab("all")}
           >
             AllBooks
           </button>
@@ -31,7 +27,7 @@ const TabNav = (props: Props) => {
                 ? "dark:text-white before:w-full"
                 : "dark:text-gray-400"
             }  nav_link`}
-            onClick={() => onChange("saved")}
+            onClick={() => changeTab("saved")}
           >
             SavedBooks
           </button>

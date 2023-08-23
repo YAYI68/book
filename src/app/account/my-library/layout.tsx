@@ -1,20 +1,11 @@
-"use client";
+import React, { ReactNode } from "react";
 import TabNav from "@/components/header/TabNav";
-import { useLibraryStore } from "@/store";
-import React, { ReactNode, useState } from "react";
 
 type Props = {
   children: ReactNode;
 };
 
 const Layout = (props: Props) => {
-  const [tab, SetTab] = useState("all");
-  const library = useLibraryStore();
-  const handleTabChange = (text: string) => {
-    SetTab(text);
-    library.inc();
-  };
-  console.log({ count: library.count });
   return (
     <div className="">
       <div className="" id="tab">
@@ -23,7 +14,7 @@ const Layout = (props: Props) => {
             My Library
           </h3>
         </div>
-        <TabNav tab={tab} onChange={handleTabChange} />
+        <TabNav />
       </div>
       <div>{props.children}</div>
     </div>

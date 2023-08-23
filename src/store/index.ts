@@ -1,1 +1,1 @@
-export { default as useLibraryStore } from "./useLibaryStore";
+export { default as useTabStore } from "./useTabStore";
