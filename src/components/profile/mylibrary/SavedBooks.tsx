@@ -1,9 +1,13 @@
-import React from "react";
+import { NotAvailable } from "@/components/notFound";
 
 type Props = {};
 
 const SavedBooks = (props: Props) => {
-  return <div>SavedBooks</div>;
+  return (
+    <div>
+      <NotAvailable />
+    </div>
+  );
 };
 
 export default SavedBooks;
