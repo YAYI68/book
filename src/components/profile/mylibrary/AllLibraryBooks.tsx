@@ -1,18 +1,19 @@
-import LibraryBookList from "@/components/common/LibraryBookList";
+import { NoItemFound } from "@/components/notFound";
 
 type Props = {};
 
 const AllLibraryBooks = (props: Props) => {
   return (
     <div className="w-full mt-4 flex flex-col">
-      <LibraryBookList
+      <NoItemFound message="You have no read or download books here at the moment." />
+      {/* <LibraryBookList
         seeMoreHref="/books?catalog=classic"
         title="Reading Books"
       />
       <LibraryBookList
         seeMoreHref="/books?catalog=classic"
         title="Downloaded Books"
-      />
+      /> */}
     </div>
   );
 };

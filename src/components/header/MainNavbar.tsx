@@ -1,7 +1,7 @@
 "use client";
 import { pacifico } from "@/utils/font";
 import Link from "next/link";
-import React, { Dispatch, SetStateAction, useRef, useState } from "react";
+import { Dispatch, SetStateAction, useRef, useState } from "react";
 import { DarkIcon, LightIcon, SearchIcon, SystemIcon } from "../ui/svg";
 import { Theme } from "../ui";
 import { useAppContext } from "@/context/AppProvider";
@@ -29,18 +29,21 @@ const MainNavLink = (props: MainNavLinkProps) => (
 type DropDownLinkProps = {
   url?: string;
   name?: string;
+  onClick: (param: boolean) => void;
 };
 
-const DropDownLink = (props: DropDownLinkProps) => (
-  <li className="w-full">
-    <Link
-      href={props.url}
-      className=" w-full block dark:text-white text-xs hover:bg-gray-500  hover:text-white p-2 rounded-md"
-    >
-      {props.name}
-    </Link>
-  </li>
-);
+const DropDownLink = (props: DropDownLinkProps) => {
+  return (
+    <li className="w-full" onClick={() => props.onClick(true)}>
+      <Link
+        href={props.url}
+        className=" w-full block dark:text-white text-xs hover:bg-gray-500  hover:text-white p-2 rounded-md"
+      >
+        {props.name}
+      </Link>
+    </li>
+  );
+};
 
 type UserDropdownLinkProps = {
   onClickOut?: Dispatch<SetStateAction<boolean | null>>;
@@ -55,10 +58,18 @@ const UserDropdownLink = (props: UserDropdownLinkProps) => {
       ref={DropdownRef}
       className="w-[8rem] p-2 absolute top-[120%] border rounded dark:bg-gray-800 bg-white"
     >
-      <DropDownLink url="/my-library" name="My Library" />
-      <DropDownLink url="/wishlist" name="Wishlist" />
-      <DropDownLink url="/profile" name="profile" />
-      <DropDownLink url="" name="Subscription" />
+      <DropDownLink
+        onClick={onClickOut}
+        url="/account/my-library"
+        name="My Library"
+      />
+      <DropDownLink onClick={onClickOut} url="/wishlist" name="Wishlist" />
+      <DropDownLink
+        onClick={onClickOut}
+        url="/account/profile"
+        name="profile"
+      />
+      <DropDownLink onClick={onClickOut} url="" name="Subscription" />
       <button
         onClick={() => signOut()}
         className="text-xs w-full bg-red-400 p-2 rounded-md mt-1"
