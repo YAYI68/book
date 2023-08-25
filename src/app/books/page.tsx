@@ -2,7 +2,6 @@ import { BookCategorySideBar, BookHero } from "@/components/book";
 import BookCategoryList from "@/components/common/BookCategoryList";
 import BookListDetail from "@/components/common/BookListDetail";
 import { Main } from "@/components/ui";
-import React from "react";
 
 type AllBookProps = {
   title?: string;
@@ -25,8 +24,6 @@ const AllBookList = (props: AllBookProps) => {
     </Main>
   );
 };
-
-type Props = {};
 
 const Page = ({ searchParams }) => {
   const { catalog, search, category } = searchParams;
