@@ -118,6 +118,9 @@ const NewSavedBooks = (props: Props) => {
             ""
           )}
         </div>
+        <button className="p-4 my-4 bg-black text-white text-center w-full rounded-md">
+          Submit
+        </button>
       </form>
     </div>
   );
