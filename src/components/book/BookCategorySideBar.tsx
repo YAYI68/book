@@ -1,5 +1,4 @@
 import Link from "next/link";
-import React from "react";
 
 type Props = {};
 
@@ -11,10 +10,10 @@ const BookCategorySideBar = (props: Props) => {
         <ul className="w-full ">
           <li className="w-full">
             <Link
-              href="/books?category=art"
+              href="/books?category=programming"
               className="w-full font-semibold px-4 py-2 block  dark:text-white dark:hover:text-red-500  hover:bg-red-200 hover:text-red-500 rounded-2xl"
             >
-              Art
+              Programming
             </Link>
           </li>
           <li className="w-full">
@@ -27,34 +26,18 @@ const BookCategorySideBar = (props: Props) => {
           </li>
           <li className="w-full">
             <Link
-              href="/books?category=social"
+              href="/books?category=comics"
               className="w-full font-semibold px-4 py-2 block  dark:text-white dark:hover:text-red-500 hover:bg-red-200 hover:text-red-500 rounded-2xl"
             >
-              Social Science
+              Comics
             </Link>
           </li>
           <li className="w-full">
             <Link
-              href="/books?category=history"
+              href="/books?category=romance"
               className="w-full font-semibold px-4 py-2 block  dark:text-white dark:hover:text-red-500 hover:bg-red-200 hover:text-red-500 rounded-2xl"
             >
-              History
-            </Link>
-          </li>
-          <li className="w-full">
-            <Link
-              href="/books?category=government"
-              className="w-full font-semibold px-4 py-2 block  dark:text-white dark:hover:text-red-500 hover:bg-red-200 hover:text-red-500 rounded-2xl"
-            >
-              Government
-            </Link>
-          </li>
-          <li className="w-full">
-            <Link
-              href="/books?category=Computer"
-              className="w-full font-semibold px-4 py-2 block  dark:text-white dark:hover:text-red-500 hover:bg-red-200 hover:text-red-500 rounded-2xl"
-            >
-              Computer science
+              Romance
             </Link>
           </li>
         </ul>

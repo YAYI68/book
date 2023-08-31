@@ -20,7 +20,6 @@ cloudinaryConfig();
 export async function POST(req: Request) {
   const session = await getCurrentSession();
   if (!session) {
-    console.log("Unauthorized");
     return NextResponse.json({ message: "UnAuthorized" }, { status: 401 });
   }
   const { author, title, description, image, genre, edition, note } =
@@ -31,6 +30,7 @@ export async function POST(req: Request) {
       error: "Incomplete inFormation to register book ",
     });
   }
+  console.log("Hello from book");
   try {
     await dbConnect();
     const bookGenre = await Genre.findOne({ name: genre.toLowerCase() });

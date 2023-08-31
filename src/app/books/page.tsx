@@ -46,7 +46,7 @@ const Page = ({ searchParams }) => {
             <BookCategorySideBar />
           </div>
           <div className="md:w-[85%] flex flex-col gap-2 md:py-[3rem]">
-            <BookCategoryList title="Art" />
+            <BookCategoryList title="Programming" />
             <BookCategoryList title="Top pick for you" />
             <BookListDetail title={"RECENTLY PUBLISHED"} />
           </div>

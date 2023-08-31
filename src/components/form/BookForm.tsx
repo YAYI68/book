@@ -1,6 +1,5 @@
 "use client";
-
-import React, { useState } from "react";
+import { useState } from "react";
 import { EditIcon } from "../ui/svg";
 import Image from "next/image";
 import SelectInput from "./SelectInput";
@@ -8,7 +7,6 @@ import TextInputField from "./TextInputField";
 import TextAreaField from "./TextAreaField";
 import FileInPutField from "./FileInPutField";
 import { useDataFetcher } from "@/hooks";
-import { createBook } from "@/utils/actions";
 import { useAppContext } from "@/context/AppProvider";
 import { Loader } from "../shared";
 
@@ -17,7 +15,6 @@ const BASE_URL = process.env.BASE_URL;
 type Props = {};
 const BookForm = (props: Props) => {
   const { headers } = useAppContext();
-  console.log({ headers });
   const { data: genreData, isLoading } = useDataFetcher({
     key: "/api/genre",
     path: "genre",
@@ -53,11 +50,9 @@ const BookForm = (props: Props) => {
     }
   };
 
-  console.log({ file });
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // ("use server ");
+
     const data = {
       author: formValues.author,
       title: formValues.title,
@@ -67,11 +62,11 @@ const BookForm = (props: Props) => {
       edition: formValues.edition,
       note: file.note,
     };
+    console.log({ data });
+    // console.log("save is pressed");
     try {
       const res = await fetch(`/api/book/`, {
         method: "POST",
-        cache: "no-store",
-        credentials: "include",
         headers: headers,
         body: JSON.stringify({ ...data }),
       });
