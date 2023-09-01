@@ -9,6 +9,7 @@ import FileInPutField from "./FileInPutField";
 import { useDataFetcher } from "@/hooks";
 import { useAppContext } from "@/context/AppProvider";
 import { Loader } from "../shared";
+import axios from "axios";
 
 const BASE_URL = process.env.BASE_URL;
 
@@ -50,9 +51,7 @@ const BookForm = (props: Props) => {
     }
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
+  const handleSubmit = () => {
     const data = {
       author: formValues.author,
       title: formValues.title,
@@ -63,24 +62,32 @@ const BookForm = (props: Props) => {
       note: file.note,
     };
     console.log({ data });
-    // console.log("save is pressed");
-    try {
-      const res = await fetch(`/api/book/`, {
-        method: "POST",
-        headers: headers,
-        body: JSON.stringify({ ...data }),
+    console.log("save is pressed");
+    // try {
+    axios
+      .post("/api/book/", {
+        ...data,
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
       });
-      console.log({ res });
-      if (!res.ok) {
-        console.log(" Error is here");
-      }
-    } catch (error) {
-      console.log({ error });
-    }
+    // const res = await fetch(`/api/book/`, {
+    //   method: "GET",
+    //   // body: JSON.stringify({ ...data }),
+    // });
+    // console.log({ res });
+    // if (!res.ok) {
+    //   console.log(" Error is here");
+    // }
+    // } catch (error) {
+    //   console.log({ error });
+    // }
   };
 
   const goBack = () => {};
-
   if (isLoading) {
     return <Loader />;
   }
