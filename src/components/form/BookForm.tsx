@@ -7,15 +7,14 @@ import TextInputField from "./TextInputField";
 import TextAreaField from "./TextAreaField";
 import FileInPutField from "./FileInPutField";
 import { useDataFetcher } from "@/hooks";
-import { useAppContext } from "@/context/AppProvider";
 import { Loader } from "../shared";
 import axios from "axios";
-
-const BASE_URL = process.env.BASE_URL;
+import { toast } from "react-toastify";
+import { Spinner } from "../ui";
 
 type Props = {};
 const BookForm = (props: Props) => {
-  const { headers } = useAppContext();
+  const [saveLoading, setSaveloading] = useState(false);
   const { data: genreData, isLoading } = useDataFetcher({
     key: "/api/genre",
     path: "genre",
@@ -52,6 +51,7 @@ const BookForm = (props: Props) => {
   };
 
   const handleSubmit = () => {
+    setSaveloading(true);
     const data = {
       author: formValues.author,
       title: formValues.title,
@@ -61,30 +61,18 @@ const BookForm = (props: Props) => {
       edition: formValues.edition,
       note: file.note,
     };
-    console.log({ data });
-    console.log("save is pressed");
-    // try {
     axios
-      .post("/api/book/", {
+      .post("/api/book", {
         ...data,
       })
       .then(function (response) {
-        console.log(response);
+        setSaveloading(false);
+        toast.success("Book Successfully saved ");
       })
       .catch(function (error) {
-        console.log(error);
+        setSaveloading(false);
+        toast.error("Sorry an Error occur while saving the book ");
       });
-    // const res = await fetch(`/api/book/`, {
-    //   method: "GET",
-    //   // body: JSON.stringify({ ...data }),
-    // });
-    // console.log({ res });
-    // if (!res.ok) {
-    //   console.log(" Error is here");
-    // }
-    // } catch (error) {
-    //   console.log({ error });
-    // }
   };
 
   const goBack = () => {};
@@ -101,16 +89,20 @@ const BookForm = (props: Props) => {
             <button
               onClick={() => goBack()}
               type="button"
-              className="p-2 border dark:border-white text-red-500 border-black border-primary rounded-md text-primary text-xs lg:text-[1rem]"
+              className="text-center bg-red-500 text-white p-2 rounded-md font-medium flex flex-col items-center justify-center"
             >
               Cancel
             </button>
             <button
               onClick={handleSubmit}
               type="button"
-              className="p-2 border dark:border-white border-black border-primary bg-primary text-red-500 rounded-md text-xs lg:text-[1rem]"
+              className="text-center bg-red-500 text-white p-2 rounded-md font-medium flex flex-col items-center justify-center"
             >
-              Save
+              {saveLoading ? (
+                <Spinner className="h-4 w-4" />
+              ) : (
+                <span>Save</span>
+              )}
             </button>
           </div>
         </div>

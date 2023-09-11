@@ -94,8 +94,8 @@ export const dateDiff = (firstDate: Date, secondDate: Date) => {
 
 export const uploadToCloudinary = async ({ file, folder }) => {
   cloudinaryConfig();
-  const file_url = await cloudinary.uploader.upload(file, {
+  const data = await cloudinary.uploader.upload(file, {
     folder: folder,
   });
-  return file_url.secure_url;
+  return data;
 };

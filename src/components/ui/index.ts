@@ -1,3 +1,4 @@
+export { default as SubScribeButton } from "./SubScribeButton";
 export { default as EditDeleteDropDown } from "./EditDeleteDropDown";
 export { default as DropDown } from "./DropDown";
 export { default as Theme } from "./Theme";

@@ -6,6 +6,7 @@ import { cloudinaryConfig } from "@/config/cloudinary";
 import genreModel from "@/backend/models/genre.model";
 import { getCurrentSession } from "@/utils";
 import Genre from "@/backend/models/genre.model";
+import { uploadToCloudinary } from "@/backend/utils";
 
 // export const config = {
 //   api: {
@@ -18,38 +19,40 @@ import Genre from "@/backend/models/genre.model";
 cloudinaryConfig();
 export async function POST(req: Request) {
   const session = await getCurrentSession();
+  await dbConnect();
+  const { author, title, description, image, genre, edition, note } =
+    await req.json();
   if (!session) {
     return NextResponse.json({ message: "UnAuthorized" }, { status: 401 });
   }
-  const { author, title, description, image, genre, edition, note } =
-    await req.json();
-
   if (!author || !title || !image || !note) {
     return NextResponse.json({
       error: "Incomplete inFormation to register book ",
     });
   }
   try {
-    await dbConnect();
     const bookGenre = await Genre.findOne({ name: genre.toLowerCase() });
-    // const bookImage = await cloudinary.uploader.upload(image, {
-    //   folder: "Book/covers",
-    // });
-    // const bookFile = await cloudinary.uploader.upload(note, {
-    //   folder: "Book/files",
-    // });
+    const bookImage = await uploadToCloudinary({
+      file: image,
+      folder: "Book/covers",
+    });
+    const bookFile = await uploadToCloudinary({
+      file: note,
+      folder: "Book/files",
+    });
+    // console.log({ bookImage, bookFile });
     const book = await Book.create({
       author,
       title,
-      image: "image url",
-      note: "note",
-      pages: "pages",
-      format: "format",
+      image: bookImage.secure_url,
+      note: bookFile.secure_url,
+      pages: bookFile.pages,
+      format: bookFile.format,
       edition,
       description,
       genre: bookGenre ? bookGenre._id : "",
     });
-    console.log({ book });
+    // console.log({ book });
     return NextResponse.json({ book }, { status: 201 });
   } catch (error) {
     return NextResponse.json({ error }, { status: 500 });
