@@ -48,7 +48,7 @@ export async function POST(req: Request) {
           readLimit:
             user.plan === "free"
               ? user.downloadLimit + 10
-              : user.plan === "starter"
+              : user.plan === "basic"
               ? user.downloadLimit + 20
               : Number.POSITIVE_INFINITY,
         }

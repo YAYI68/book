@@ -22,11 +22,11 @@ const userSchema = new Schema(
     password: { type: String, minLength: 8, select: false },
     gender: {
       type: String,
-      enum: ["Male", "Female"],
+      enum: ["male", "female"],
     },
     plan: {
       type: String,
-      enum: ["free", "starter", "professional"],
+      enum: ["free", "basic", "pro"],
       default: "free",
     },
     readLimit: {
@@ -35,10 +35,10 @@ const userSchema = new Schema(
         if (this.plan === "free") {
           return 5;
         }
-        if (this.plan === "starter") {
+        if (this.plan === "basic") {
           return 15;
         }
-        if (this.plan === "professional") {
+        if (this.plan === "pro") {
           return Number.POSITIVE_INFINITY;
         }
       },
@@ -49,10 +49,10 @@ const userSchema = new Schema(
         if (this.plan === "free") {
           return 10;
         }
-        if (this.plan === "starter") {
+        if (this.plan === "basic") {
           return 20;
         }
-        if (this.plan === "professional") {
+        if (this.plan === "pro") {
           return Number.POSITIVE_INFINITY;
         }
       },

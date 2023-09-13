@@ -1,4 +1,4 @@
-import { SubscriptionSection } from "@/components/pricing";
+import { SubscriptionSection, SuscriptionSuccess } from "@/components/pricing";
 import { Main } from "@/components/ui";
 
 type Props = {};
@@ -14,7 +14,11 @@ const page = async ({ searchParams }) => {
     );
   }
 
-  return <h1>Hello</h1>;
+  return (
+    <Main>
+      <SuscriptionSuccess reference={reference} />
+    </Main>
+  );
 };
 
 export default page;

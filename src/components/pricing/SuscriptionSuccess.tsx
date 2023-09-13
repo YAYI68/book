@@ -7,13 +7,14 @@ type Props = {
 
 const SuscriptionSuccess = (props: Props) => {
   const { reference } = props;
+  console.log({ clientRef: reference });
   const { data: subscription, isLoading } = useDataFetcher({
     key: "/api/success",
-    path: `success?${reference}`,
+    path: `success?reference=${reference}`,
   });
 
   return (
-    <section>
+    <section className="text-white">
       <p>Hi $customer_email</p>
       <p>You re currently on the $ subscription.plan.name plan</p>
       <p>Status: subscription.status</p>

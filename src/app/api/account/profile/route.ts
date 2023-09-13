@@ -27,7 +27,6 @@ export async function PATCH(request: Request) {
   const session = await getCurrentSession();
   const { user } = session;
   if (!session) {
-    console.log("Unauthorized");
     return NextResponse.json({ message: "UnAuthorized" }, { status: 401 });
   }
 
@@ -37,9 +36,8 @@ export async function PATCH(request: Request) {
       file: image,
       folder: "userprofile",
     });
-    console.log({ profile_url });
   }
-  console.log({ profile_url });
+
   await dbConnect();
   try {
     const inputData = filteredInput({
@@ -66,7 +64,6 @@ export async function DELETE(request: Request) {
   const session = await getCurrentSession();
   const { user } = session;
   if (!session) {
-    console.log("Unauthorized");
     return NextResponse.json({ message: "UnAuthorized" }, { status: 401 });
   }
   await dbConnect();
