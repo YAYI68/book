@@ -1,3 +1,4 @@
+export { default as CheckBadge } from "./CheckBadge";
 export { default as SuccessCheckIcon } from "./SuccessCheckIcon";
 export { default as FileIcon } from "./FileIcon";
 export { default as TrashIcon } from "./TrashIcon";
