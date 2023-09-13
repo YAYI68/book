@@ -3,13 +3,7 @@ import dbConnect from "@/backend/database";
 import User from "@/backend/models/user.model";
 
 import { NextResponse } from "next/server";
-import {
-  comparePassword,
-  createJwt,
-  hashPassword,
-  messageTemplate,
-  transporter,
-} from "@/backend/utils";
+import { comparePassword } from "@/backend/utils";
 
 const BASE_URL = process.env.BASE_URL;
 
@@ -44,15 +38,15 @@ export async function POST(req: Request) {
 
     const isValid = await comparePassword(password, user.password);
 
-    // const currentDuration = +new Date();
-    // const lastDuration = +new Date(`${user.duration}`);
+    const currentDuration = +new Date();
+    const weekDuration = +new Date(`${user.duration}`);
 
-    // if (currentDuration > lastDuration) {
-    //   await User.updateOne(
-    //     { _id: user._id },
-    //     { duration: new Date(+new Date() + 7 * 24 * 60 * 60 * 1000) }
-    //   );
-    // }
+    if (currentDuration > weekDuration) {
+      await User.findOneAndUpdate(
+        { _id: user._id },
+        { duration: new Date(+new Date() + 7 * 24 * 60 * 60 * 1000) }
+      );
+    }
 
     if (!user) {
       return NextResponse.json({ error: "User not found" }, { status: 401 });

@@ -3,8 +3,8 @@ import { NextResponse } from "next/server";
 import Book from "@/backend/models/book.model";
 import { getCurrentSession } from "@/utils";
 import LibraryBook from "@/backend/models/library.model";
+import { canRead } from "./canRead";
 
-const BASE_URL = process.env.BASE_URL;
 export async function POST(req: Request) {
   await dbConnect();
   const { bookId } = await req.json();
@@ -13,13 +13,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ message: "UnAuthorized" }, { status: 401 });
   }
   const { user } = session;
-  const reponse = await fetch(`${BASE_URL}/api/canread`, {
-    cache: "no-store",
-    method: "POST",
-    body: JSON.stringify({ user }),
-  });
-  const resData = await reponse.json();
-  const { read } = resData;
+  const read = await canRead(user);
   if (!read) {
     return NextResponse.json(
       {
