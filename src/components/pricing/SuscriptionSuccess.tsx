@@ -22,7 +22,7 @@ const SuscriptionSuccess = (props: Props) => {
   console.log({ subscription });
   return (
     <section className=" w-full lg:p-8 flex flex-col items-center justify-center ">
-      <div className="w-[80%] lg:w-[30%] shadow-lg flex flex-col items-center  p-4  dark:bg-slate-800 dark:text-white rounded-xl">
+      <div className="w-[80%] lg:w-[30%] shadow-lg flex flex-col items-center  p-4 border dark:bg-slate-800 dark:text-white rounded-xl">
         <div id="check" className="w-full flex flex-col items-center gap-2">
           <div className="w-[5rem] h-[5rem] rounded-[50%]">
             <CheckBadge className=" text-green-600" />
@@ -58,7 +58,7 @@ const SuscriptionSuccess = (props: Props) => {
         </div>
         <Link
           href="/"
-          className="w-full p-2 my-4 text-center bg-red-500 text-white "
+          className="w-full p-2 my-4 text-center rounded-md bg-red-500 text-white "
         >
           Back to Home
         </Link>

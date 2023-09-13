@@ -28,7 +28,6 @@ const SubScribeButton = (props: Props) => {
       const { data } = resData;
       if (data) {
         router.push(`${data.authorization_url}`);
-        console.log(data.authorization_url);
       }
     }
   };
@@ -36,9 +35,6 @@ const SubScribeButton = (props: Props) => {
   return (
     <button
       disabled={!code}
-      //   onClick={() => {
-      //     initializePayment(onSuccess, onClose);
-      //   }}
       onClick={Subscribe}
       className="text-white bg-red-500 rounded p-2 w-full flex items-center justify-center gap-2 "
     >
