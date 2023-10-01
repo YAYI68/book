@@ -1,4 +1,5 @@
 import { Schema, models, model } from "mongoose";
+import { downloadLimitDefault, readLimitDefault } from "../utils";
 
 const userSchema = new Schema(
   {
@@ -20,10 +21,6 @@ const userSchema = new Schema(
       require: true,
     },
     password: { type: String, minLength: 8, select: false },
-    gender: {
-      type: String,
-      enum: ["male", "female"],
-    },
     plan: {
       type: String,
       enum: ["free", "basic", "pro"],
@@ -31,31 +28,11 @@ const userSchema = new Schema(
     },
     readLimit: {
       type: Number,
-      default: function () {
-        if (this.plan === "free") {
-          return 5;
-        }
-        if (this.plan === "basic") {
-          return 15;
-        }
-        if (this.plan === "pro") {
-          return Number.POSITIVE_INFINITY;
-        }
-      },
+      default: 5,
     },
     downloadLimit: {
       type: Number,
-      default: function () {
-        if (this.plan === "free") {
-          return 10;
-        }
-        if (this.plan === "basic") {
-          return 20;
-        }
-        if (this.plan === "pro") {
-          return Number.POSITIVE_INFINITY;
-        }
-      },
+      default: 10,
     },
     readCount: {
       type: Number,
@@ -95,5 +72,12 @@ const userSchema = new Schema(
     timestamps: true,
   }
 );
+
+userSchema.pre("save", async function () {
+  if (this.isModified("plan")) {
+    this.readLimit = readLimitDefault();
+    this.downloadLimit = downloadLimitDefault();
+  }
+});
 
 export default models.User || model("User", userSchema);

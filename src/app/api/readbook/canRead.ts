@@ -18,7 +18,6 @@ export async function canRead(user: UserType) {
       return true;
     }
     if (currentDuration > lastDuration && user.readCount < user.readLimit) {
-      console.log("condition Two ");
       await User.updateOne(
         { _id: user._id },
         {
@@ -29,7 +28,6 @@ export async function canRead(user: UserType) {
       return true;
     }
     if (currentDuration > lastDuration && user.readCount === user.readLimit) {
-      console.log("condition Three ");
       await User.updateOne(
         { _id: user._id },
         {

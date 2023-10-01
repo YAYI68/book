@@ -22,7 +22,7 @@ export async function GET(request: Request) {
 }
 
 export async function PATCH(request: Request) {
-  const { image, email, firstname, lastname, gender } = await request.json();
+  const { image, email, firstname, lastname } = await request.json();
 
   const session = await getCurrentSession();
   const { user } = session;
@@ -45,7 +45,6 @@ export async function PATCH(request: Request) {
       email,
       firstname,
       lastname,
-      gender,
     });
 
     const profile = await User.findOneAndUpdate(

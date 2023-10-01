@@ -99,3 +99,27 @@ export const uploadToCloudinary = async ({ file, folder }) => {
   });
   return data;
 };
+
+export function downloadLimitDefault() {
+  if (this.plan === "free") {
+    return 10;
+  }
+  if (this.plan === "basic") {
+    return 20;
+  }
+  if (this.plan === "pro") {
+    return Number.POSITIVE_INFINITY;
+  }
+}
+
+export function readLimitDefault() {
+  if (this.plan === "free") {
+    return 5;
+  }
+  if (this.plan === "basic") {
+    return 15;
+  }
+  if (this.plan === "pro") {
+    return Number.POSITIVE_INFINITY;
+  }
+}
